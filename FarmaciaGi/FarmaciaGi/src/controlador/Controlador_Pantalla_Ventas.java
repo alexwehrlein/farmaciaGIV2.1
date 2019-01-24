@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -473,7 +474,7 @@ public class Controlador_Pantalla_Ventas {
                 if (pantalla_Ventas.jTextFieldPagoRealizado.getText().length() > 0) {
                     float cantidadIngresada = Float.parseFloat(pantalla_Ventas.jTextFieldPagoRealizado.getText());
                     if (t < cantidadIngresada) {
-                        String cambioVenta = String.format("%.2f", cantidadIngresada - t);
+                        String cambioVenta = String.format(Locale.US,"%.2f", cantidadIngresada - t);
 
                         float decNumbert = Float.parseFloat(cambioVenta.substring(cambioVenta.indexOf('.')));
 
@@ -562,8 +563,8 @@ public class Controlador_Pantalla_Ventas {
                 int porcentaje = Integer.parseInt(pantalla_Ventas.jComboBoxGenerico.getSelectedItem().toString());
                 float totalTipoAnti = Float.parseFloat(modeloTabDescuento.getValueAt(1, 2).toString());//sin descuento
                 modeloTabDescuento.setValueAt(sacarDesc(porcentaje, totalTipoAnti), 1, 3);//con descuento
-                pantalla_Ventas.jTextFieldTotalVenta.setText(String.format("%.2f", obtenerT()));
-                pantalla_Ventas.jLabelSubtotalVenta.setText(String.format("%.2f", obtenerT()));
+                pantalla_Ventas.jTextFieldTotalVenta.setText(String.format(Locale.US,"%.2f", obtenerT()));
+                pantalla_Ventas.jLabelSubtotalVenta.setText(String.format(Locale.US,"%.2f", obtenerT()));
             }
         });
 
@@ -575,8 +576,8 @@ public class Controlador_Pantalla_Ventas {
                 float totalTipoAnti = Float.parseFloat(modeloTabDescuento.getValueAt(0, 2).toString());
                 modeloTabDescuento.setValueAt(sacarDesc(porcentaje, totalTipoAnti), 0, 3);
                 //JOptionPane.showMessageDialog(null, sacarDesc(porcentaje, totalTipoAnti));
-                pantalla_Ventas.jTextFieldTotalVenta.setText(String.format("%.2f", obtenerT()));
-                pantalla_Ventas.jLabelSubtotalVenta.setText(String.format("%.2f", obtenerT()));
+                pantalla_Ventas.jTextFieldTotalVenta.setText(String.format(Locale.US,"%.2f", obtenerT()));
+                pantalla_Ventas.jLabelSubtotalVenta.setText(String.format(Locale.US,"%.2f", obtenerT()));
             }
         });
 
@@ -589,7 +590,7 @@ public class Controlador_Pantalla_Ventas {
                 pantalla_Ventas.jDialogCobro.setResizable(false);
                 pantalla_Ventas.jDialogCobro.setVisible(true);
                 pantalla_Ventas.jTextFieldPagoRealizado.requestFocus();
-                pantalla_Ventas.jTextFieldTotalVenta.setText((String.format("%.2f", obtenerT())));
+                pantalla_Ventas.jTextFieldTotalVenta.setText((String.format(Locale.US,"%.2f", obtenerT())));
 
             }
         });
@@ -816,7 +817,7 @@ public class Controlador_Pantalla_Ventas {
             if (pantalla_Ventas.jTextFieldCambio.getText().matches("^[0-9]+([.])?([0-9]+)?$")) {
                 float cantidadIngresada = Float.parseFloat(pantalla_Ventas.jTextFieldPagoRealizado.getText());
                 if (t < cantidadIngresada) {
-                    pantalla_Ventas.jTextFieldCambio.setText("$ " + (String.format("%.2f", cantidadIngresada - t)));
+                    pantalla_Ventas.jTextFieldCambio.setText("$ " + (String.format(Locale.US,"%.2f", cantidadIngresada - t)));
                 } else {
                     pantalla_Ventas.jTextFieldCambio.setText("$ ");
                 }
@@ -901,7 +902,7 @@ public class Controlador_Pantalla_Ventas {
         }
         subTotal = totalTipoConsulta + totalTipoGenerico + totalTipoPatente + totalTipoAbarrotes + totalTipoPerfumeria;
 
-        pantalla_Ventas.jLabelSubtotalVenta.setText("$" + String.format("%.2f", subTotal));
+        pantalla_Ventas.jLabelSubtotalVenta.setText("$" + String.format(Locale.US,"%.2f", subTotal));
         cantidad = String.valueOf(pzsConsulta + pzsGenerico + pzsPatente + pzsAbarrotes + pzsPerfumeria);
         pantalla_Ventas.jLabelCantidadProductos.setText(String.valueOf(pzsConsulta + pzsGenerico + pzsPatente + pzsAbarrotes + pzsPerfumeria));
         //  totalFinal = subTotal;
@@ -918,28 +919,28 @@ public class Controlador_Pantalla_Ventas {
         modeloTabDescuento.setValueAt("" + pzsAbarrotes, 3, 1);
         modeloTabDescuento.setValueAt("" + pzsPerfumeria, 4, 1);
 
-        modeloTabDescuento.setValueAt("" + String.format("%.2f", totalTipoPatente), 0, 2);
-        modeloTabDescuento.setValueAt("" + String.format("%.2f", totalTipoGenerico), 1, 2);
-        modeloTabDescuento.setValueAt("" + String.format("%.2f", totalTipoConsulta), 2, 2);
-        modeloTabDescuento.setValueAt("" + String.format("%.2f", totalTipoAbarrotes), 3, 2);
-        modeloTabDescuento.setValueAt("" + String.format("%.2f", totalTipoPerfumeria), 4, 2);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoPatente), 0, 2);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoGenerico), 1, 2);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoConsulta), 2, 2);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoAbarrotes), 3, 2);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoPerfumeria), 4, 2);
 
-        modeloTabDescuento.setValueAt("" + String.format("%.2f", totalTipoConsulta), 2, 3);
-        modeloTabDescuento.setValueAt("" + String.format("%.2f", totalTipoAbarrotes), 3, 3);
-        modeloTabDescuento.setValueAt("" + String.format("%.2f", totalTipoPerfumeria), 4, 3);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoConsulta), 2, 3);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoAbarrotes), 3, 3);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoPerfumeria), 4, 3);
 
         // modeloTabDescuento.setValueAt("" + sacarDesc(Integer.parseInt(pantalla_Ventas.jComboBoxAnti.getSelectedItem().toString()), totalTipoAntibiotico), 0, 3);
         modeloTabDescuento.setValueAt("" + sacarDesc(Integer.parseInt(pantalla_Ventas.jComboBoxPatente.getSelectedItem().toString()), totalTipoPatente), 0, 3);
         modeloTabDescuento.setValueAt("" + sacarDesc(Integer.parseInt(pantalla_Ventas.jComboBoxGenerico.getSelectedItem().toString()), totalTipoGenerico), 1, 3);
         //pantalla_Ventas.jTextFieldTotalVenta.setText(String.format("%.2f", obtenerT()));
-        TotalVentaFinal = String.format("%.2f", obtenerT());
+        TotalVentaFinal = String.format(Locale.US,"%.2f", obtenerT());
         pago();
     }
 
     public String sacarDesc(int porcentaje, float total) {
         double to = total * porcentaje / 100.0;
         double Tf = total - to;
-        return String.format("%.2f", Tf);
+        return String.format(Locale.US,"%.2f", Tf);
 
     }
 
@@ -949,7 +950,7 @@ public class Controlador_Pantalla_Ventas {
         for (int i = 0; i < pantalla_Ventas.jTableProductosVenta.getRowCount(); i++) {
             pzs = Integer.parseInt(modelo.getValueAt(i, 4).toString());
             precio = Float.parseFloat(modelo.getValueAt(i, 5).toString());
-            modelo.setValueAt("" + String.format("%.2f", pzs * precio), i, 6);
+            modelo.setValueAt("" + String.format(Locale.US,"%.2f", pzs * precio), i, 6);
         }
 
     }
