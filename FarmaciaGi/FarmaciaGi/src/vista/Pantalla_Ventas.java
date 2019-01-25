@@ -57,7 +57,7 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
         jRadioButtonSelectId = new javax.swing.JRadioButton();
         jRadioButtonSelectNombre = new javax.swing.JRadioButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jDialogCobro = new javax.swing.JDialog();
+        jDialogCobro = new javax.swing.JDialog(this, true);
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jTextFieldTotalVenta = new javax.swing.JTextField();
@@ -70,7 +70,7 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
         jButtonVenta = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jDialogTikect = new javax.swing.JDialog();
+        jDialogTikect = new javax.swing.JDialog(this, true);
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         folioTikect = new javax.swing.JTextField();
@@ -202,8 +202,6 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
                     .addComponent(jButtonSalirCliente))
                 .addGap(25, 25, 25))
         );
-
-        jDialogCobro.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 

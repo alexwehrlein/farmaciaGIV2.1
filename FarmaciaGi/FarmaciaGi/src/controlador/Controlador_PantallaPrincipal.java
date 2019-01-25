@@ -77,7 +77,7 @@ public class Controlador_PantallaPrincipal {
             public void actionPerformed(ActionEvent e) {
                 if (pantalla_Principal.jMenuItemIniciarSesion.getText().equals("Iniciar Sesion")) {
                     pantalla_Principal.jDialogLogin.setTitle("Farmacia GI");
-                    pantalla_Principal.jDialogLogin.setBounds(249, 154, 570, 310);
+                    pantalla_Principal.jDialogLogin.setBounds(249, 154, 580, 330);
                     pantalla_Principal.jDialogLogin.setResizable(false);
                     pantalla_Principal.jDialogLogin.setVisible(true);
                     pantalla_Principal.jTextFieldUsuarioLogin.requestFocus();

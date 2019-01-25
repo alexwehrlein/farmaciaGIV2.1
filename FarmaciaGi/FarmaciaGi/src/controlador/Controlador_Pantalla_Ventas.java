@@ -29,6 +29,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
+import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicSliderUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -105,7 +106,6 @@ public class Controlador_Pantalla_Ventas {
         pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
         tablaDes();
 
-        //  pantalla_Ventas.jButtonClienteDescuento.setEnabled(false);
         pantalla_Ventas.jComboBoxSustancia.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e
@@ -505,7 +505,7 @@ public class Controlador_Pantalla_Ventas {
                     return;
                 }
                 pantalla_Ventas.jDialogClienteVentas.setTitle("Clientes");
-                pantalla_Ventas.jDialogClienteVentas.setBounds(449, 154, 500, 450);
+                pantalla_Ventas.jDialogClienteVentas.setBounds(449, 154, 500, 470);
                 pantalla_Ventas.jDialogClienteVentas.setResizable(false);
                 pantalla_Ventas.jDialogClienteVentas.setVisible(true);
 
@@ -586,7 +586,7 @@ public class Controlador_Pantalla_Ventas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 pantalla_Ventas.jDialogCobro.setTitle("Cobro");
-                pantalla_Ventas.jDialogCobro.setBounds(249, 154, 636, 400);
+                pantalla_Ventas.jDialogCobro.setBounds(249, 154, 636, 450);
                 pantalla_Ventas.jDialogCobro.setResizable(false);
                 pantalla_Ventas.jDialogCobro.setVisible(true);
                 pantalla_Ventas.jTextFieldPagoRealizado.requestFocus();
@@ -628,50 +628,6 @@ public class Controlador_Pantalla_Ventas {
             }
         });
 
-        pantalla_Ventas.jButtonClienteDescuento.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (modelo.getRowCount() <= 0) {
-                    JOptionPane.showMessageDialog(null, "AGREGUE PRODUCTOS", "ERROR..", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                if (ventas.pausarVenta(modelo, pausaVenta)) {
-                    pantalla_Ventas.jTablePausaVenta.setModel(modeloPausarVenta);
-                    String[] datos = new String[3];
-                    datos[0] = String.valueOf(pausaVenta);
-                    datos[1] = modelo.getValueAt(0, 1).toString();
-                    datos[2] = pantalla_Ventas.jLabelSubtotalVenta.getText();
-                    modeloPausarVenta.addRow(datos);
-
-                    pausaVenta = pausaVenta + 1;
-                    pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
-                    pantalla_Ventas.jTextFieldClienteVenta.setText("PUBLICO EN GENERAL");
-                    modelo.setRowCount(0);
-                    pantalla_Ventas.jLabelSubtotalVenta.setText("$0");
-                    // pantalla_Ventas.jComboBoxAnti.setEnabled(false);
-                    pantalla_Ventas.jComboBoxGenerico.setEnabled(false);
-                    pantalla_Ventas.jComboBoxPatente.setEnabled(false);
-                    //pantalla_Ventas.jComboBoxAnti.setSelectedItem("0");
-                    pantalla_Ventas.jComboBoxGenerico.setSelectedItem("0");
-                    pantalla_Ventas.jComboBoxPatente.setSelectedItem("0");
-                    tablaDes();
-                    pantalla_Ventas.jTextFieldTotalVenta.setText("");
-                    pantalla_Ventas.jTextFieldPagoRealizado.setText("");
-                    pantalla_Ventas.jLabelCantidadProductos.setText("0");
-                    pantalla_Ventas.jTextFieldCambio.setText("");
-                    pantalla_Ventas.jLabelSubtotalVenta.setText("$0");
-                    //  totalFinal=0;
-                    cantidad = "";
-                    idCli = "1";
-                    pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
-                    pantalla_Ventas.jTextFieldSustancia.setText("");
-                    pantalla_Ventas.jComboBoxSustancia.removeAllItems();
-                    placeHolder = new PlaceHolder(pantalla_Ventas.jTextFieldSustancia, "Busqueda por sustancias");
-
-                }
-
-            }
-        });
 
         pantalla_Ventas.jTablePausaVenta.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent Mouse_evt) {
@@ -701,6 +657,7 @@ public class Controlador_Pantalla_Ventas {
                pantalla_Ventas.jDialogTikect.setBounds(249, 154, 490, 219);
                pantalla_Ventas.jDialogTikect.setResizable(false);
                pantalla_Ventas.jDialogTikect.setVisible(true);
+               pantalla_Ventas.jDialogTikect.setModal(true);
                pantalla_Ventas.folioTikect.requestFocus();
             }
         });

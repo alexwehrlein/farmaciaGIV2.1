@@ -187,10 +187,8 @@
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
     </Component>
     <Container class="javax.swing.JDialog" name="jDialogCobro">
-      <Properties>
-        <Property name="defaultCloseOperation" type="int" value="2"/>
-      </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JDialog(this, true)"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
 
@@ -436,6 +434,7 @@
     </Container>
     <Container class="javax.swing.JDialog" name="jDialogTikect">
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JDialog(this, true)"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
 
