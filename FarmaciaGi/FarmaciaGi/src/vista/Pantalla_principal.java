@@ -88,6 +88,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jMenuItemGestionCliente = new javax.swing.JMenuItem();
         jMenuItemUsuarios = new javax.swing.JMenuItem();
         jMenuItemProductosAdmin = new javax.swing.JMenuItem();
+        jMenuItemInformacionSucursal = new javax.swing.JMenuItem();
         jMenuCajero = new javax.swing.JMenu();
         jMenuItemRealizarVenta = new javax.swing.JMenuItem();
         jMenuItemGrstionGastos = new javax.swing.JMenuItem();
@@ -208,7 +209,6 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jMenuBar1.setBackground(new java.awt.Color(153, 153, 255));
 
         jMenuAdmon.setBackground(new java.awt.Color(0, 0, 102));
-        jMenuAdmon.setBorder(null);
         jMenuAdmon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/admin1.png"))); // NOI18N
         jMenuAdmon.setText("ADMINISTRADOR");
 
@@ -236,6 +236,10 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jMenuItemProductosAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/medi.png"))); // NOI18N
         jMenuItemProductosAdmin.setText("Gestion Productos");
         jMenuAdmon.add(jMenuItemProductosAdmin);
+
+        jMenuItemInformacionSucursal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconfinder_Help_info_notification_information_sign_1886951.png"))); // NOI18N
+        jMenuItemInformacionSucursal.setText("Informacion Sucursal");
+        jMenuAdmon.add(jMenuItemInformacionSucursal);
 
         jMenuBar1.add(jMenuAdmon);
 
@@ -379,6 +383,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
     public javax.swing.JMenuItem jMenuItemGestionProducto;
     public javax.swing.JMenuItem jMenuItemGestionProveedor;
     public javax.swing.JMenuItem jMenuItemGrstionGastos;
+    public javax.swing.JMenuItem jMenuItemInformacionSucursal;
     public javax.swing.JMenuItem jMenuItemIniciarSesion;
     public javax.swing.JMenuItem jMenuItemProductosAdmin;
     public javax.swing.JMenuItem jMenuItemRealizarCorteCaja;

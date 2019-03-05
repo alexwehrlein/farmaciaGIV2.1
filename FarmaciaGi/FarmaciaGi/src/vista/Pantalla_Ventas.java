@@ -61,13 +61,12 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jTextFieldTotalVenta = new javax.swing.JTextField();
-        jTextFieldPagoRealizado = new javax.swing.JTextField();
         jTextFieldCambio = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         jLabel20 = new javax.swing.JLabel();
         jButtonVenta = new javax.swing.JButton();
+        btnCambioCliente = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jDialogTikect = new javax.swing.JDialog(this, true);
@@ -214,9 +213,6 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
         jTextFieldTotalVenta.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jTextFieldTotalVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jTextFieldPagoRealizado.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jTextFieldPagoRealizado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         jTextFieldCambio.setEditable(false);
         jTextFieldCambio.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jTextFieldCambio.setForeground(new java.awt.Color(255, 0, 0));
@@ -228,8 +224,6 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel19.setText("IMPORTE:");
 
-        jSeparator1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-
         jLabel20.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel20.setText("PAGO DEL CLIENTE:");
 
@@ -237,62 +231,56 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
         jButtonVenta.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jButtonVenta.setText("TERMINAR VENTA");
 
+        btnCambioCliente.setFont(new java.awt.Font("Noto Sans", 1, 24)); // NOI18N
+        btnCambioCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addComponent(jTextFieldTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldPagoRealizado, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(97, 97, 97))
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(181, 181, 181)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jButtonVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(164, 164, 164)
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel20)
+                                .addGap(18, 18, 18)))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCambioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(97, 97, 97))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jButtonVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel7Layout.createSequentialGroup()
-                    .addGap(52, 52, 52)
-                    .addComponent(jLabel20)
-                    .addContainerGap(308, Short.MAX_VALUE)))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldPagoRealizado, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel20)
+                    .addComponent(btnCambioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(jTextFieldCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addComponent(jButtonVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
-            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel7Layout.createSequentialGroup()
-                    .addGap(118, 118, 118)
-                    .addComponent(jLabel20)
-                    .addContainerGap(171, Short.MAX_VALUE)))
+                .addGap(50, 50, 50)
+                .addComponent(jButtonVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -309,7 +297,7 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100))
+                .addGap(132, 132, 132))
         );
 
         javax.swing.GroupLayout jDialogCobroLayout = new javax.swing.GroupLayout(jDialogCobro.getContentPane());
@@ -782,6 +770,7 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JTextField btnCambioCliente;
     private javax.swing.ButtonGroup buttonGroup1;
     public javax.swing.JTextField folioTikect;
     public javax.swing.JButton jButtonAgregar;
@@ -830,7 +819,6 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     public javax.swing.JTable jTableClientes;
     public javax.swing.JTable jTableDescuentoCliente;
@@ -841,7 +829,6 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
     public javax.swing.JTextField jTextFieldClienteVenta;
     public javax.swing.JTextField jTextFieldFolio;
     public javax.swing.JTextField jTextFieldFolioProductoVenta;
-    public javax.swing.JTextField jTextFieldPagoRealizado;
     public javax.swing.JTextField jTextFieldSustancia;
     public javax.swing.JTextField jTextFieldTotalVenta;
     // End of variables declaration//GEN-END:variables

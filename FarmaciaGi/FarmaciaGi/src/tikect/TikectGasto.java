@@ -8,6 +8,7 @@ package tikect;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,7 +16,7 @@ import java.util.Date;
  */
 public class TikectGasto {
     
-    public void TikectGasto(String descripcion, double total){
+    public void TikectGasto(String descripcion, String total){
        
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -53,10 +54,15 @@ public class TikectGasto {
         
          auxs+= "\n==========================================\n";
          auxs+= "    Gasto      \n Farmacia gi\n\n\n\n\n";// Varios saltos para no cortar antes
-         impServicio.printCadena(impra, auxs);
-        // Cortar el papel ....
-        byte[] cutP = new byte[]{0x1d, 'V', 1}; // comado para cortar
-        impServicio.printBytes(impra, cutP); // se imprime el bruto 
+         
+         try {
+            impServicio.printCadena(impra, auxs);
+            // Cortar el papel ....
+            byte[] cutP = new byte[]{0x1d, 'V', 1}; // comado para cortar
+            impServicio.printBytes(impra, cutP); // se imprime el bruto 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El tikect no se pudo imprimir","warning",JOptionPane.WARNING_MESSAGE);
+        }
     }
     
 }

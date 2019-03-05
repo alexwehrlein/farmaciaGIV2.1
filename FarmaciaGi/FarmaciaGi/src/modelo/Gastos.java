@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -22,8 +23,9 @@ import javax.swing.table.TableColumn;
  * @author saube
  */
 public class Gastos {
+    private int id;
     private String descripcion;
-    private double total;
+    private String total;
     private String turno;
     private String fecha;
     Conexion conexion ;
@@ -35,9 +37,15 @@ public class Gastos {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-    
-    
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getDescripcion() {
         return descripcion;
     }
@@ -46,11 +54,11 @@ public class Gastos {
         this.descripcion = descripcion;
     }
 
-    public double getTotal() {
+    public String getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(String total) {
         this.total = total;
     }
 
@@ -60,24 +68,31 @@ public class Gastos {
         return turno;
     }
 
+    public Gastos(int id) {
+        this.id = id;
+    }
+    
     public void setTurno(String turno) {
         this.turno = turno;
     }
 
-    public Gastos(String descripcion, double total, String turno) {
+    public Gastos(String descripcion, String total, String turno) {
         this.descripcion = descripcion;
         this.total = total;
         this.turno = turno;
     }
 
-    public Gastos(String descripcion, double total, String turno, String fecha) {
+    public Gastos(int id , String descripcion, String total, String turno, String fecha) {
+        this.id = id;
         this.descripcion = descripcion;
         this.total = total;
         this.turno = turno;
         this.fecha = fecha;
     }
-    
-    
+
+    public Gastos(String fecha) {
+        this.fecha = fecha;
+    }
     
     
     public boolean registrarGastos(){
@@ -125,10 +140,50 @@ public class Gastos {
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             ResultSet resultado = pst.executeQuery();
             while (resultado.next()) {
-                arrayEgresos.add(new Gastos(resultado.getString("descripcion"), resultado.getDouble("total"), resultado.getString("turno"), resultado.getString("fecha")));
+                arrayEgresos.add(new Gastos(resultado.getInt("id_gastos") ,resultado.getString("descripcion"), String.format(Locale.US,"%.2f", resultado.getDouble("total")), resultado.getString("turno"), resultado.getString("fecha")));
             }
             for (int i = 0; i < arrayEgresos.size(); i++) {
-                modelo.addRow(new Object[]{ arrayEgresos.get(i).getDescripcion(), arrayEgresos.get(i).getTotal(), arrayEgresos.get(i).getFecha(),
+                modelo.addRow(new Object[]{ arrayEgresos.get(i).getId() , arrayEgresos.get(i).getDescripcion(), arrayEgresos.get(i).getTotal(), arrayEgresos.get(i).getFecha(),
+                    arrayEgresos.get(i).getTurno()});
+            }
+            con.close();
+        } catch (SQLException ex) {
+            //Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return modelo;
+    }
+     
+      public DefaultTableModel buscarRegistroEgreso(JTable jt) {
+        jt.setDefaultRenderer(Object.class, new Render());
+        JButton btnModificar = new JButton("Modificar");
+        JButton btnEliminar = new JButton("Eliminar");
+        //JComboBox tipo;
+        TableColumn col = jt.getColumnModel().getColumn(1);
+        //String op[] = {"Luz", "Agua", "Gas", "Producto"};
+        //tipo = new JComboBox(op);
+       // col.setCellEditor(new DefaultCellEditor(tipo));
+        btnModificar.setName("btnModificar");
+        btnEliminar.setName("btnEliminar");
+       ImageIcon im = new ImageIcon(getClass().getResource("/imagenes/mo.png"));
+       btnModificar.setIcon(im);
+       ImageIcon ie = new ImageIcon(getClass().getResource("/imagenes/eli.png"));
+       btnEliminar.setIcon(ie);
+        jt.setRowHeight(25);
+
+        DefaultTableModel modelo = (DefaultTableModel) jt.getModel();
+        ArrayList<Gastos> arrayEgresos = new ArrayList<>();
+        try {
+            
+            String sql = "SELECT * FROM gastos WHERE fecha = '"+getFecha()+"' or id_gastos = "+getId()+"  order by descripcion";
+            Connection con  =new Conexion().getConnection();
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            ResultSet resultado = pst.executeQuery();
+            while (resultado.next()) {
+                arrayEgresos.add(new Gastos(resultado.getInt("id_gastos"), resultado.getString("descripcion"), String.format(Locale.US,"%.2f", resultado.getDouble("total")), resultado.getString("turno"), resultado.getString("fecha")));
+            }
+            for (int i = 0; i < arrayEgresos.size(); i++) {
+                modelo.addRow(new Object[]{arrayEgresos.get(i).getId(), arrayEgresos.get(i).getDescripcion(), arrayEgresos.get(i).getTotal(), arrayEgresos.get(i).getFecha(),
                     arrayEgresos.get(i).getTurno()});
             }
             con.close();

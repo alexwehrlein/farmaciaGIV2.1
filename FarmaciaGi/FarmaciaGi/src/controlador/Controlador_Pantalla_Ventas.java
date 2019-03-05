@@ -184,7 +184,6 @@ public class Controlador_Pantalla_Ventas {
             public void keyPressed(KeyEvent e
             ) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    pantalla_Ventas.jTextFieldPagoRealizado.requestFocus();
 
                     String codigo = pantalla_Ventas.jTextFieldFolioProductoVenta.getText();
 
@@ -365,8 +364,7 @@ public class Controlador_Pantalla_Ventas {
             public void keyPressed(KeyEvent e
             ) {
                 if (e.getKeyCode() == KeyEvent.VK_F9) {
-                    pantalla_Ventas.jTextFieldPagoRealizado.requestFocus();
-                    pantalla_Ventas.jTextFieldPagoRealizado.setText("");
+                    
                 }
             }
 
@@ -392,7 +390,7 @@ public class Controlador_Pantalla_Ventas {
             }
         });
 
-        pantalla_Ventas.jTextFieldPagoRealizado.addKeyListener(new KeyAdapter() {
+        pantalla_Ventas.btnCambioCliente.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -463,16 +461,16 @@ public class Controlador_Pantalla_Ventas {
 
         });
 
-        pantalla_Ventas.jTextFieldPagoRealizado.addKeyListener(new KeyAdapter() {
+        pantalla_Ventas.btnCambioCliente.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 float t = obtenerT();
                 double cambioVentaD;
-                if (!pantalla_Ventas.jTextFieldPagoRealizado.getText().matches("^\\d+\\.?\\d?\\d?") && pantalla_Ventas.jTextFieldPagoRealizado.getText().length() > 0) {
-                    pantalla_Ventas.jTextFieldPagoRealizado.setText(pantalla_Ventas.jTextFieldPagoRealizado.getText().substring(0, pantalla_Ventas.jTextFieldPagoRealizado.getText().length() - 1));
+                if (!pantalla_Ventas.btnCambioCliente.getText().matches("^\\d+\\.?\\d?\\d?") && pantalla_Ventas.btnCambioCliente.getText().length() > 0) {
+                    pantalla_Ventas.btnCambioCliente.setText(pantalla_Ventas.btnCambioCliente.getText().substring(0, pantalla_Ventas.btnCambioCliente.getText().length() - 1));
                 }
-                if (pantalla_Ventas.jTextFieldPagoRealizado.getText().length() > 0) {
-                    float cantidadIngresada = Float.parseFloat(pantalla_Ventas.jTextFieldPagoRealizado.getText());
+                if (pantalla_Ventas.btnCambioCliente.getText().length() > 0) {
+                    float cantidadIngresada = Float.parseFloat(pantalla_Ventas.btnCambioCliente.getText());
                     if (t < cantidadIngresada) {
                         String cambioVenta = String.format(Locale.US,"%.2f", cantidadIngresada - t);
 
@@ -539,7 +537,7 @@ public class Controlador_Pantalla_Ventas {
                     pantalla_Ventas.jComboBoxPatente.setSelectedItem("0");
                     tablaDes();
                     pantalla_Ventas.jTextFieldTotalVenta.setText("");
-                    pantalla_Ventas.jTextFieldPagoRealizado.setText("");
+                    pantalla_Ventas.btnCambioCliente.setText("");
                     pantalla_Ventas.jLabelCantidadProductos.setText("0");
                     pantalla_Ventas.jTextFieldCambio.setText("");
                     pantalla_Ventas.jLabelSubtotalVenta.setText("$0");
@@ -632,12 +630,14 @@ public class Controlador_Pantalla_Ventas {
             public void actionPerformed(ActionEvent e) {
                 float total = obtenerT();
                 System.out.println(total);
+                 pantalla_Ventas.btnCambioCliente.requestFocus();
                 pantalla_Ventas.jTextFieldTotalVenta.setText((String.format(Locale.US,"%.2f", total)));
+                //pantalla_Ventas.btnCambioCliente.requestFocusInWindow();
                 pantalla_Ventas.jDialogCobro.setTitle("Cobro");
-                pantalla_Ventas.jDialogCobro.setBounds(249, 154, 636, 450);
+                pantalla_Ventas.jDialogCobro.setBounds(249, 154, 626, 440);
                 pantalla_Ventas.jDialogCobro.setResizable(false);
                 pantalla_Ventas.jDialogCobro.setVisible(true);
-                pantalla_Ventas.jTextFieldPagoRealizado.requestFocus();
+                //pantalla_Ventas.jTextFieldPagoRealizado.requestFocusInWindow();
                 //pantalla_Ventas.jTextFieldPagoRealizado.setFocusable(true);
 
             }
@@ -661,7 +661,7 @@ public class Controlador_Pantalla_Ventas {
                     pantalla_Ventas.jComboBoxPatente.setSelectedItem("0");
                     tablaDes();
                     pantalla_Ventas.jTextFieldTotalVenta.setText("");
-                    pantalla_Ventas.jTextFieldPagoRealizado.setText("");
+                    pantalla_Ventas.btnCambioCliente.setText("");
                     pantalla_Ventas.jLabelCantidadProductos.setText("0");
                     pantalla_Ventas.jTextFieldCambio.setText("");
                     pantalla_Ventas.jLabelSubtotalVenta.setText("$0");
@@ -749,7 +749,6 @@ public class Controlador_Pantalla_Ventas {
     }
 
     public void ingresarVentaPausada(String codigo) {
-        pantalla_Ventas.jTextFieldPagoRealizado.requestFocus();
 
         canProductos = ventas.productoCero(codigo);
         if (!canProductos.equals("0")) {
@@ -818,9 +817,9 @@ public class Controlador_Pantalla_Ventas {
     public void pago() {
         float t = obtenerT();
 
-        if (pantalla_Ventas.jTextFieldPagoRealizado.getText().length() > 0) {
+        if (pantalla_Ventas.btnCambioCliente.getText().length() > 0) {
             if (pantalla_Ventas.jTextFieldCambio.getText().matches("^[0-9]+([.])?([0-9]+)?$")) {
-                float cantidadIngresada = Float.parseFloat(pantalla_Ventas.jTextFieldPagoRealizado.getText());
+                float cantidadIngresada = Float.parseFloat(pantalla_Ventas.btnCambioCliente.getText());
                 if (t < cantidadIngresada) {
                     pantalla_Ventas.jTextFieldCambio.setText("$ " + (String.format(Locale.US,"%.2f", cantidadIngresada - t)));
                 } else {
@@ -844,7 +843,7 @@ public class Controlador_Pantalla_Ventas {
         String cliente = pantalla_Ventas.jTextFieldClienteVenta.getText();
         int piezas = Integer.parseInt(pantalla_Ventas.jLabelCantidadProductos.getText());
         String total = pantalla_Ventas.jTextFieldTotalVenta.getText();
-        String pago = pantalla_Ventas.jTextFieldPagoRealizado.getText();
+        String pago = pantalla_Ventas.btnCambioCliente.getText();
         String cambio = pantalla_Ventas.jTextFieldCambio.getText();
 
         for (int i = 0; i < modelo.getRowCount(); i++) {
@@ -1035,12 +1034,12 @@ public class Controlador_Pantalla_Ventas {
             return;
         }
 
-        if (pantalla_Ventas.jTextFieldPagoRealizado.getText().isEmpty()) {
+        if (pantalla_Ventas.btnCambioCliente.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "INGRESE EL PAGO", "ERROR..", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if (obtenerT() > Float.parseFloat(pantalla_Ventas.jTextFieldPagoRealizado.getText())) {
+        if (obtenerT() > Float.parseFloat(pantalla_Ventas.btnCambioCliente.getText())) {
             JOptionPane.showMessageDialog(null, "EL PAGO ES INSUFICIENTE", "ERROR..", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -1068,7 +1067,7 @@ public class Controlador_Pantalla_Ventas {
             tablaDes();
             pantalla_Ventas.jLabelSubtotalVenta.setText("$0");
             pantalla_Ventas.jTextFieldTotalVenta.setText("");
-            pantalla_Ventas.jTextFieldPagoRealizado.setText("");
+            pantalla_Ventas.btnCambioCliente.setText("");
             pantalla_Ventas.jLabelCantidadProductos.setText("0");
             pantalla_Ventas.jTextFieldCambio.setText("");
 

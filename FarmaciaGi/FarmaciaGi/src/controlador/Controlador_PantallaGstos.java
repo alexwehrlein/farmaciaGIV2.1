@@ -5,11 +5,17 @@
  */
 package controlador;
 
+import java.awt.AWTEventMulticaster;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -50,7 +56,7 @@ public class Controlador_PantallaGstos {
 
                     if (pass) {
                         String descripcion = gastosFarmacia.jTextFieldDescripcionGastos.getText();
-                        double monto = Double.valueOf(gastosFarmacia.jTextFieldTotalGastos.getText());
+                        String monto = String.format(Locale.US, "%.2f", gastosFarmacia.jTextFieldTotalGastos.getText());
 
                         gastos = new Gastos(descripcion, monto, turno);
 
@@ -62,8 +68,6 @@ public class Controlador_PantallaGstos {
                             gastosFarmacia.jTextFieldTotalGastos.setBackground(Color.WHITE);
                             tikectGastos = new TikectGasto();
                             tikectGastos.TikectGasto(descripcion, monto);
-                            
-                            
 
                         } else {
 
@@ -80,6 +84,50 @@ public class Controlador_PantallaGstos {
             ) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     gastosFarmacia.jTextFieldTotalGastos.requestFocus();
+                }
+            }
+        });
+
+        gastosFarmacia.jTextFieldTotalGastosId.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e
+            ) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (gastosFarmacia.jTextFieldTotalGastosId.getText() != "") {
+                        Clear_Table();
+                        int id = Integer.parseInt(gastosFarmacia.jTextFieldTotalGastosId.getText());
+                        gastosFarmacia.jTableGastos.setModel(new Gastos(id).buscarRegistroEgreso(gastosFarmacia.jTableGastos));
+                    }
+                }
+            }
+        });
+
+        gastosFarmacia.jDateChooserFecha.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                Date fecha = gastosFarmacia.jDateChooserFecha.getDate();
+                if (fecha != null) {
+                    Clear_Table();
+                    SimpleDateFormat Formato = new SimpleDateFormat("yyyy-MM-dd");
+                    gastosFarmacia.jTableGastos.setModel(new Gastos(Formato.format(fecha)).buscarRegistroEgreso(gastosFarmacia.jTableGastos));
+                }
+            }
+        });
+
+        gastosFarmacia.jButtonRegistrarTikect.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int fila;
+                try {
+                    fila = gastosFarmacia.jTableGastos.getSelectedRow();
+                    if (fila == -1) {
+                        JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        String descripcion = (String) gastosFarmacia.jTableGastos.getValueAt(fila, 1);
+                        String monto = (String) gastosFarmacia.jTableGastos.getValueAt(fila, 2);
+                        tikectGastos = new TikectGasto();
+                        tikectGastos.TikectGasto(descripcion, monto);
+                    }
+                } catch (Exception ex) {
                 }
             }
         });
@@ -105,8 +153,7 @@ public class Controlador_PantallaGstos {
 
                         if (pass) {
                             String descripcion = gastosFarmacia.jTextFieldDescripcionGastos.getText();
-                            double monto = Double.valueOf(gastosFarmacia.jTextFieldTotalGastos.getText());
-
+                            String monto = String.format(Locale.US, "%.2f", gastosFarmacia.jTextFieldTotalGastos.getText());
                             gastos = new Gastos(descripcion, monto, turno);
 
                             if (gastos.registrarGastos()) {
