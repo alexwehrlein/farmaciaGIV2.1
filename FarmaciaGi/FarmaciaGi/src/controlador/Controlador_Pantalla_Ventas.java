@@ -1,9 +1,11 @@
 package controlador;
 
 import com.placeholder.PlaceHolder;
+import com.sun.java.accessibility.util.AWTEventMonitor;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -28,6 +30,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.RowFilter;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicSliderUI;
@@ -38,6 +41,7 @@ import modelo.Cliente;
 import modelo.Productos;
 import modelo.Render;
 import modelo.Ventas;
+import tikect.TikectGasto;
 import tikect.TikectInventario;
 import tikect.TikectR;
 import tikect.TikectVentas;
@@ -105,8 +109,108 @@ public class Controlador_Pantalla_Ventas {
         pantalla_Ventas.jTextFieldFolio.setText(String.valueOf(folio));
         pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
         tablaDes();
+        pantalla_Ventas.btnMas.setMnemonic(KeyEvent.VK_PLUS);
+        pantalla_Ventas.btnMas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int fila;
+                try {
+                    fila = pantalla_Ventas.jTableProductosVenta.getSelectedRow();
+                    if (fila == -1) {
+                        JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        String codigo = (String) pantalla_Ventas.jTableProductosVenta.getValueAt(fila, 0);
 
-        pantalla_Ventas.jComboBoxSustancia.addKeyListener(new KeyAdapter() {
+                        canProductos = ventas.productoCero(codigo);
+                        if (!canProductos.equals("0")) {
+
+                            canProductos = ventas.productoCero(codigo);
+                            int canProductosInt = Integer.parseInt(canProductos);
+
+                            for (int i = 0; i < pantalla_Ventas.jTableProductosVenta.getRowCount(); i++) {
+
+                                String art = pantalla_Ventas.jTableProductosVenta.getValueAt(i, 0).toString();
+                                if (art.equals(codigo)) {
+                                    int cantidadTabla = Integer.parseInt(pantalla_Ventas.jTableProductosVenta.getValueAt(i, 4).toString());
+                                    if (cantidadTabla >= canProductosInt) {
+
+                                        netx = false;
+                                        break;
+                                    } else {
+                                        netx = true;
+                                        break;
+                                    }
+
+                                } else {
+
+                                    netx = true;
+                                    break;
+                                }
+
+                            }
+
+                            if (netx) {
+                                agregarProducto(codigo, "1");//agrega producto a la tabla
+                                agregarSubTotalporTipo();
+                                if (!pantalla_Ventas.jTextFieldClienteVenta.getText().equals("PUBLICO EN GENERAL")) {
+                                    for (int i = 0; i < pantalla_Ventas.jTableProductosVenta.getRowCount(); i++) {
+                                        switch (modelo.getValueAt(i, 3).toString()) {
+                                            case "PATENTE":
+                                                pantalla_Ventas.jComboBoxPatente.setEnabled(true);
+                                                break;
+                                            case "GENÉRICO":
+                                                pantalla_Ventas.jComboBoxGenerico.setEnabled(true);
+                                                break;
+
+                                        }
+                                    }
+
+                                }
+
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Ya no hay producto en existencia");
+                                pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
+                                pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
+                                new Controlador_PantallaProductos(rol, turno);
+                            }
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El producto esta agotado");
+                            pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
+                            pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
+                            new Controlador_PantallaProductos(rol, turno);
+                        }
+                    }
+                } catch (Exception ex) {
+                }
+            }
+        });
+
+        pantalla_Ventas.btnMenos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int fila;
+                try {
+                    fila = pantalla_Ventas.jTableProductosVenta.getSelectedRow();
+                    if (fila == -1) {
+                        JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        String codigo = (String) pantalla_Ventas.jTableProductosVenta.getValueAt(fila, 0);
+                        String piezas = (String) pantalla_Ventas.jTableProductosVenta.getValueAt(fila, 4);
+                        if (Integer.parseInt(piezas) > 1) {
+                            quitarProducto(codigo);
+                            agregarSubTotalporTipo();
+                        }
+
+                    }
+                } catch (Exception ex) {
+                }
+            }
+        }
+        );
+
+        pantalla_Ventas.jComboBoxSustancia.addKeyListener(
+                new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e
             ) {
@@ -163,20 +267,137 @@ public class Controlador_Pantalla_Ventas {
                             JOptionPane.showMessageDialog(null, "Ya no hay producto en existencia");
                             pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
                             pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
-                            new Controlador_PantallaProductos(rol , turno);
+                            new Controlador_PantallaProductos(rol, turno);
                         }
 
                     } else {
                         JOptionPane.showMessageDialog(null, "El producto esta agotado");
                         pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
                         pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
-                        new Controlador_PantallaProductos(rol , turno);
+                        new Controlador_PantallaProductos(rol, turno);
                     }
                 }
 
             }
 
-        });
+        }
+        );
+
+        pantalla_Ventas.jButtonVentaM.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e
+            ) {
+                pantalla_Ventas.jDialogVentaM.setTitle("Farmacia GI");
+                pantalla_Ventas.jDialogVentaM.setBounds(249, 154, 460, 240);
+                pantalla_Ventas.jDialogVentaM.setResizable(false);
+                pantalla_Ventas.jDialogVentaM.setVisible(true);
+                pantalla_Ventas.jTextFieldCantidadM.setText("");
+                pantalla_Ventas.jTextFieldCodigoM.setText("");
+                pantalla_Ventas.jTextFieldCantidadM.requestFocus();
+            }
+        }
+        );
+
+        pantalla_Ventas.jTextFieldCodigoM.addKeyListener(
+                new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e
+            ) {
+                String codigo = pantalla_Ventas.jTextFieldCodigoM.getText();
+                int piezas = Integer.parseInt(pantalla_Ventas.jTextFieldCantidadM.getText());
+
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (codigo.isEmpty()) {
+                        //JOptionPane.showMessageDialog(null, "CAMPO VACIO..", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
+                        return;
+                    }
+
+                    if (!codigo.matches("^\\d+$")) {
+                        JOptionPane.showMessageDialog(null, "CODIGO INCORRECTO", "ERROR..", JOptionPane.ERROR_MESSAGE);
+                        pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
+                        return;
+                    }
+                    if (!new Ventas().existeRegistroProducto(codigo)) {
+                        JOptionPane.showMessageDialog(null, "EL PRODUCTO NO EXISTE", "ERROR..", JOptionPane.ERROR_MESSAGE);
+                        pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
+                        return;
+
+                    }
+
+                    canProductos = ventas.productoCero(codigo);
+                    if (!canProductos.equals("0")) {
+                        if (Integer.parseInt(canProductos) >= piezas) {
+
+                            canProductos = ventas.productoCero(codigo);
+                            int canProductosInt = Integer.parseInt(canProductos);//productos en existencia
+
+                            for (int i = 0; i < pantalla_Ventas.jTableProductosVenta.getRowCount(); i++) {
+
+                                String art = pantalla_Ventas.jTableProductosVenta.getValueAt(i, 0).toString();
+                                if (art.equals(codigo)) {
+                                    int cantidadTabla = Integer.parseInt(pantalla_Ventas.jTableProductosVenta.getValueAt(i, 4).toString());
+                                    if (cantidadTabla > canProductosInt) {
+
+                                        netx = false;
+                                        break;
+                                    } else {
+                                        netx = true;
+                                        break;
+                                    }
+
+                                } else {
+
+                                    netx = true;
+                                    break;
+                                }
+
+                            }
+
+                            if (netx) {
+                                agregarProducto(codigo, String.valueOf(piezas));//agrega producto a la tabla
+                                agregarSubTotalporTipo();
+                                if (!pantalla_Ventas.jTextFieldClienteVenta.getText().equals("PUBLICO EN GENERAL")) {
+                                    for (int i = 0; i < pantalla_Ventas.jTableProductosVenta.getRowCount(); i++) {
+                                        switch (modelo.getValueAt(i, 3).toString()) {
+                                            case "PATENTE":
+                                                pantalla_Ventas.jComboBoxPatente.setEnabled(true);
+                                                break;
+                                            case "GENÉRICO":
+                                                pantalla_Ventas.jComboBoxGenerico.setEnabled(true);
+                                                break;
+
+                                        }
+                                    }
+
+                                }
+                                pantalla_Ventas.jTextFieldCantidadM.setText("");
+                                pantalla_Ventas.jTextFieldCodigoM.setText("");
+                                pantalla_Ventas.jDialogVentaM.setVisible(false);
+
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Ya no hay producto en existencia");
+                                pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
+                                pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
+                                new Controlador_PantallaProductos(rol, turno);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Solo quedan en existencia " + canProductos);
+                            pantalla_Ventas.jTextFieldCodigoM.setText("");
+                            pantalla_Ventas.jTextFieldCodigoM.requestFocus();
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El producto esta agotado");
+                        pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
+                        pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
+                        new Controlador_PantallaProductos(rol, turno);
+                    }
+                }
+            }
+        }
+        );
 
         pantalla_Ventas.jTextFieldFolioProductoVenta.addKeyListener(
                 new KeyAdapter() {
@@ -234,7 +455,7 @@ public class Controlador_Pantalla_Ventas {
                         }
 
                         if (netx) {
-                            agregarProducto();//agrega producto a la tabla
+                            agregarProducto(codigo, "1");//agrega producto a la tabla
                             agregarSubTotalporTipo();
                             if (!pantalla_Ventas.jTextFieldClienteVenta.getText().equals("PUBLICO EN GENERAL")) {
                                 for (int i = 0; i < pantalla_Ventas.jTableProductosVenta.getRowCount(); i++) {
@@ -255,14 +476,14 @@ public class Controlador_Pantalla_Ventas {
                             JOptionPane.showMessageDialog(null, "Ya no hay producto en existencia");
                             pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
                             pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
-                            new Controlador_PantallaProductos(rol , turno);
+                            new Controlador_PantallaProductos(rol, turno);
                         }
 
                     } else {
                         JOptionPane.showMessageDialog(null, "El producto esta agotado");
                         pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
                         pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
-                        new Controlador_PantallaProductos(rol , turno);
+                        new Controlador_PantallaProductos(rol, turno);
                     }
 
                     //pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
@@ -272,9 +493,11 @@ public class Controlador_Pantalla_Ventas {
         }
         );
 
-        pantalla_Ventas.jTextFieldSustancia.addKeyListener(new KeyAdapter() {
+        pantalla_Ventas.jTextFieldSustancia.addKeyListener(
+                new KeyAdapter() {
             @Override
-            public void keyReleased(KeyEvent e) {
+            public void keyReleased(KeyEvent e
+            ) {
                 String sustancia = pantalla_Ventas.jTextFieldSustancia.getText();
                 productos = new Productos();
                 pantalla_Ventas.jComboBoxSustancia.removeAllItems();
@@ -285,17 +508,20 @@ public class Controlador_Pantalla_Ventas {
                 }
 
             }
-        });
+        }
+        );
 
-        pantalla_Ventas.jButtonAgregar.addActionListener(new ActionListener() {
+        pantalla_Ventas.jButtonAgregar.addActionListener(
+                new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-             
+            public void actionPerformed(ActionEvent e
+            ) {
+
                 if (pantalla_Ventas.jComboBoxSustancia.getItemCount() == 0) {
                     JOptionPane.showMessageDialog(null, "NO HAY PRODUCTO QUE AGREGAR", "ERROR..", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                   String sustancia = pantalla_Ventas.jComboBoxSustancia.getSelectedItem().toString();
+                String sustancia = pantalla_Ventas.jComboBoxSustancia.getSelectedItem().toString();
                 String codigo = ventas.OctenerCodigo(sustancia);
                 canProductos = ventas.productoCero(codigo);
                 if (!canProductos.equals("0")) {
@@ -347,28 +573,31 @@ public class Controlador_Pantalla_Ventas {
                         JOptionPane.showMessageDialog(null, "Ya no hay producto en existencia");
                         pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
                         pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
-                        new Controlador_PantallaProductos(rol , turno);
+                        new Controlador_PantallaProductos(rol, turno);
                     }
 
                 } else {
                     JOptionPane.showMessageDialog(null, "El producto esta agotado");
                     pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
                     pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
-                    new Controlador_PantallaProductos(rol , turno);
+                    new Controlador_PantallaProductos(rol, turno);
                 }
 
             }
-        });
+        }
+        );
 
         pantalla_Ventas.jTextFieldFolioProductoVenta.addKeyListener(new KeyAdapter() {
+
             public void keyPressed(KeyEvent e
             ) {
                 if (e.getKeyCode() == KeyEvent.VK_F9) {
-                    
+
                 }
             }
 
-        });
+        }
+        );
 
         pantalla_Ventas.jTableProductosVenta.addKeyListener(new KeyAdapter() {
             @Override
@@ -472,7 +701,7 @@ public class Controlador_Pantalla_Ventas {
                 if (pantalla_Ventas.btnCambioCliente.getText().length() > 0) {
                     float cantidadIngresada = Float.parseFloat(pantalla_Ventas.btnCambioCliente.getText());
                     if (t < cantidadIngresada) {
-                        String cambioVenta = String.format(Locale.US,"%.2f", cantidadIngresada - t);
+                        String cambioVenta = String.format(Locale.US, "%.2f", cantidadIngresada - t);
 
                         float decNumbert = Float.parseFloat(cambioVenta.substring(cambioVenta.indexOf('.')));
 
@@ -606,8 +835,8 @@ public class Controlador_Pantalla_Ventas {
                 int porcentaje = Integer.parseInt(pantalla_Ventas.jComboBoxGenerico.getSelectedItem().toString());
                 float totalTipoAnti = Float.parseFloat(modeloTabDescuento.getValueAt(1, 2).toString());//sin descuento
                 modeloTabDescuento.setValueAt(sacarDesc(porcentaje, totalTipoAnti), 1, 3);//con descuento
-                pantalla_Ventas.jTextFieldTotalVenta.setText(String.format(Locale.US,"%.2f", obtenerT()));
-                pantalla_Ventas.jLabelSubtotalVenta.setText(String.format(Locale.US,"%.2f", obtenerT()));
+                pantalla_Ventas.jTextFieldTotalVenta.setText(String.format(Locale.US, "%.2f", obtenerT()));
+                pantalla_Ventas.jLabelSubtotalVenta.setText(String.format(Locale.US, "%.2f", obtenerT()));
             }
         });
 
@@ -619,8 +848,8 @@ public class Controlador_Pantalla_Ventas {
                 float totalTipoAnti = Float.parseFloat(modeloTabDescuento.getValueAt(0, 2).toString());
                 modeloTabDescuento.setValueAt(sacarDesc(porcentaje, totalTipoAnti), 0, 3);
                 //JOptionPane.showMessageDialog(null, sacarDesc(porcentaje, totalTipoAnti));
-                pantalla_Ventas.jTextFieldTotalVenta.setText(String.format(Locale.US,"%.2f", obtenerT()));
-                pantalla_Ventas.jLabelSubtotalVenta.setText(String.format(Locale.US,"%.2f", obtenerT()));
+                pantalla_Ventas.jTextFieldTotalVenta.setText(String.format(Locale.US, "%.2f", obtenerT()));
+                pantalla_Ventas.jLabelSubtotalVenta.setText(String.format(Locale.US, "%.2f", obtenerT()));
             }
         });
 
@@ -630,8 +859,8 @@ public class Controlador_Pantalla_Ventas {
             public void actionPerformed(ActionEvent e) {
                 float total = obtenerT();
                 System.out.println(total);
-                 pantalla_Ventas.btnCambioCliente.requestFocus();
-                pantalla_Ventas.jTextFieldTotalVenta.setText((String.format(Locale.US,"%.2f", total)));
+                pantalla_Ventas.btnCambioCliente.requestFocus();
+                pantalla_Ventas.jTextFieldTotalVenta.setText((String.format(Locale.US, "%.2f", total)));
                 //pantalla_Ventas.btnCambioCliente.requestFocusInWindow();
                 pantalla_Ventas.jDialogCobro.setTitle("Cobro");
                 pantalla_Ventas.jDialogCobro.setBounds(249, 154, 626, 440);
@@ -676,7 +905,6 @@ public class Controlador_Pantalla_Ventas {
             }
         });
 
-
         pantalla_Ventas.jTablePausaVenta.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent Mouse_evt) {
                 int colum = pantalla_Ventas.jTablePausaVenta.getColumnModel().getColumnIndexAtX(Mouse_evt.getX());
@@ -697,44 +925,42 @@ public class Controlador_Pantalla_Ventas {
             }
 
         });
-        
+
         pantalla_Ventas.jButtonRTikect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               pantalla_Ventas.jDialogTikect.setTitle("");
-               pantalla_Ventas.jDialogTikect.setBounds(249, 154, 490, 219);
-               pantalla_Ventas.jDialogTikect.setResizable(false);
-               pantalla_Ventas.jDialogTikect.setVisible(true);
-               pantalla_Ventas.jDialogTikect.setModal(true);
-               pantalla_Ventas.folioTikect.requestFocus();
+                pantalla_Ventas.jDialogTikect.setTitle("");
+                pantalla_Ventas.jDialogTikect.setBounds(249, 154, 490, 219);
+                pantalla_Ventas.jDialogTikect.setResizable(false);
+                pantalla_Ventas.jDialogTikect.setVisible(true);
+                pantalla_Ventas.jDialogTikect.setModal(true);
+                pantalla_Ventas.folioTikect.requestFocus();
             }
         });
-        
-         pantalla_Ventas.folioTikect.addKeyListener(new KeyAdapter() {
+
+        pantalla_Ventas.folioTikect.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     if (pantalla_Ventas.folioTikect.getText().equals("")) {
-                        JOptionPane.showMessageDialog(null, "INGRESE UN FOLIO" , "ERROR" , JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "INGRESE UN FOLIO", "ERROR", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
                     if (!pantalla_Ventas.folioTikect.getText().matches("^[0-9]+$")) {
-                        JOptionPane.showMessageDialog(null, "INGRESE UN FOLIO valido" , "ERROR" , JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "INGRESE UN FOLIO valido", "ERROR", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
-                    
+
                     String folio = pantalla_Ventas.folioTikect.getText();
-                  
-                    String [] arr = ventas.infoTikect(folio);
-                    List<List<String>>productos = ventas.infoTikectProductos(folio);
-                    
+
+                    String[] arr = ventas.infoTikect(folio);
+                    List<List<String>> productos = ventas.infoTikectProductos(folio);
+
                     tikectR = new TikectR();
-                    tikectR.tikectR(arr , productos);
+                    tikectR.tikectR(arr, productos);
                 }
             }
         });
-        
-        
 
         pantalla_Ventas.jButtonEliminarVentas.addActionListener(new ActionListener() {
             @Override
@@ -800,14 +1026,14 @@ public class Controlador_Pantalla_Ventas {
                 JOptionPane.showMessageDialog(null, "Ya no hay producto en existencia");
                 pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
                 pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
-                new Controlador_PantallaProductos(rol , turno);
+                new Controlador_PantallaProductos(rol, turno);
             }
 
         } else {
             JOptionPane.showMessageDialog(null, "El producto esta agotado");
             pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
             pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
-            new Controlador_PantallaProductos(rol , turno);
+            new Controlador_PantallaProductos(rol, turno);
 
         }
 
@@ -821,7 +1047,7 @@ public class Controlador_Pantalla_Ventas {
             if (pantalla_Ventas.jTextFieldCambio.getText().matches("^[0-9]+([.])?([0-9]+)?$")) {
                 float cantidadIngresada = Float.parseFloat(pantalla_Ventas.btnCambioCliente.getText());
                 if (t < cantidadIngresada) {
-                    pantalla_Ventas.jTextFieldCambio.setText("$ " + (String.format(Locale.US,"%.2f", cantidadIngresada - t)));
+                    pantalla_Ventas.jTextFieldCambio.setText("$ " + (String.format(Locale.US, "%.2f", cantidadIngresada - t)));
                 } else {
                     pantalla_Ventas.jTextFieldCambio.setText("$ ");
                 }
@@ -906,7 +1132,7 @@ public class Controlador_Pantalla_Ventas {
         }
         subTotal = totalTipoConsulta + totalTipoGenerico + totalTipoPatente + totalTipoAbarrotes + totalTipoPerfumeria;
 
-        pantalla_Ventas.jLabelSubtotalVenta.setText("$" + String.format(Locale.US,"%.2f", subTotal));
+        pantalla_Ventas.jLabelSubtotalVenta.setText("$" + String.format(Locale.US, "%.2f", subTotal));
         cantidad = String.valueOf(pzsConsulta + pzsGenerico + pzsPatente + pzsAbarrotes + pzsPerfumeria);
         pantalla_Ventas.jLabelCantidadProductos.setText(String.valueOf(pzsConsulta + pzsGenerico + pzsPatente + pzsAbarrotes + pzsPerfumeria));
         //  totalFinal = subTotal;
@@ -923,28 +1149,28 @@ public class Controlador_Pantalla_Ventas {
         modeloTabDescuento.setValueAt("" + pzsAbarrotes, 3, 1);
         modeloTabDescuento.setValueAt("" + pzsPerfumeria, 4, 1);
 
-        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoPatente), 0, 2);
-        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoGenerico), 1, 2);
-        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoConsulta), 2, 2);
-        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoAbarrotes), 3, 2);
-        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoPerfumeria), 4, 2);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US, "%.2f", totalTipoPatente), 0, 2);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US, "%.2f", totalTipoGenerico), 1, 2);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US, "%.2f", totalTipoConsulta), 2, 2);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US, "%.2f", totalTipoAbarrotes), 3, 2);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US, "%.2f", totalTipoPerfumeria), 4, 2);
 
-        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoConsulta), 2, 3);
-        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoAbarrotes), 3, 3);
-        modeloTabDescuento.setValueAt("" + String.format(Locale.US,"%.2f", totalTipoPerfumeria), 4, 3);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US, "%.2f", totalTipoConsulta), 2, 3);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US, "%.2f", totalTipoAbarrotes), 3, 3);
+        modeloTabDescuento.setValueAt("" + String.format(Locale.US, "%.2f", totalTipoPerfumeria), 4, 3);
 
         // modeloTabDescuento.setValueAt("" + sacarDesc(Integer.parseInt(pantalla_Ventas.jComboBoxAnti.getSelectedItem().toString()), totalTipoAntibiotico), 0, 3);
         modeloTabDescuento.setValueAt("" + sacarDesc(Integer.parseInt(pantalla_Ventas.jComboBoxPatente.getSelectedItem().toString()), totalTipoPatente), 0, 3);
         modeloTabDescuento.setValueAt("" + sacarDesc(Integer.parseInt(pantalla_Ventas.jComboBoxGenerico.getSelectedItem().toString()), totalTipoGenerico), 1, 3);
         //pantalla_Ventas.jTextFieldTotalVenta.setText(String.format("%.2f", obtenerT()));
-        TotalVentaFinal = String.format(Locale.US,"%.2f", obtenerT());
+        TotalVentaFinal = String.format(Locale.US, "%.2f", obtenerT());
         pago();
     }
 
     public String sacarDesc(int porcentaje, float total) {
         double to = total * porcentaje / 100.0;
         double Tf = total - to;
-        return String.format(Locale.US,"%.2f", Tf);
+        return String.format(Locale.US, "%.2f", Tf);
 
     }
 
@@ -954,7 +1180,7 @@ public class Controlador_Pantalla_Ventas {
         for (int i = 0; i < pantalla_Ventas.jTableProductosVenta.getRowCount(); i++) {
             pzs = Integer.parseInt(modelo.getValueAt(i, 4).toString());
             precio = Float.parseFloat(modelo.getValueAt(i, 5).toString());
-            modelo.setValueAt("" + String.format(Locale.US,"%.2f", pzs * precio), i, 6);
+            modelo.setValueAt("" + String.format(Locale.US, "%.2f", pzs * precio), i, 6);
         }
 
     }
@@ -986,16 +1212,20 @@ public class Controlador_Pantalla_Ventas {
         modeloTabDescuento.setValueAt("0.0", 4, 3);
     }
 
-    public void agregarProducto() {
-        String codigo = pantalla_Ventas.jTextFieldFolioProductoVenta.getText();
+    public void agregarProducto(String codigo, String piezas) {
         if (productoAgregado(codigo)) {
             modelo.setValueAt("" + (Integer.parseInt(modelo.getValueAt(obtenerFila(codigo), 4).toString()) + 1), obtenerFila(codigo), 4);//Integer.parseInt(() + 1), 2)
             agregarTotal();
 
         } else {
-            pantalla_Ventas.jTableProductosVenta.setModel(new Ventas().obtenerDatosProducto(codigo, pantalla_Ventas.jTableProductosVenta));
+            pantalla_Ventas.jTableProductosVenta.setModel(new Ventas().obtenerDatosProducto(codigo, pantalla_Ventas.jTableProductosVenta, piezas));
         }
         pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
+    }
+
+    public void quitarProducto(String codigo) {
+        modelo.setValueAt("" + (Integer.parseInt(modelo.getValueAt(obtenerFila(codigo), 4).toString()) - 1), obtenerFila(codigo), 4);//Integer.parseInt(() + 1), 2)
+        agregarTotal();
     }
 
     public void agregarProducto2(String codigo) {
@@ -1005,7 +1235,7 @@ public class Controlador_Pantalla_Ventas {
             agregarTotal();
 
         } else {
-            pantalla_Ventas.jTableProductosVenta.setModel(new Ventas().obtenerDatosProducto(codigo, pantalla_Ventas.jTableProductosVenta));
+            pantalla_Ventas.jTableProductosVenta.setModel(new Ventas().obtenerDatosProducto(codigo, pantalla_Ventas.jTableProductosVenta, "1"));
         }
         pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
     }

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -50,6 +51,10 @@ public class Ventas {
     }
 
     public void setPiezas(int piezas) {
+        this.piezas = piezas;
+    }
+
+    public Ventas(int piezas) {
         this.piezas = piezas;
     }
     
@@ -180,7 +185,7 @@ public class Ventas {
         return false;
     }
 
-    public DefaultTableModel obtenerDatosProducto(String cod, JTable jt) {
+    public DefaultTableModel obtenerDatosProducto(String cod, JTable jt , String piezas) {
         con =  conn.getConnection();
         jt.setDefaultRenderer(Object.class, new Render());
         JButton btnEliminar = new JButton("Eliminar");
@@ -195,7 +200,8 @@ public class Ventas {
             ResultSet resultado = pst.executeQuery();
 
             while (resultado.next()) {
-                arr = new String[]{resultado.getString("codigo"), resultado.getString("marca_comercial"), resultado.getString("sustancia"), resultado.getString("tipo_medicamento"), "1", resultado.getString("precio"), resultado.getString("precio")};
+                float precio = Integer.parseInt(piezas) * Float.parseFloat(resultado.getString("precio"));
+                arr = new String[]{resultado.getString("codigo"), resultado.getString("marca_comercial"), resultado.getString("sustancia"), resultado.getString("tipo_medicamento"), piezas, String.format(Locale.US, "%.2f", precio), String.format(Locale.US, "%.2f", precio)};
             }
             pst.close();
             resultado.close();

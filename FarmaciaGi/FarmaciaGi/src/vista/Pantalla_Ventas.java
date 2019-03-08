@@ -73,6 +73,13 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         folioTikect = new javax.swing.JTextField();
+        jDialogVentaM = new javax.swing.JDialog(this,true);
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextFieldCantidadM = new javax.swing.JTextField();
+        jTextFieldCodigoM = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -108,6 +115,9 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
         jButtonRTikect = new javax.swing.JButton();
         jButtonEliminarVentas = new javax.swing.JButton();
         jButtonPausarVenta1 = new javax.swing.JButton();
+        jButtonVentaM = new javax.swing.JButton();
+        btnMenos = new rojerusan.RSMaterialButtonCircle();
+        btnMas = new rojerusan.RSMaterialButtonCircle();
 
         jDialogClienteVentas.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -367,6 +377,80 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jPanel4.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ingresar Codigo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Noto Sans", 1, 18))); // NOI18N
+
+        jPanel5.setBackground(new java.awt.Color(153, 153, 255));
+
+        jLabel6.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
+        jLabel6.setText("Cantidad");
+
+        jLabel7.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
+        jLabel7.setText("Codigo");
+
+        jTextFieldCantidadM.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
+
+        jTextFieldCodigoM.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextFieldCantidadM)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(71, 71, 71)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(0, 167, Short.MAX_VALUE))
+                    .addComponent(jTextFieldCodigoM))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldCantidadM, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCodigoM, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jDialogVentaMLayout = new javax.swing.GroupLayout(jDialogVentaM.getContentPane());
+        jDialogVentaM.getContentPane().setLayout(jDialogVentaMLayout);
+        jDialogVentaMLayout.setHorizontalGroup(
+            jDialogVentaMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jDialogVentaMLayout.setVerticalGroup(
+            jDialogVentaMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(getIconImage());
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -575,6 +659,22 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
         jButtonPausarVenta1.setBackground(new java.awt.Color(204, 51, 255));
         jButtonPausarVenta1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButtonPausarVenta1.setText("PAUSAR");
+        jButtonPausarVenta1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPausarVenta1ActionPerformed(evt);
+            }
+        });
+
+        jButtonVentaM.setBackground(new java.awt.Color(204, 51, 255));
+        jButtonVentaM.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButtonVentaM.setMnemonic('m');
+        jButtonVentaM.setText("V. Mayoreo ");
+
+        btnMenos.setMnemonic('-');
+        btnMenos.setText("-");
+        btnMenos.setFont(new java.awt.Font("Roboto Medium", 1, 24)); // NOI18N
+
+        btnMas.setText("+");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -618,6 +718,8 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
                                 .addGap(120, 120, 120))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButtonCancelarVenta)
+                                .addGap(74, 74, 74)
+                                .addComponent(jButtonVentaM)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonPausarVenta1)
                                 .addGap(123, 123, 123)
@@ -642,7 +744,14 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButtonEliminarVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)))))
-                .addGap(114, 114, 114))
+                .addGap(36, 36, 36)
+                .addComponent(btnMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(1127, Short.MAX_VALUE)
+                    .addComponent(btnMas, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(11, 11, 11)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -669,8 +778,14 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
                         .addComponent(jTextFieldFolioProductoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextFieldSustancia, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jComboBoxSustancia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(btnMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -678,7 +793,8 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
                             .addComponent(jLabel11)
                             .addComponent(jLabelSubtotalVenta)
                             .addComponent(jButtonCancelarVenta)
-                            .addComponent(jButtonPausarVenta1))
+                            .addComponent(jButtonPausarVenta1)
+                            .addComponent(jButtonVentaM))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
@@ -693,11 +809,16 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButtonRegistrarVentaa, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonEliminarVentas)))
                 .addGap(12, 12, 12))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(202, 202, 202)
+                    .addComponent(btnMas, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(401, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -733,6 +854,10 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
     private void jButtonSalirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirClienteActionPerformed
         jDialogClienteVentas.dispose();
     }//GEN-LAST:event_jButtonSalirClienteActionPerformed
+
+    private void jButtonPausarVenta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPausarVenta1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonPausarVenta1ActionPerformed
  
     /**
      * @param args the command line arguments
@@ -771,6 +896,8 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField btnCambioCliente;
+    public rojerusan.RSMaterialButtonCircle btnMas;
+    public rojerusan.RSMaterialButtonCircle btnMenos;
     private javax.swing.ButtonGroup buttonGroup1;
     public javax.swing.JTextField folioTikect;
     public javax.swing.JButton jButtonAgregar;
@@ -783,12 +910,14 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
     public javax.swing.JButton jButtonSalirCliente;
     public javax.swing.JButton jButtonSeleccionarCliente;
     public javax.swing.JButton jButtonVenta;
+    public javax.swing.JButton jButtonVentaM;
     public javax.swing.JComboBox jComboBoxGenerico;
     public javax.swing.JComboBox jComboBoxPatente;
     public javax.swing.JComboBox<String> jComboBoxSustancia;
     public javax.swing.JDialog jDialogClienteVentas;
     public javax.swing.JDialog jDialogCobro;
     public javax.swing.JDialog jDialogTikect;
+    public javax.swing.JDialog jDialogVentaM;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -802,6 +931,8 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     public javax.swing.JLabel jLabelCantidadProductos;
     public javax.swing.JLabel jLabelCantidadProductos1;
@@ -810,6 +941,8 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     public javax.swing.JRadioButton jRadioButtonSelectId;
@@ -826,7 +959,9 @@ public class Pantalla_Ventas extends javax.swing.JFrame {
     public javax.swing.JTable jTableProductosVenta;
     public javax.swing.JTextField jTextFieldBuscarCliente;
     public javax.swing.JTextField jTextFieldCambio;
+    public javax.swing.JTextField jTextFieldCantidadM;
     public javax.swing.JTextField jTextFieldClienteVenta;
+    public javax.swing.JTextField jTextFieldCodigoM;
     public javax.swing.JTextField jTextFieldFolio;
     public javax.swing.JTextField jTextFieldFolioProductoVenta;
     public javax.swing.JTextField jTextFieldSustancia;
