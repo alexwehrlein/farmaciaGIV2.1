@@ -858,16 +858,13 @@ public class Controlador_Pantalla_Ventas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 float total = obtenerT();
-                System.out.println(total);
-                pantalla_Ventas.btnCambioCliente.requestFocus();
                 pantalla_Ventas.jTextFieldTotalVenta.setText((String.format(Locale.US, "%.2f", total)));
                 //pantalla_Ventas.btnCambioCliente.requestFocusInWindow();
                 pantalla_Ventas.jDialogCobro.setTitle("Cobro");
                 pantalla_Ventas.jDialogCobro.setBounds(249, 154, 626, 440);
                 pantalla_Ventas.jDialogCobro.setResizable(false);
                 pantalla_Ventas.jDialogCobro.setVisible(true);
-                //pantalla_Ventas.jTextFieldPagoRealizado.requestFocusInWindow();
-                //pantalla_Ventas.jTextFieldPagoRealizado.setFocusable(true);
+                pantalla_Ventas.btnCambioCliente.requestFocus();
 
             }
         });
@@ -1063,6 +1060,8 @@ public class Controlador_Pantalla_Ventas {
     }
 
     public void enviarDatosTikect() {
+        int porcentajeGenerico = Integer.parseInt(pantalla_Ventas.jComboBoxGenerico.getSelectedItem().toString());
+        int porcentajePatente = Integer.parseInt(pantalla_Ventas.jComboBoxPatente.getSelectedItem().toString());
         int filas = 0;
         String folio = pantalla_Ventas.jTextFieldFolio.getText();
         String empleada = pantalla_Ventas.jLabelNombreEmpleado.getText();
@@ -1082,12 +1081,26 @@ public class Controlador_Pantalla_Ventas {
         String[] impor = new String[filas];
 
         for (int i = 0; i < modelo.getRowCount(); i++) {
+            float descuentoGenerico = (float) (Float.parseFloat(modelo.getValueAt(i, 6).toString()) * porcentajeGenerico / 100.0);
+            float descuentoPatente = (float) (Float.parseFloat(modelo.getValueAt(i, 6).toString()) * porcentajeGenerico / 100.0);
+            String tipo_m = modelo.getValueAt(i, 3).toString();
             prod[i] = modelo.getValueAt(i, 1).toString();
             prec[i] = modelo.getValueAt(i, 5).toString();
             cant[i] = modelo.getValueAt(i, 4).toString();
-            impor[i] = modelo.getValueAt(i, 6).toString();
+            if (tipo_m == "GENÉRICO") {
+                float importe = Float.parseFloat(modelo.getValueAt(i, 6).toString()) - descuentoGenerico;
+                impor[i] = String.format(Locale.US, "%.2f", importe);
+            } else if (tipo_m == "PATENTE") {
+                float importe = Float.parseFloat(modelo.getValueAt(i, 6).toString()) - descuentoPatente;
+                impor[i] = String.format(Locale.US, "%.2f", importe);
+            }else{
+                impor[i] = modelo.getValueAt(i, 6).toString();
+            }
+            
         }
-
+        for (int i = 0; i < impor.length; i++) {
+            System.out.println(impor[i]);
+        }
         tikectVentas = new TikectVentas();
         tikectVentas.tikectVentas(folio, empleada, cliente, piezas, total, pago, cambio, prod, prec, cant, impor);
 
