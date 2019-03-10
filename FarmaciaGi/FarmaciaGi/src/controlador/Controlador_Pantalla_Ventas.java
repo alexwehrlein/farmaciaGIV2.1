@@ -1226,6 +1226,7 @@ public class Controlador_Pantalla_Ventas {
     }
 
     public void agregarProducto(String codigo, String piezas) {
+        System.out.println(piezas);
         if (productoAgregado(codigo)) {
             modelo.setValueAt("" + (Integer.parseInt(modelo.getValueAt(obtenerFila(codigo), 4).toString()) + 1), obtenerFila(codigo), 4);//Integer.parseInt(() + 1), 2)
             agregarTotal();

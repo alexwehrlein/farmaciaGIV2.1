@@ -201,7 +201,8 @@ public class Ventas {
 
             while (resultado.next()) {
                 float precio = Integer.parseInt(piezas) * Float.parseFloat(resultado.getString("precio"));
-                arr = new String[]{resultado.getString("codigo"), resultado.getString("marca_comercial"), resultado.getString("sustancia"), resultado.getString("tipo_medicamento"), piezas, String.format(Locale.US, "%.2f", precio), String.format(Locale.US, "%.2f", precio)};
+                float precioU= Float.parseFloat(resultado.getString("precio"));
+                arr = new String[]{resultado.getString("codigo"), resultado.getString("marca_comercial"), resultado.getString("sustancia"), resultado.getString("tipo_medicamento"), piezas, String.format(Locale.US, "%.2f",precioU), String.format(Locale.US, "%.2f", precio)};
             }
             pst.close();
             resultado.close();
