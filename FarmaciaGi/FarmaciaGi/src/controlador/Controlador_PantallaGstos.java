@@ -56,7 +56,7 @@ public class Controlador_PantallaGstos {
 
                     if (pass) {
                         String descripcion = gastosFarmacia.jTextFieldDescripcionGastos.getText();
-                        String monto = String.format(Locale.US, "%.2f", gastosFarmacia.jTextFieldTotalGastos.getText());
+                        String monto = gastosFarmacia.jTextFieldTotalGastos.getText();
 
                         gastos = new Gastos(descripcion, monto, turno);
 
