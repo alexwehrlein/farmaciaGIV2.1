@@ -16,7 +16,7 @@ import java.util.Date;
  */
 public class TikectCorte {
     
-    public void TikecCorte(String ventas, String consultorio, String devoluciones, String gastos,String abarrotes, String perfumeria, double total,String turno, ArrayList<String>clientes , String [] consultas){
+    public void TikecCorte(String ventas, String consultorio, String devoluciones, String gastos,String abarrotes, String perfumeria, double total,String turno, ArrayList<String>clientes , String [] consultas , String retiros, int clave){
         
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -46,6 +46,9 @@ public class TikectCorte {
         auxs+= "==========================================\n";
         auxs+= "DEVOLUCIONES:         $ "+devoluciones+"\n";
         auxs+= "GASTOS:               $ "+gastos+"\n";
+        if (clave == 0) {
+            auxs+= "RETIROS:               $ "+retiros+"\n";
+        }
         auxs+= "==========================================\n";
         auxs+= "Cantidad de descuentos:   "+clientesNum+"\n";
         auxs+= "Clientes con descuento:   Des. Patente  Des. Generico \n";

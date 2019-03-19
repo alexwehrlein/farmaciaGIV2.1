@@ -41,6 +41,7 @@ public class Controlador_PantallaProductos {
         pantalla_Productos.setVisible(true);
         pantalla_Productos.setLocationRelativeTo(null);
         pantalla_Productos.tablaProductos.setModel(new Productos().cargarRegistroEgreso(pantalla_Productos.tablaProductos));
+        pantalla_Productos.existenciasM.setVisible(false);
 
         List<List<String>> productosTikect = new ArrayList<List<String>>();
         productosTikect.add(new ArrayList<String>());
@@ -77,7 +78,8 @@ public class Controlador_PantallaProductos {
                     int inventario = Integer.parseInt(pantalla_Productos.campoAgregarExistencia.getText());
                     if (inventario > 0) {
                         long codigo = Long.valueOf(pantalla_Productos.codigo.getText());
-                        int existencias = Integer.parseInt(pantalla_Productos.existenciasM.getText());
+                        productos = new Productos(codigo);
+                        int existencias = productos.productoCero();
                         int agregarInventario = inventario + existencias;
                         String producto = pantalla_Productos.nombre.getText();
                         productos = new Productos(codigo, agregarInventario);

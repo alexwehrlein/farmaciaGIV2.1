@@ -38,6 +38,7 @@ public class Pantalla_Corte {
     String gastosTotal = "0";
     String perfumeriaTotal = "0";
     String abarrotesTotal = "0";
+    String retiros ;
     String id;
     int folio;
     String turnoF;
@@ -74,6 +75,7 @@ public class Pantalla_Corte {
                         perfumeriaTotal = corte.perfumeriaTotal();
                         gastosTotal = corte.gastosTotal();
                         nombresClientes = corte.descuentos();
+                        retiros = corte.retiros();
                         String arr [] = corte.totalesC();
                         
       
@@ -83,6 +85,7 @@ public class Pantalla_Corte {
                         double at = Double.parseDouble(abarrotesTotal);
                         double pt = Double.parseDouble(perfumeriaTotal);
                         double gt = Double.parseDouble(gastosTotal);
+                        double r = Double.parseDouble(retiros);
                         
                         pantalla_Corte.jTextFieldTVenta.setText("$ " + String.format("%.2f", vt));
                         pantalla_Corte.jTextFieldTConsultorio.setText("$ "+String.format("%.2f", ct));
@@ -90,10 +93,11 @@ public class Pantalla_Corte {
                         pantalla_Corte.jTextFieldTAbarrotes.setText("$ " + String.format("%.2f", at));
                         pantalla_Corte.jTextFieldTPerfumeria.setText("$ " + String.format("%.2f", pt));
                         pantalla_Corte.jTextFieldTGastos.setText("$ " + String.format("%.2f", gt));
+                        pantalla_Corte.jTextFieldRetiros.setText("$ " + String.format("%.2f", r));
 
-                        double t = vt + ct + at + pt;
-                        double tt = t - dt - gt;
-                        double tk =tt-ct;
+                        double t = vt + ct + at + pt;//total de los tipos de venta
+                        double tt = t - dt - gt;//total a estregar
+                        double tk =tt-ct-r;//el total menos las consultas
                         
                         
 
@@ -104,7 +108,7 @@ public class Pantalla_Corte {
 
                             JOptionPane.showMessageDialog(null, "El corte se a guardado");
                             tikectCorte = new TikectCorte();
-                            tikectCorte.TikecCorte(ventaTotal, consultorioTotal, devolucionesTotal, gastosTotal,abarrotesTotal,perfumeriaTotal, tk, turno,nombresClientes,arr);
+                            tikectCorte.TikecCorte(ventaTotal, consultorioTotal, devolucionesTotal, gastosTotal,abarrotesTotal,perfumeriaTotal, tk, turno,nombresClientes,arr,retiros,0);
                             tcc = new TikectCorteConsulta();
                             tcc.Tikect(ct, turno);
                             JOptionPane.showMessageDialog(null, "Turno finalizado" , "Adios" , JOptionPane.INFORMATION_MESSAGE);

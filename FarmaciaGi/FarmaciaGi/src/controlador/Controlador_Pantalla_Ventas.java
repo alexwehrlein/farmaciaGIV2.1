@@ -24,6 +24,7 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Action;
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -45,6 +46,7 @@ import tikect.TikectGasto;
 import tikect.TikectInventario;
 import tikect.TikectR;
 import tikect.TikectVentas;
+import tikect.TikectkArqueo;
 import vista.Pantalla_Ventas;
 
 /**
@@ -58,6 +60,7 @@ public class Controlador_Pantalla_Ventas {
     Cliente cliente;
     TikectVentas tikectVentas;
     TikectR tikectR;
+    TikectkArqueo arqueo;
     private DefaultTableModel modelo;
     private DefaultTableModel modeloTabDescuento;
     private DefaultTableModel modeloPausarVenta;
@@ -70,6 +73,7 @@ public class Controlador_Pantalla_Ventas {
     PlaceHolder placeHolder;
     String TotalVentaFinal;
     int pausaVenta = 1;
+    float precioMayorista = 0;
 
     public Controlador_Pantalla_Ventas(String idEmpleado, String nombreEmpleado, String turnoEmpleado, String rol) {
         this.idEmpleado = idEmpleado;
@@ -299,8 +303,70 @@ public class Controlador_Pantalla_Ventas {
         }
         );
 
-        pantalla_Ventas.jTextFieldCodigoM.addKeyListener(
-                new KeyAdapter() {
+        pantalla_Ventas.btnPrecioMayoreo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pantalla_Ventas.jDialogPrecioMayoreo.setBounds(249, 154, 388, 199);
+                pantalla_Ventas.jDialogPrecioMayoreo.setResizable(false);
+                pantalla_Ventas.jDialogPrecioMayoreo.setVisible(true);
+                pantalla_Ventas.jTextFieldCodigo.setText("");
+                pantalla_Ventas.jTextFieldPrecio.setText("");
+                pantalla_Ventas.jComboBoxDes.setSelectedItem("0");
+                pantalla_Ventas.jTextFieldCodigo.requestFocus();
+            }
+        });
+
+        pantalla_Ventas.jTextFieldCodigo.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    String codigo = pantalla_Ventas.jTextFieldCodigo.getText();
+
+                    if (codigo.isEmpty()) {
+                        //JOptionPane.showMessageDialog(null, "CAMPO VACIO..", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
+                        return;
+                    }
+
+                    if (!codigo.matches("^\\d+$")) {
+                        JOptionPane.showMessageDialog(null, "CODIGO INCORRECTO", "ERROR..", JOptionPane.ERROR_MESSAGE);
+                        pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
+                        return;
+                    }
+                    if (!new Ventas().existeRegistroProducto(codigo)) {
+                        JOptionPane.showMessageDialog(null, "EL PRODUCTO NO EXISTE", "ERROR..", JOptionPane.ERROR_MESSAGE);
+                        pantalla_Ventas.jTextFieldFolioProductoVenta.setText("");
+                        return;
+
+                    }
+                    
+                    ventas = new Ventas(Long.parseLong(codigo));
+                    precioMayorista = Float.parseFloat(ventas.precioProducto());
+                    pantalla_Ventas.jTextFieldPrecio.setText(String.format(Locale.US, "%.2f", precioMayorista));
+                }
+            }
+        });
+        
+        pantalla_Ventas.jComboBoxDes.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String codigo = pantalla_Ventas.jTextFieldCodigo.getText();
+                String precio = pantalla_Ventas.jTextFieldPrecio.getText();
+                if (codigo.isEmpty() && precio.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "No deje campos en blanco","ERROR",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int porcentaje = Integer.parseInt(pantalla_Ventas.jComboBoxDes.getSelectedItem().toString());
+                String total = sacarDesc(porcentaje, precioMayorista);//con descuento
+                pantalla_Ventas.jTextFieldPrecio.setText(total);
+                
+            }
+        });
+        
+
+        pantalla_Ventas.jTextFieldCodigoM.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e
             ) {
@@ -1093,10 +1159,10 @@ public class Controlador_Pantalla_Ventas {
             } else if (tipo_m == "PATENTE") {
                 float importe = Float.parseFloat(modelo.getValueAt(i, 6).toString()) - descuentoPatente;
                 impor[i] = String.format(Locale.US, "%.2f", importe);
-            }else{
+            } else {
                 impor[i] = modelo.getValueAt(i, 6).toString();
             }
-            
+
         }
         for (int i = 0; i < impor.length; i++) {
             System.out.println(impor[i]);
@@ -1326,7 +1392,22 @@ public class Controlador_Pantalla_Ventas {
             pantalla_Ventas.jComboBoxSustancia.removeAllItems();
             pantalla_Ventas.jTextFieldFolioProductoVenta.requestFocus();
             placeHolder = new PlaceHolder(pantalla_Ventas.jTextFieldSustancia, "Busqueda por sustancias");
-
+//            int arqueo = ventas.numArqueos();//saver cuantos arqueos
+//            arqueo = arqueo +1;
+//            int canArqueo = 3000 * arqueo;
+//            ventas = new Ventas(turno);
+//            String arr[] = ventas.arqueo();
+//            float ventasT = Float.parseFloat(arr[0]);
+//            float devoluciones = Float.parseFloat(arr[1]);
+//            float gastos = Float.parseFloat(arr[1]);
+//            float total = (ventasT) - (devoluciones - gastos);
+//            if (total >= canArqueo) {
+//                ventas = new  Ventas(turno,total);
+//                boolean netx = ventas.insertAqueo();
+//                this.arqueo = new TikectkArqueo();
+//                this.arqueo.TikectkArqueo(total, arqueo);
+//                
+//            }
         } else {
             JOptionPane.showMessageDialog(null, "La venta no se registro");
 

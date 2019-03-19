@@ -298,6 +298,16 @@ public class Controlador_PantallaPrincipal {
             }
         });
         
+        pantalla_Principal.jMenuItemRetiro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                    new Controlador_Pantalla_Retiros(turno);
+                
+                
+            }
+        });
+        
         pantalla_Principal.jMenuItemInformacionSucursal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -309,6 +319,7 @@ public class Controlador_PantallaPrincipal {
         pantalla_Principal.jMenuItemGrstionGastos.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_DOWN_MASK));
         pantalla_Principal.jMenuItemDevoluciones.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK));
         pantalla_Principal.jMenuItemGestionProducto.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_DOWN_MASK));
+        pantalla_Principal.jMenuItemRetiro.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK));
     }
 
     public boolean camposVacios() {
@@ -331,6 +342,7 @@ public class Controlador_PantallaPrincipal {
         pantalla_Principal.jMenuItemUsuarios.setEnabled(false);
         pantalla_Principal.jMenuItemProductosAdmin.setEnabled(false);
         pantalla_Principal.jMenuItemInformacionSucursal.setEnabled(false);
+        pantalla_Principal.jMenuItemRetiro.setEnabled(false);
         pantalla_Principal.jMenuAdmon.setEnabled(true);
         pantalla_Principal.jMenuCajero.setEnabled(true);
     }
@@ -355,6 +367,7 @@ public class Controlador_PantallaPrincipal {
         pantalla_Principal.jMenuItemDevoluciones.setEnabled(true);
         pantalla_Principal.jMenuItemGestionProducto.setEnabled(true);
         pantalla_Principal.jMenuItemInformacionSucursal.setEnabled(false);
+        pantalla_Principal.jMenuItemRetiro.setEnabled(true);
         pantalla_Principal.jMenuItemIniciarSesion.setText("Cerrar Sesion");
 
     }

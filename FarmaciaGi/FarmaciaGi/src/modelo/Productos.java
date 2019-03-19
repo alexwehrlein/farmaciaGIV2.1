@@ -36,7 +36,8 @@ public class Productos {
     private int proveedor;
     private String nombreProveedor;
     private int cantidad;
-
+    private Connection con;
+    Conexion conn = new Conexion();
     Conexion conexion;
     Pantalla_Productos pantalla_Productos;
 
@@ -68,6 +69,16 @@ public class Productos {
         this.laboratorio = laboratorio;
         this.proveedor = proveedor;
         this.cantidad = cantidad;
+    }
+    
+     public Productos(long codigo, String marcaComercial, String sustancias, double precio, String tipoMedicamento, String laboratorio, String nombreProveedor) {
+        this.codigo = codigo;
+        this.marcaComercial = marcaComercial;
+        this.sustancias = sustancias;
+        this.precio = precio;
+        this.tipoMedicamento = tipoMedicamento;
+        this.laboratorio = laboratorio;
+        this.nombreProveedor = nombreProveedor;
     }
 
     public long getCodigo() {
@@ -156,6 +167,8 @@ public class Productos {
     public Productos(String sustancias) {
         this.sustancias = sustancias;
     }
+    
+    
 
     public double PrrcioProducto() {
         double precio = 0;
@@ -180,6 +193,37 @@ public class Productos {
         }
 
         return precio;
+    }
+    
+    public int productoCero() {
+        String sql = null ; int cantidad = 0;
+        try {
+            con = new Conexion().getConnection();
+            Statement stm = (Statement) con.createStatement();
+
+            sql = "SELECT cantidad FROM productos WHERE codigo=" + getCodigo() + "";
+            ResultSet rs = stm.executeQuery(sql);
+            if (rs.next()) {
+                cantidad = rs.getInt("cantidad");
+
+            }
+            stm.close();
+            rs.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+
+        } finally {
+            try {
+                con.close();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return cantidad;
+
     }
 
     public boolean ModificarRegristros() {
@@ -346,12 +390,12 @@ public class Productos {
             ResultSet resultado = pst.executeQuery();
             while (resultado.next()) {
                 arrayProductos.add(new Productos(resultado.getLong("codigo"), resultado.getString("marca_comercial"), resultado.getString("sustancia"), resultado.getDouble("precio"),
-                        resultado.getString("tipo_medicamento"), resultado.getString("laboratorio"), resultado.getString("nombre"), resultado.getInt("cantidad")));
+                        resultado.getString("tipo_medicamento"), resultado.getString("laboratorio"), resultado.getString("nombre")));
             }
             for (int i = 0; i < arrayProductos.size(); i++) {
                 modelo.addRow(new Object[]{arrayProductos.get(i).getCodigo(), arrayProductos.get(i).getMarcaComercial(),
                     arrayProductos.get(i).getSustancias(), arrayProductos.get(i).getPrecio(), arrayProductos.get(i).getTipoMedicamento(), arrayProductos.get(i).getLaboratorio(),
-                    arrayProductos.get(i).getCantidad(), btnModificar});
+                     btnModificar});
             }
             pst.close();
             pst = null;

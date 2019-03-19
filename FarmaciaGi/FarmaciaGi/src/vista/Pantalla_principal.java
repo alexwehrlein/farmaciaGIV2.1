@@ -95,6 +95,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jMenuItemRealizarCorteCaja = new javax.swing.JMenuItem();
         jMenuItemDevoluciones = new javax.swing.JMenuItem();
         jMenuItemGestionProducto = new javax.swing.JMenuItem();
+        jMenuItemRetiro = new javax.swing.JMenuItem();
         jMenuInicioSesion = new javax.swing.JMenu();
         jMenuItemIniciarSesion = new javax.swing.JMenuItem();
 
@@ -271,6 +272,10 @@ public class Pantalla_principal extends javax.swing.JFrame {
         });
         jMenuCajero.add(jMenuItemGestionProducto);
 
+        jMenuItemRetiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/money.png"))); // NOI18N
+        jMenuItemRetiro.setText("Retiros");
+        jMenuCajero.add(jMenuItemRetiro);
+
         jMenuBar1.add(jMenuCajero);
 
         jMenuInicioSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/loo4.png"))); // NOI18N
@@ -388,6 +393,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
     public javax.swing.JMenuItem jMenuItemProductosAdmin;
     public javax.swing.JMenuItem jMenuItemRealizarCorteCaja;
     public javax.swing.JMenuItem jMenuItemRealizarVenta;
+    public javax.swing.JMenuItem jMenuItemRetiro;
     public javax.swing.JMenuItem jMenuItemUsuarios;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JPanel jPanelIma;

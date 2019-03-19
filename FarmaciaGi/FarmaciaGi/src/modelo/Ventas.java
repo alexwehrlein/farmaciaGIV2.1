@@ -31,6 +31,8 @@ public class Ventas {
     private Connection con;
     private long codigo;
     private int piezas;
+    private String turno;
+    private float monto;
     Conexion conn = new Conexion();
 
     public Ventas(long codigo, int piezas) {
@@ -57,8 +59,35 @@ public class Ventas {
     public Ventas(int piezas) {
         this.piezas = piezas;
     }
-    
-  
+
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+
+    public Ventas(String turno) {
+        this.turno = turno;
+    }
+
+    public float getMonto() {
+        return monto;
+    }
+
+    public void setMonto(float monto) {
+        this.monto = monto;
+    }
+
+    public Ventas(String turno, float monto) {
+        this.turno = turno;
+        this.monto = monto;
+    }
+
+    public Ventas(long codigo) {
+        this.codigo = codigo;
+    }
 
     public ArrayList<Ventas> ventaPausada(String id) {
         ArrayList<Ventas> arrayRegistros = new ArrayList<>();
@@ -88,7 +117,37 @@ public class Ventas {
     }
 
     public Ventas() {
-       
+
+    }
+
+    public String precioProducto() {
+        String sql = null , precio = "" ;
+        try {
+            con = new Conexion().getConnection();
+            Statement stm = (Statement) con.createStatement();
+
+            sql = "SELECT precio FROM productos WHERE codigo=" + getCodigo() + "";
+            ResultSet rs = stm.executeQuery(sql);
+            if (rs.next()) {
+                precio = rs.getString("precio");
+
+            }
+            stm.close();
+            rs.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+
+        } finally {
+            try {
+                con.close();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return precio;
     }
 
     public String productoCero(String codigo) {
@@ -127,7 +186,7 @@ public class Ventas {
         String codigo = null;
 
         try {
-            con =  conn.getConnection();
+            con = conn.getConnection();
             Statement stm = (Statement) con.createStatement();
 
             sql = "SELECT codigo FROM productos WHERE sustancia='" + sustancia + "'";
@@ -152,7 +211,7 @@ public class Ventas {
         String sql = null;
 
         try {
-             con =  conn.getConnection();
+            con = conn.getConnection();
             Statement stm = (Statement) con.createStatement();
             sql = "TRUNCATE pausar_venta";
             stm.execute(sql);
@@ -167,11 +226,30 @@ public class Ventas {
 
     }
 
+    public boolean insertAqueo() {
+        String sql = null;
+
+        try {
+            con = conn.getConnection();
+            Statement stm = (Statement) con.createStatement();
+            sql = "INSERT INTO arqueos VALUES(" + getMonto() + ", '" + getTurno() + "')";
+            stm.execute(sql);
+
+            stm.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            conn.getClose();
+        }
+        return true;
+    }
+
     public boolean existeRegistroProducto(String cod) {
         try {
 
             String sql = "SELECT * FROM productos WHERE codigo = " + cod;
-            con =  conn.getConnection();
+            con = conn.getConnection();
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet resultado = pst.executeQuery();
 
@@ -185,8 +263,54 @@ public class Ventas {
         return false;
     }
 
-    public DefaultTableModel obtenerDatosProducto(String cod, JTable jt , String piezas) {
-        con =  conn.getConnection();
+    public int numArqueos() {
+        int arqueos = 0;
+        try {
+
+            String sql = "SELECT COUNT(id_arqueo) as arqueo FROM arqueos";
+            con = conn.getConnection();
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet resultado = pst.executeQuery();
+            if (resultado.next()) {
+                arqueos = resultado.getInt("arqueo");
+            }
+
+        } catch (SQLException ex) {
+
+        } finally {
+            conn.getClose();
+        }
+        return arqueos;
+    }
+
+    public String[] arqueo() {
+        String[] arr = {"", "", "", ""};
+        try {
+
+            String sql = "select COUNT(id_ventas),\n"
+                    + "       (SELECT IFNULL(SUM(monto),0) FROM ventas WHERE fecha = CURDATE() AND tipo_venta = 'Venta' AND turno = '" + getTurno() + "') as ventas ,\n"
+                    + "       (SELECT IFNULL(SUM(monto),0) FROM ventas WHERE fecha = CURDATE() AND tipo_venta = 'DEVOLUCION' AND turno = '" + getTurno() + "') as devoluciones ,\n"
+                    + "       (SELECT IFNULL(SUM(total),0) FROM gastos WHERE fecha = CURDATE() AND turno = '" + getTurno() + "') as gastos\n"
+                    + "  from ventas";
+            con = conn.getConnection();
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet resultado = pst.executeQuery();
+            if (resultado.next()) {
+                arr[0] = resultado.getString("ventas");
+                arr[1] = resultado.getString("devoluciones");
+                arr[2] = resultado.getString("gastos");
+
+            }
+        } catch (SQLException ex) {
+
+        } finally {
+            conn.getClose();
+        }
+        return arr;
+    }
+
+    public DefaultTableModel obtenerDatosProducto(String cod, JTable jt, String piezas) {
+        con = conn.getConnection();
         jt.setDefaultRenderer(Object.class, new Render());
         JButton btnEliminar = new JButton("Eliminar");
         ImageIcon ie = new ImageIcon(getClass().getResource("/imagenes/eli.png"));
@@ -201,8 +325,8 @@ public class Ventas {
 
             while (resultado.next()) {
                 float precio = Integer.parseInt(piezas) * Float.parseFloat(resultado.getString("precio"));
-                float precioU= Float.parseFloat(resultado.getString("precio"));
-                arr = new String[]{resultado.getString("codigo"), resultado.getString("marca_comercial"), resultado.getString("sustancia"), resultado.getString("tipo_medicamento"), piezas, String.format(Locale.US, "%.2f",precioU), String.format(Locale.US, "%.2f", precio)};
+                float precioU = Float.parseFloat(resultado.getString("precio"));
+                arr = new String[]{resultado.getString("codigo"), resultado.getString("marca_comercial"), resultado.getString("sustancia"), resultado.getString("tipo_medicamento"), piezas, String.format(Locale.US, "%.2f", precioU), String.format(Locale.US, "%.2f", precio)};
             }
             pst.close();
             resultado.close();
@@ -223,7 +347,7 @@ public class Ventas {
     public boolean pausarVenta(DefaultTableModel modelo, int id) {
 
         try {
-            con =  conn.getConnection();
+            con = conn.getConnection();
             Statement stm = (Statement) con.createStatement();
             for (int i = 0; i < modelo.getRowCount(); i++) {
                 stm.execute("INSERT INTO pausar_venta VALUES(" + id + ", " + modelo.getValueAt(i, 0).toString() + "," + modelo.getValueAt(i, 4).toString() + ")");
@@ -244,7 +368,7 @@ public class Ventas {
         double totalV = Double.valueOf(total);
 
         try {
-            con =  conn.getConnection();
+            con = conn.getConnection();
             Statement stm = (Statement) con.createStatement();
 
             for (int i = 0; i < modelo.getRowCount(); i++) {
@@ -254,7 +378,7 @@ public class Ventas {
             }
 
             sql = "INSERT INTO ventas (fecha,id_empleado,id_cliente,monto,turno,tipo_venta,des_p,des_g)"
-                    + "VALUES (CURDATE()," + idEmp + "," + idClient + "," + totalV + ",'" + turno + "','Venta', "+des_p+" , "+des_g+")";
+                    + "VALUES (CURDATE()," + idEmp + "," + idClient + "," + totalV + ",'" + turno + "','Venta', " + des_p + " , " + des_g + ")";
 
             stm.execute(sql);
 
@@ -295,7 +419,7 @@ public class Ventas {
         int cantidadExistencias = 0;
         String nombre = null;
         try {
-            con =  conn.getConnection();
+            con = conn.getConnection();
             Statement stm = (Statement) con.createStatement();
             String sql = "SELECT cantidad,marca_comercial FROM productos WHERE codigo=" + codigoProducto;
             ResultSet resultado = stm.executeQuery(sql);
@@ -322,7 +446,7 @@ public class Ventas {
     public void piezasDescontar(long codigoProducto, int piezas) {
         int cantidadExistencias = 0, cantidadActual;
         try {
-             con =  conn.getConnection();
+            con = conn.getConnection();
             Statement stm = (Statement) con.createStatement();
             String sql = "SELECT cantidad FROM productos WHERE codigo=" + codigoProducto;
             ResultSet resultado = stm.executeQuery(sql);
@@ -348,7 +472,7 @@ public class Ventas {
     public String folio() {
         String sql = null, folio = "0";
         try {
-             con =  conn.getConnection();
+            con = conn.getConnection();
             Statement stm = (Statement) con.createStatement();
 
             sql = "SELECT MAX(id_ventas) AS folio FROM ventas";
@@ -374,24 +498,24 @@ public class Ventas {
         return folio;
 
     }
-    
-    public String[] infoTikect(String folio){
-        String []arr = {"","","","",""};
+
+    public String[] infoTikect(String folio) {
+        String[] arr = {"", "", "", "", ""};
         try {
-            con =  conn.getConnection();
+            con = conn.getConnection();
             Statement stm = (Statement) con.createStatement();
 
-            String sql = "SELECT * , cliente.nombre as cliente , empleado.nombre as empleado FROM ventas\n" +
-                            "INNER JOIN empleado ON empleado.id_empleado = ventas.id_empleado\n" +
-                            "INNER JOIN cliente on cliente.id_cliente = ventas.id_cliente\n" +
-                            "WHERE id_ventas ="+folio;
+            String sql = "SELECT * , cliente.nombre as cliente , empleado.nombre as empleado FROM ventas\n"
+                    + "INNER JOIN empleado ON empleado.id_empleado = ventas.id_empleado\n"
+                    + "INNER JOIN cliente on cliente.id_cliente = ventas.id_cliente\n"
+                    + "WHERE id_ventas =" + folio;
             ResultSet resultado = stm.executeQuery(sql);
             if (resultado.next()) {
-                arr[0]=String.valueOf(resultado.getInt("id_ventas"));
-                arr[1]=resultado.getString("fecha");
-                arr[2]=resultado.getString("cliente");
-                arr[3]=resultado.getString("empleado");
-                arr[4]=String.valueOf(resultado.getDouble("monto"));
+                arr[0] = String.valueOf(resultado.getInt("id_ventas"));
+                arr[1] = resultado.getString("fecha");
+                arr[2] = resultado.getString("cliente");
+                arr[3] = resultado.getString("empleado");
+                arr[4] = String.valueOf(resultado.getDouble("monto"));
             }
             stm.close();
             resultado.close();
@@ -403,21 +527,21 @@ public class Ventas {
         }
         return arr;
     }
-    
-     public List<List<String>> infoTikectProductos(String folio){
-        List<List<String>> productos = new ArrayList<List<String>>(); 
-            productos.add(new ArrayList<String>());
-            productos.add(new ArrayList<String>());
-            productos.add(new ArrayList<String>());
-            productos.add(new ArrayList<String>());
-         
-         try {
-            con =  conn.getConnection();
+
+    public List<List<String>> infoTikectProductos(String folio) {
+        List<List<String>> productos = new ArrayList<List<String>>();
+        productos.add(new ArrayList<String>());
+        productos.add(new ArrayList<String>());
+        productos.add(new ArrayList<String>());
+        productos.add(new ArrayList<String>());
+
+        try {
+            con = conn.getConnection();
             Statement stm = (Statement) con.createStatement();
 
-            String sql = "SELECT * FROM detalle_venta\n" +
-                    "INNER JOIN productos ON productos.codigo = detalle_venta.id_producto\n" +
-                    "WHERE id_venta ="+folio;
+            String sql = "SELECT * FROM detalle_venta\n"
+                    + "INNER JOIN productos ON productos.codigo = detalle_venta.id_producto\n"
+                    + "WHERE id_venta =" + folio;
             ResultSet resultado = stm.executeQuery(sql);
             while (resultado.next()) {
                 productos.get(0).add(String.valueOf(resultado.getInt("piezas")));
@@ -432,9 +556,9 @@ public class Ventas {
 
         } finally {
             conn.getClose();
-        } 
+        }
         return productos;
-         
-     }
+
+    }
 
 }

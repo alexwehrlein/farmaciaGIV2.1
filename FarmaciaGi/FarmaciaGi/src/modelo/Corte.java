@@ -482,4 +482,33 @@ public class Corte {
          
      }
         
+    public String retiros() {
+        String sql = null , precio = "" ;
+        try {
+            con = new Conexion().getConnection();
+            Statement stm = (Statement) con.createStatement();
+
+            sql = "SELECT SUM(precio) as total FROM retiros WHERE fecha = CURDATE() AND turno='" + getTurno() + "'";
+            ResultSet rs = stm.executeQuery(sql);
+            if (rs.next()) {
+                precio = rs.getString("precio");
+
+            }
+            stm.close();
+            rs.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+
+        } finally {
+            try {
+                con.close();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return precio;
+    } 
 }
