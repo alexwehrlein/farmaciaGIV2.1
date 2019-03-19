@@ -355,7 +355,7 @@ public class Controlador_Pantalla_Ventas {
                 String codigo = pantalla_Ventas.jTextFieldCodigo.getText();
                 String precio = pantalla_Ventas.jTextFieldPrecio.getText();
                 if (codigo.isEmpty() && precio.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "No deje campos en blanco","ERROR",JOptionPane.ERROR_MESSAGE);
+//                    JOptionPane.showMessageDialog(null, "No deje campos en blancooo","ERROR",JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 int porcentaje = Integer.parseInt(pantalla_Ventas.jComboBoxDes.getSelectedItem().toString());

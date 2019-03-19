@@ -3,16 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/alexwehrlein/NetBeansProjects/farmaciaGiJava/FarmaciaGi/FarmaciaGi/src/vista/Pantalla_Ventas.java</file>
-            <file>file:/home/alexwehrlein/NetBeansProjects/farmaciaGiJava/FarmaciaGi/FarmaciaGi/src/vista/Pantalla_Retiro.java</file>
-            <file>file:/home/alexwehrlein/NetBeansProjects/farmaciaGiJava/FarmaciaGi/FarmaciaGi/src/modelo/Gastos.java</file>
-            <file>file:/home/alexwehrlein/NetBeansProjects/farmaciaGiJava/FarmaciaGi/FarmaciaGi/src/modelo/Ventas.java</file>
-            <file>file:/home/alexwehrlein/NetBeansProjects/farmaciaGiJava/FarmaciaGi/FarmaciaGi/src/controlador/Controlador_PantallaGstos.java</file>
-            <file>file:/home/alexwehrlein/NetBeansProjects/farmaciaGiJava/FarmaciaGi/FarmaciaGi/src/tikect/TikectRetiros.java</file>
-            <file>file:/home/alexwehrlein/NetBeansProjects/farmaciaGiJava/FarmaciaGi/FarmaciaGi/src/controlador/Controlador_Pantalla_Ventas.java</file>
-            <file>file:/home/alexwehrlein/NetBeansProjects/farmaciaGiJava/FarmaciaGi/FarmaciaGi/src/controlador/Controlador_Pantalla_Retiros.java</file>
-            <file>file:/home/alexwehrlein/NetBeansProjects/farmaciaGiJava/FarmaciaGi/FarmaciaGi/src/modelo/Retiros.java</file>
-            <file>file:/home/alexwehrlein/NetBeansProjects/farmaciaGiJava/FarmaciaGi/FarmaciaGi/src/vista/Pantalla_GastosFarmacia.java</file>
+            <file>file:/home/alexwehrlein/NetBeansProjects/farmaciaGiJava/FarmaciaGi/FarmaciaGi/src/vista/Pantalla_CorteCaja.java</file>
+            <file>file:/home/alexwehrlein/NetBeansProjects/farmaciaGiJava/FarmaciaGi/FarmaciaGi/src/tikect/TikectCorte.java</file>
+            <file>file:/home/alexwehrlein/NetBeansProjects/farmaciaGiJava/FarmaciaGi/FarmaciaGi/src/controlador/Pantalla_Corte.java</file>
+            <file>file:/home/alexwehrlein/NetBeansProjects/farmaciaGiJava/FarmaciaGi/FarmaciaGi/src/modelo/Corte.java</file>
         </group>
     </open-files>
 </project-private>

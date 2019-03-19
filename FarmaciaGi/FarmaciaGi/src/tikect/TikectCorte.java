@@ -56,13 +56,13 @@ public class TikectCorte {
             
              auxs+= string+". \n";
         }
+//        auxs+= "==========================================\n";
+//         for (int i = 0; i < consultas.length / 3; i++) {
+//        auxs+= ""+consultas[num]+":           "+consultas[num2]+"    Total: $ "+consultas[num3]+"\n";
+//        num+=3; num2+=3; num3+=3;
+//         }
         auxs+= "==========================================\n";
-         for (int i = 0; i < consultas.length / 3; i++) {
-        auxs+= ""+consultas[num]+":           "+consultas[num2]+"    Total: $ "+consultas[num3]+"\n";
-        num+=3; num2+=3; num3+=3;
-         }
-        auxs+= "==========================================\n";
-        auxs+= "TOTAL VENTAS:     $ "+total+"\n";
+        auxs+= "TOTAL VENTAS:     $ "+String.format("%.2f", total)+"\n";
         auxs+= "_________________________________________\n";
         
         auxs+= "==========================================\n\n\n\n\n";

@@ -436,14 +436,14 @@ public class Productos {
             ResultSet resultado = pst.executeQuery();
             while (resultado.next()) {
                 arrayProductos.add(new Productos(resultado.getLong("codigo"), resultado.getString("marca_comercial"), resultado.getString("sustancia"), resultado.getDouble("precio"),
-                        resultado.getString("tipo_medicamento"), resultado.getString("laboratorio"), resultado.getString("nombre"), resultado.getInt("cantidad")));
+                        resultado.getString("tipo_medicamento"), resultado.getString("laboratorio"), resultado.getString("nombre")));
             }
             int num = arrayProductos.size();
 
             for (int i = 0; i < arrayProductos.size(); i++) {
                 modelo.addRow(new Object[]{arrayProductos.get(i).getCodigo(), arrayProductos.get(i).getMarcaComercial(),
-                    arrayProductos.get(i).getSustancias(), arrayProductos.get(i).getPrecio(), arrayProductos.get(i).getTipoMedicamento(), arrayProductos.get(i).getLaboratorio(),
-                    arrayProductos.get(i).getCantidad(), btnModificar});
+                    arrayProductos.get(i).getSustancias(), arrayProductos.get(i).getPrecio(), arrayProductos.get(i).getTipoMedicamento(), arrayProductos.get(i).getLaboratorio()
+                    , btnModificar});
             }
             System.out.println(num);
             if (num < 1) {
@@ -492,12 +492,12 @@ public class Productos {
             ResultSet resultado = pst.executeQuery();
             while (resultado.next()) {
                 arrayProductos.add(new Productos(resultado.getLong("codigo"), resultado.getString("marca_comercial"), resultado.getString("sustancia"), resultado.getDouble("precio"),
-                        resultado.getString("tipo_medicamento"), resultado.getString("laboratorio"), resultado.getString("nombre"), resultado.getInt("cantidad")));
+                        resultado.getString("tipo_medicamento"), resultado.getString("laboratorio"), resultado.getString("nombre")));
             }
             for (int i = 0; i < arrayProductos.size(); i++) {
                 modelo.addRow(new Object[]{arrayProductos.get(i).getCodigo(), arrayProductos.get(i).getMarcaComercial(),
                     arrayProductos.get(i).getSustancias(), arrayProductos.get(i).getPrecio(), arrayProductos.get(i).getTipoMedicamento(), arrayProductos.get(i).getLaboratorio(),
-                    arrayProductos.get(i).getCantidad(), btnModificar});
+                    btnModificar});
             }
             pst.close();
             pst = null;
