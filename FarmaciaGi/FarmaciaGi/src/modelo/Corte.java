@@ -488,7 +488,7 @@ public class Corte {
             con = new Conexion().getConnection();
             Statement stm = (Statement) con.createStatement();
 
-            sql = "SELECT SUM(precio) as total FROM retiros WHERE fecha = CURDATE() AND turno='" + getTurno() + "'";
+            sql = "SELECT IFNULL(SUM(precio),0) as total FROM retiros WHERE fecha = CURDATE() AND turno='" + getTurno() + "'";
             ResultSet rs = stm.executeQuery(sql);
             if (rs.next()) {
                 precio = rs.getString("total");

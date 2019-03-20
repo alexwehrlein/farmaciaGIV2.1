@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -67,10 +68,14 @@ public class TikectCorte {
         
         auxs+= "==========================================\n\n\n\n\n";
         
-       impServicio.printCadena(impra, auxs);
-        // Cortar el papel ....
-        byte[] cutP = new byte[]{0x1d, 'V', 1}; // comado para cortar
-        impServicio.printBytes(impra, cutP); // se imprime el bruto 
+       try {
+            impServicio.printCadena(impra, auxs);
+            // Cortar el papel ....
+            byte[] cutP = new byte[]{0x1d, 'V', 1}; // comado para cortar
+            impServicio.printBytes(impra, cutP); // se imprime el bruto 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El tikect no se pudo imprimir","warning",JOptionPane.WARNING_MESSAGE);
+        }
         
         
         
