@@ -491,7 +491,7 @@ public class Corte {
             sql = "SELECT SUM(precio) as total FROM retiros WHERE fecha = CURDATE() AND turno='" + getTurno() + "'";
             ResultSet rs = stm.executeQuery(sql);
             if (rs.next()) {
-                precio = rs.getString("precio");
+                precio = rs.getString("total");
 
             }
             stm.close();
