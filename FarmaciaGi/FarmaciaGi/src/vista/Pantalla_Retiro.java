@@ -49,7 +49,7 @@ public class Pantalla_Retiro extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(102, 153, 255));
 
-        jPanel3.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel3.setBackground(new java.awt.Color(0, 112, 192));
 
         btnTikect.setText("TIKECT");
         btnTikect.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N

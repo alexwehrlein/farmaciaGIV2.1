@@ -5,14 +5,21 @@
  */
 package modelo;
 
+import com.mysql.jdbc.PreparedStatement;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 //import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 
 /**
@@ -23,9 +30,28 @@ public class Corte {
 
     Connection con;
     private String turno;
+    private String fecha;
+    private String fecha2;
     private double total;
+    private int id;
     boolean yes;
     Conexion conn = new Conexion();
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public double getTotal() {
         return total;
@@ -45,8 +71,10 @@ public class Corte {
 
     public Corte() {
     }
-    
-    
+
+    public Corte(int id) {
+        this.id = id;
+    }
 
     public void setTurno(String turno) {
         this.turno = turno;
@@ -57,13 +85,29 @@ public class Corte {
         this.total = total;
     }
 
-    public String devolucionesTotal() {
+    public Corte(int id, double total, String fecha, String turno) {
+        this.turno = turno;
+        this.fecha = fecha;
+        this.total = total;
+        this.id = id;
+    }
+
+    public Corte(String turno, String fecha) {
+        this.turno = turno;
+        this.fecha = fecha;
+    }
+
+    public String devolucionesTotal(int num) {
         String sql = null, devolucionesTotal = "0";
         try {
             con = new Conexion().getConnection();
             Statement stm = (Statement) con.createStatement();
 
-            sql = "SELECT SUM(monto) FROM ventas WHERE fecha = CURDATE() AND tipo_venta = 'DEVOLUCION' AND turno='" + getTurno() + "'";
+            if (num == 0) {
+                sql = "SELECT SUM(monto) FROM ventas WHERE fecha = CURDATE() AND tipo_venta = 'DEVOLUCION' AND turno='" + getTurno() + "'";
+            } else {
+                sql = "SELECT SUM(monto) FROM ventas WHERE fecha = '" + getFecha() + "' AND tipo_venta = 'DEVOLUCION' AND turno='" + getTurno() + "'";
+            }
             ResultSet resultado = stm.executeQuery(sql);
             if (resultado.next()) {
                 devolucionesTotal = resultado.getString("SUM(monto)");
@@ -84,7 +128,7 @@ public class Corte {
 
     }
 
-    public String ventaTotal() {
+    public String ventaTotal(int num) {
         String sql = null, ventaTotal = "0";
         double total = 0;
         try {
@@ -92,7 +136,11 @@ public class Corte {
             Statement stm = (Statement) con.createStatement();
             Statement stm2 = (Statement) con.createStatement();
 
-            sql = "SELECT SUM(monto) FROM ventas WHERE fecha = CURDATE()   AND tipo_venta = 'Venta' AND turno='" + getTurno() + "'";
+            if (num == 0) {
+                sql = "SELECT SUM(monto) FROM ventas WHERE fecha = CURDATE()   AND tipo_venta = 'Venta' AND turno='" + getTurno() + "'";
+            } else {
+                sql = "SELECT SUM(monto) FROM ventas WHERE fecha = '" + getFecha() + "'   AND tipo_venta = 'Venta' AND turno='" + getTurno() + "'";
+            }
 
             ResultSet resultado = stm.executeQuery(sql);
             if (resultado.next()) {
@@ -116,13 +164,17 @@ public class Corte {
 
     }
 
-    public String consultaTotal() {
+    public String consultaTotal(int num) {
         String sql = null, ventaTotal = "0";
         try {
             con = new Conexion().getConnection();
             Statement stm = (Statement) con.createStatement();
 
-            sql = "SELECT SUM(total) FROM detalle_venta WHERE fecha = CURDATE()  AND tipo_venta = 'CONSULTA' AND turno='" + getTurno() + "'";
+            if (num == 0) {
+                sql = "SELECT SUM(total) FROM detalle_venta WHERE fecha = CURDATE()  AND tipo_venta = 'CONSULTA' AND turno='" + getTurno() + "'";
+            } else {
+                sql = "SELECT SUM(total) FROM detalle_venta WHERE fecha = '" + getFecha() + "'  AND tipo_venta = 'CONSULTA' AND turno='" + getTurno() + "'";
+            }
             ResultSet resultado = stm.executeQuery(sql);
             if (resultado.next()) {
                 ventaTotal = resultado.getString("SUM(total)");
@@ -143,13 +195,17 @@ public class Corte {
 
     }
 
-    public String gastosTotal() {
+    public String gastosTotal(int num) {
         String sql = null, gastosTotal = "0";
         try {
             con = new Conexion().getConnection();
             Statement stm = (Statement) con.createStatement();
 
-            sql = "SELECT SUM(total) FROM gastos WHERE fecha = CURDATE()  AND turno='" + getTurno() + "'";
+            if (num == 0) {
+                sql = "SELECT SUM(total) FROM gastos WHERE fecha = CURDATE()  AND turno='" + getTurno() + "'";
+            } else {
+                sql = "SELECT SUM(total) FROM gastos WHERE fecha = '" + getFecha() + "'  AND turno='" + getTurno() + "'";
+            }
             ResultSet resultado = stm.executeQuery(sql);
             if (resultado.next()) {
                 gastosTotal = resultado.getString("SUM(total)");
@@ -170,13 +226,17 @@ public class Corte {
 
     }
 
-    public String abarrotesTotal() {
+    public String abarrotesTotal(int num) {
         String sql = null, ventaTotal = "0";
         try {
             con = new Conexion().getConnection();
             Statement stm = (Statement) con.createStatement();
 
-            sql = "SELECT SUM(total) FROM detalle_venta WHERE fecha = CURDATE()  AND tipo_venta = 'ABARROTES' AND turno='" + getTurno() + "'";
+            if (num == 0) {
+                sql = "SELECT SUM(total) FROM detalle_venta WHERE fecha = CURDATE()  AND tipo_venta = 'ABARROTES' AND turno='" + getTurno() + "'";
+            } else {
+                sql = "SELECT SUM(total) FROM detalle_venta WHERE fecha = '" + getFecha() + "'  AND tipo_venta = 'ABARROTES' AND turno='" + getTurno() + "'";
+            }
             ResultSet resultado = stm.executeQuery(sql);
             if (resultado.next()) {
                 ventaTotal = resultado.getString("SUM(total)");
@@ -197,13 +257,17 @@ public class Corte {
 
     }
 
-    public String perfumeriaTotal() {
+    public String perfumeriaTotal(int num) {
         String sql = null, ventaTotal = "0";
         try {
             con = new Conexion().getConnection();
             Statement stm = (Statement) con.createStatement();
 
-            sql = "SELECT SUM(total) FROM detalle_venta WHERE fecha = CURDATE()  AND tipo_venta = 'PERFUMERIA' AND turno='" + getTurno() + "'";
+            if (num == 0) {
+                sql = "SELECT SUM(total) FROM detalle_venta WHERE fecha = CURDATE()  AND tipo_venta = 'PERFUMERIA' AND turno='" + getTurno() + "'";
+            } else {
+                sql = "SELECT SUM(total) FROM detalle_venta WHERE fecha = '" + getFecha() + "'  AND tipo_venta = 'PERFUMERIA' AND turno='" + getTurno() + "'";
+            }
             ResultSet resultado = stm.executeQuery(sql);
             if (resultado.next()) {
                 ventaTotal = resultado.getString("SUM(total)");
@@ -295,16 +359,21 @@ public class Corte {
 
     }
 
-    public ArrayList<String> descuentos() {
-          ArrayList<String> nombresClientes = new ArrayList<String>();
+    public ArrayList<String> descuentos(int num) {
+        ArrayList<String> nombresClientes = new ArrayList<String>();
+        String sql = "";
         try {
             con = conn.getConnection();
             java.sql.Statement stm = (java.sql.Statement) con.createStatement();
 
-            String sql = "SELECT  concat_ws(' DESCUENTO %  ', cliente.nombre, des_p, des_g) as clientes From ventas INNER JOIN cliente on ventas.id_cliente=cliente.id_cliente WHERE ventas.id_cliente != 1 AND fecha = CURDATE()  AND turno = '" + getTurno() + "' ";
+            if (num == 0) {
+                sql = "SELECT  concat_ws(' DESCUENTO %  ', cliente.nombre, des_p, des_g) as clientes From ventas INNER JOIN cliente on ventas.id_cliente=cliente.id_cliente WHERE ventas.id_cliente != 1 AND fecha = CURDATE()  AND turno = '" + getTurno() + "' ";
+            } else {
+                sql = "SELECT  concat_ws(' DESCUENTO %  ', cliente.nombre, des_p, des_g) as clientes From ventas INNER JOIN cliente on ventas.id_cliente=cliente.id_cliente WHERE ventas.id_cliente != 1 AND fecha = '"+getFecha()+"'  AND turno = '" + getTurno() + "' ";
+            }
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
-                 nombresClientes.add(rs.getString("clientes"));
+                nombresClientes.add(rs.getString("clientes"));
             }
             stm.close();
             rs.close();
@@ -316,9 +385,10 @@ public class Corte {
         }
         return nombresClientes;
     }
-    
-     public String[] consultaD(){
-        String []arr = {"0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"}; String box;
+
+    public String[] consultaD() {
+        String[] arr = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"};
+        String box;
         try {
             String sql = "SELECT SUM(total) AS consulta, COUNT(id_detalle) AS consulata2 FROM detalle_venta WHERE descripcion = 'CONSULTA'AND fecha = CURDATE() AND turno = '" + getTurno() + "' ";
             String sql2 = "SELECT SUM(total) AS aplicacion, COUNT(id_detalle) AS aplicacion2 FROM detalle_venta WHERE descripcion = 'APLICACION' AND fecha = CURDATE() AND turno = '" + getTurno() + "' ";
@@ -328,102 +398,101 @@ public class Corte {
             String sql6 = "SELECT SUM(total) AS presion, COUNT(id_detalle) AS presion2 FROM detalle_venta WHERE descripcion = 'TOMA DE PRESION' AND fecha = CURDATE() AND turno = '" + getTurno() + "'";
             String sql7 = "SELECT SUM(total) AS oido, COUNT(id_detalle) AS oido2 FROM detalle_venta WHERE descripcion = 'LAVADO DE OIDO' AND fecha = CURDATE() AND turno = '" + getTurno() + "'";
             String sql8 = "SELECT SUM(total) AS hc, COUNT(id_detalle) AS hc2 FROM detalle_venta WHERE descripcion = 'HISTORIAL CLINICO' AND fecha = CURDATE() AND turno = '" + getTurno() + "'";
-            String sql9 = "SELECT SUM(total) AS tg, COUNT(id_detalle) AS tg2 FROM detalle_venta WHERE descripcion = 'TOMA DE GLUCOSA' AND fecha = CURDATE() AND turno = '" + getTurno() + "'";        
+            String sql9 = "SELECT SUM(total) AS tg, COUNT(id_detalle) AS tg2 FROM detalle_venta WHERE descripcion = 'TOMA DE GLUCOSA' AND fecha = CURDATE() AND turno = '" + getTurno() + "'";
             con = conn.getConnection();
             java.sql.Statement stm = (java.sql.Statement) con.createStatement();
             ResultSet resultado = stm.executeQuery(sql);
-            if(resultado.next()){
+            if (resultado.next()) {
                 box = resultado.getString("consulta");
                 arr[0] = resultado.getString("consulta2");
                 if (box != null) {
-                        arr[1]=box;    
+                    arr[1] = box;
                 } else {
-                    
+
                 }
-                            
+
             }
             resultado = stm.executeQuery(sql2);
-            if(resultado.next()){
-                  box=resultado.getString("aplicacion");
-                  arr[2] = resultado.getString("aplicacion2");
-                  if (box != null) {
-                        arr[3]=box;    
+            if (resultado.next()) {
+                box = resultado.getString("aplicacion");
+                arr[2] = resultado.getString("aplicacion2");
+                if (box != null) {
+                    arr[3] = box;
                 } else {
-                    
+
                 }
             }
             resultado = stm.executeQuery(sql3);
-            if(resultado.next()){
-                  box=resultado.getString("suero");
-                  arr[4] = resultado.getString("suero2");
-                  if (box != null) {
-                        arr[5]=box;    
+            if (resultado.next()) {
+                box = resultado.getString("suero");
+                arr[4] = resultado.getString("suero2");
+                if (box != null) {
+                    arr[5] = box;
                 } else {
-                    
+
                 }
             }
             resultado = stm.executeQuery(sql4);
-            if(resultado.next()){
-                  box=resultado.getString("glucosa"); 
-                  arr[6]=resultado.getString("glucosa2"); 
-                  if (box != null) {
-                        arr[7]=box;    
+            if (resultado.next()) {
+                box = resultado.getString("glucosa");
+                arr[6] = resultado.getString("glucosa2");
+                if (box != null) {
+                    arr[7] = box;
                 } else {
-                    
+
                 }
             }
             resultado = stm.executeQuery(sql5);
-            if(resultado.next()){
-                  box=resultado.getString("certificado");
-                  arr[8] = resultado.getString("certificado2");
-                  if (box != null) {
-                        arr[9]=box;    
+            if (resultado.next()) {
+                box = resultado.getString("certificado");
+                arr[8] = resultado.getString("certificado2");
+                if (box != null) {
+                    arr[9] = box;
                 } else {
-                    
+
                 }
             }
-             resultado = stm.executeQuery(sql6);
-            if(resultado.next()){
-                  box=resultado.getString("presion");
-                  arr[10] = resultado.getString("presion2");
-                  if (box != null) {
-                        arr[11]=box;    
+            resultado = stm.executeQuery(sql6);
+            if (resultado.next()) {
+                box = resultado.getString("presion");
+                arr[10] = resultado.getString("presion2");
+                if (box != null) {
+                    arr[11] = box;
                 } else {
-                    
+
                 }
             }
             resultado = stm.executeQuery(sql7);
-            if(resultado.next()){
-                  box=resultado.getString("oido"); 
-                  arr[12] =resultado.getString("oido2"); 
-                  if (box != null) {
-                        arr[13]=box;    
+            if (resultado.next()) {
+                box = resultado.getString("oido");
+                arr[12] = resultado.getString("oido2");
+                if (box != null) {
+                    arr[13] = box;
                 } else {
-                    
+
                 }
             }
             resultado = stm.executeQuery(sql8);
-            if(resultado.next()){
-                  box=resultado.getString("hc");
-                  arr[14] = resultado.getString("hc2");
-                  if (box != null) {
-                        arr[15]=box;    
+            if (resultado.next()) {
+                box = resultado.getString("hc");
+                arr[14] = resultado.getString("hc2");
+                if (box != null) {
+                    arr[15] = box;
                 } else {
-                    
+
                 }
             }
-             resultado = stm.executeQuery(sql9);
-            if(resultado.next()){
-                  box=resultado.getString("tg"); 
-                  arr[16] = resultado.getString("tg2"); 
-                  if (box != null) {
-                        arr[17]=box;    
+            resultado = stm.executeQuery(sql9);
+            if (resultado.next()) {
+                box = resultado.getString("tg");
+                arr[16] = resultado.getString("tg2");
+                if (box != null) {
+                    arr[17] = box;
                 } else {
-                    
+
                 }
             }
-          
-            
+
             stm.close();
             resultado.close();
         } catch (SQLException ex) {
@@ -432,44 +501,52 @@ public class Corte {
         }
         return arr;
     }
-     
-     public String[] totalesC(){
-        String c[] = null , nom[] = null , turno = "noche";
-        int num = 0 , contador = 0;
-        int x = 0 , y = 1 , z = 2;
-        try {
-            con =  conn.getConnection();
-            Statement stm = (Statement) con.createStatement();
 
-            String sql = "SELECT COUNT(codigo) AS num FROM productos WHERE tipo_medicamento = 'CONSULTA'";
+    public String[] totalesC(int num2) {
+        String c[] = null, nom[] = null, turno = "noche";
+        String sql = "";
+        int num = 0, contador = 0;
+        int x = 0, y = 1, z = 2;
+        try {
+            con = conn.getConnection();
+            Statement stm = (Statement) con.createStatement();
+            
+           
+                sql = "SELECT COUNT(codigo) AS num FROM productos WHERE tipo_medicamento = 'CONSULTA'";
+          
             ResultSet resultado = stm.executeQuery(sql);
             if (resultado.next()) {
-               num = resultado.getInt("num");
-               c = new String[num*3];
-               nom = new String[num];
+                num = resultado.getInt("num");
+                c = new String[num * 3];
+                nom = new String[num];
             }
-            
+
             sql = "SELECT * FROM productos WHERE tipo_medicamento = 'CONSULTA'";
             resultado = stm.executeQuery(sql);
-            
-            while(resultado.next()){
-                nom[contador] =  resultado.getString("marca_comercial");
+
+            while (resultado.next()) {
+                nom[contador] = resultado.getString("marca_comercial");
                 contador++;
             }
-            
+
             for (int i = 0; i < nom.length; i++) {
-                    
-                sql = "SELECT IFNULL(descripcion , '"+nom[i]+"') AS des , IFNULL(SUM(total),0) AS sum , IFNULL(SUM(piezas) , 0 ) AS con FROM detalle_venta WHERE descripcion ='"+nom[i]+"' AND fecha = CURDATE() AND turno = '" + turno + "'";
+                if(num2 == 0){
+                    sql = "SELECT IFNULL(descripcion , '" + nom[i] + "') AS des , IFNULL(SUM(total),0) AS sum , IFNULL(SUM(piezas) , 0 ) AS con FROM detalle_venta WHERE descripcion ='" + nom[i] + "' AND fecha = CURDATE() AND turno = '" + turno + "'";
+                }else{
+                     sql = "SELECT IFNULL(descripcion , '" + nom[i] + "') AS des , IFNULL(SUM(total),0) AS sum , IFNULL(SUM(piezas) , 0 ) AS con FROM detalle_venta WHERE descripcion ='" + nom[i] + "' AND fecha = '"+getFecha()+"' AND turno = '" + turno + "'";
+                }
                 resultado = stm.executeQuery(sql);
                 if (resultado.next()) {
                     c[x] = resultado.getString("des");
                     c[y] = String.valueOf(resultado.getInt("con"));
                     c[z] = String.valueOf(resultado.getDouble("sum"));
                 }
-                x+=3; y+=3; z+=3;
-               
+                x += 3;
+                y += 3;
+                z += 3;
+
             }
-            
+
             stm.close();
             resultado.close();
         } catch (SQLException ex) {
@@ -479,16 +556,20 @@ public class Corte {
             conn.getClose();
         }
         return c;
-         
-     }
-        
-    public String retiros() {
-        String sql = null , precio = "" ;
+
+    }
+
+    public String retiros(int num) {
+        String sql = null, precio = "";
         try {
             con = new Conexion().getConnection();
             Statement stm = (Statement) con.createStatement();
-
-            sql = "SELECT IFNULL(SUM(precio),0) as total FROM retiros WHERE fecha = CURDATE() AND turno='" + getTurno() + "'";
+            
+            if(num == 0){
+                sql = "SELECT IFNULL(SUM(precio),0) as total FROM retiros WHERE fecha = CURDATE() AND turno='" + getTurno() + "'";
+            }else{
+                sql = "SELECT IFNULL(SUM(precio),0) as total FROM retiros WHERE fecha = '"+getFecha()+"' AND turno='" + getTurno() + "'";
+            }
             ResultSet rs = stm.executeQuery(sql);
             if (rs.next()) {
                 precio = rs.getString("total");
@@ -510,5 +591,47 @@ public class Corte {
         }
 
         return precio;
-    } 
+    }
+
+    public DefaultTableModel buscarCorte(JTable jt, String fecha) {
+        jt.setDefaultRenderer(Object.class, new Render());
+        JButton btnModificar = new JButton("Modificar");
+        JButton btnEliminar = new JButton("Eliminar");
+        //JComboBox tipo;
+        TableColumn col = jt.getColumnModel().getColumn(1);
+        //String op[] = {"Luz", "Agua", "Gas", "Producto"};
+        //tipo = new JComboBox(op);
+        // col.setCellEditor(new DefaultCellEditor(tipo));
+        btnModificar.setName("btnModificar");
+        btnEliminar.setName("btnEliminar");
+        ImageIcon im = new ImageIcon(getClass().getResource("/imagenes/mo.png"));
+        btnModificar.setIcon(im);
+        ImageIcon ie = new ImageIcon(getClass().getResource("/imagenes/eli.png"));
+        btnEliminar.setIcon(ie);
+        jt.setRowHeight(25);
+
+        DefaultTableModel modelo = (DefaultTableModel) jt.getModel();
+        ArrayList<Corte> arrayEgresos = new ArrayList<>();
+        try {
+
+            String sql = "SELECT * FROM cortes WHERE fecha = '" + fecha + "' or id_corte = " + getId() + "  order by fecha";
+            Connection con = new Conexion().getConnection();
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            ResultSet resultado = pst.executeQuery();
+            while (resultado.next()) {
+                arrayEgresos.add(new Corte(resultado.getInt("id_corte"), resultado.getDouble("monto"), resultado.getString("fecha"), resultado.getString("turno")));
+            }
+            for (int i = 0; i < arrayEgresos.size(); i++) {
+                modelo.addRow(new Object[]{arrayEgresos.get(i).getId(), arrayEgresos.get(i).getTotal(), arrayEgresos.get(i).getFecha(),
+                    arrayEgresos.get(i).getTurno()});
+            }
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Corte.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+
+        return modelo;
+
+    }
 }

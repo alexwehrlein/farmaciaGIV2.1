@@ -174,6 +174,8 @@ public class Controlador_PantallaGstos {
                 }
             }
         });
+        
+        
 
     }
 

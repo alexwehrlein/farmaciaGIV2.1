@@ -28,7 +28,7 @@ public class Pantalla_ProductosAdd extends javax.swing.JFrame {
         cargarModeloCat();
         initComponents();
         this.setResizable(false);
-        this.getContentPane().setBackground(new java.awt.Color(153,153,255));
+        this.getContentPane().setBackground(new java.awt.Color(0,112,192));
          
     }
     
@@ -110,7 +110,7 @@ public class Pantalla_ProductosAdd extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setBackground(new java.awt.Color(153, 153, 255));
+        setBackground(new java.awt.Color(0, 112, 192));
         setIconImage(getIconImage());
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -158,7 +158,7 @@ public class Pantalla_ProductosAdd extends javax.swing.JFrame {
 
         altaMedicamentoProveedor.setModel(modeloCategorias);
 
-        altaMedicamentoTipoMedicamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CONSULTA", "PATENTE", "GENÉRICO", "ABARROTES", "PERFUMERIA" }));
+        altaMedicamentoTipoMedicamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PATENTE", "CONSULTA", "GENÉRICO", "ABARROTES", "PERFUMERIA" }));
 
         altaMedicamentoLavoratorio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GI", "LEVIC", "AMSA", "REDER", "OFASA", "NADRO", "FLOR DE LIZ", "MONTECORSO" }));
 
