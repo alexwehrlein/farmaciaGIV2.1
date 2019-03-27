@@ -169,7 +169,7 @@ public class Pantalla_Corte {
                         JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila.", "ERROR", JOptionPane.ERROR_MESSAGE);
                     } else {
                         String fecha = (String) pantalla_Corte.tablaCortes.getValueAt(fila, 2);
-                        String turno = (String) pantalla_Corte.tablaCortes.getValueAt(fila, 2);
+                        String turno = (String) pantalla_Corte.tablaCortes.getValueAt(fila, 3);
                         corte = new Corte(turno,fecha);
                         ventaTotal = corte.ventaTotal(1);
                         consultorioTotal = corte.consultaTotal(1);
