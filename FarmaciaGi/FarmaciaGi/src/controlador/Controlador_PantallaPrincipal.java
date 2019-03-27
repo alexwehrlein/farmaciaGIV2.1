@@ -314,6 +314,13 @@ public class Controlador_PantallaPrincipal {
                 new Controlador_Pantalla_Informacion();
             }
         });
+        
+        pantalla_Principal.jMenuItemBajas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Controlador_Pantalla_Bajas();
+            }
+        });
 
         pantalla_Principal.jMenuItemRealizarVenta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK));
         pantalla_Principal.jMenuItemGrstionGastos.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_DOWN_MASK));
@@ -343,6 +350,7 @@ public class Controlador_PantallaPrincipal {
         pantalla_Principal.jMenuItemProductosAdmin.setEnabled(false);
         pantalla_Principal.jMenuItemInformacionSucursal.setEnabled(false);
         pantalla_Principal.jMenuItemRetiro.setEnabled(false);
+        pantalla_Principal.jMenuItemBajas.setEnabled(false);
         pantalla_Principal.jMenuAdmon.setEnabled(true);
         pantalla_Principal.jMenuCajero.setEnabled(true);
     }
@@ -355,6 +363,7 @@ public class Controlador_PantallaPrincipal {
         pantalla_Principal.jMenuCajero.setEnabled(false);
         pantalla_Principal.jMenuItemProductosAdmin.setEnabled(true);
         pantalla_Principal.jMenuItemInformacionSucursal.setEnabled(true);
+        pantalla_Principal.jMenuItemBajas.setEnabled(true);
         pantalla_Principal.jMenuItemIniciarSesion.setText("Cerrar Sesion");
 
     }
@@ -368,6 +377,7 @@ public class Controlador_PantallaPrincipal {
         pantalla_Principal.jMenuItemGestionProducto.setEnabled(true);
         pantalla_Principal.jMenuItemInformacionSucursal.setEnabled(false);
         pantalla_Principal.jMenuItemRetiro.setEnabled(true);
+        pantalla_Principal.jMenuItemBajas.setEnabled(false);
         pantalla_Principal.jMenuItemIniciarSesion.setText("Cerrar Sesion");
 
     }
