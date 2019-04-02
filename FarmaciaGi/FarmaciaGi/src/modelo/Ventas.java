@@ -373,7 +373,7 @@ public class Ventas {
 
             for (int i = 0; i < modelo.getRowCount(); i++) {
                 if (modelo.getValueAt(i, 3).toString().equals("ABARROTES") || modelo.getValueAt(i, 3).toString().equals("PERFUMERIA") || modelo.getValueAt(i, 3).toString().equals("CONSULTA")) {
-                    totalV -= Double.valueOf(modelo.getValueAt(i, 5).toString());
+                    totalV -= Double.valueOf(modelo.getValueAt(i, 6).toString());
                 }
             }
 

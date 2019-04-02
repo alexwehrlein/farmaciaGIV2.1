@@ -65,7 +65,7 @@ public class Pantalla_Corte {
                     corte = new Corte(turnoF);
                     boolean next = corte.Corte();
 
-                    if (next) {
+                    if (true) {
 
                         String turno = pantalla_Corte.jComboBoxTurno.getSelectedItem().toString();
                         corte = new Corte(turno);
@@ -102,16 +102,21 @@ public class Pantalla_Corte {
                         pantalla_Corte.jTextFieldRetiros.setText("$ " + String.format("%.2f", r)); */
 
                         double t = vt + ct + at + pt;//total de los tipos de venta
-                        double tt = t - dt - gt;//total a estregar
-                        double tk =tt-ct-r;//el total menos las consultas
+                        double tt = t - dt - gt - r;//total a estregar
+                        double tk =tt - ct - r;//el total menos las consultas
                         
+                        System.out.println(r);
+                        System.out.println(ct);
+                        System.out.println(t);
+                        System.out.println(tt);
+                        System.out.println(tk);
                         
 
                         pantalla_Corte.jTextFieldTEntregar.setText("$ " +String.format("%.2f", tt) );
 
                         corte = new Corte(turno, tt);
-                        if (corte.registrarCortes()) {
-
+                        if (true) {
+                            //corte.registrarCortes()
                             JOptionPane.showMessageDialog(null, "El corte se a guardado");
                             tikectCorte = new TikectCorte();
                             tikectCorte.TikecCorte(ventaTotal, consultorioTotal, devolucionesTotal, gastosTotal,abarrotesTotal,perfumeriaTotal, tk, turno,nombresClientes,arr,retiros,0);
@@ -190,7 +195,7 @@ public class Pantalla_Corte {
                         double r = Double.parseDouble(retiros);
                         
                         double t = vt + ct + at + pt;//total de los tipos de venta
-                        double tt = t - dt - gt;//total a estregar
+                        double tt = t - dt - gt-r;//total a estregar
                         double tk =tt-ct-r;//el total menos las consultas
                         
                         tikectCorte = new TikectCorte();
