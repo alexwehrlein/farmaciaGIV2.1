@@ -36,12 +36,13 @@ public class Controlador_PantallaProductos {
     Productos productos;
     TikectInventario tikectInventario;
 
-    public Controlador_PantallaProductos(String rol , String turno) {
+    public Controlador_PantallaProductos(String rol, String turno) {
         pantalla_Productos = new Pantalla_Productos();
         pantalla_Productos.setVisible(true);
         pantalla_Productos.setLocationRelativeTo(null);
         pantalla_Productos.tablaProductos.setModel(new Productos().cargarRegistroEgreso(pantalla_Productos.tablaProductos));
         pantalla_Productos.existenciasM.setVisible(false);
+        pantalla_Productos.codigo.setVisible(false);
 
         List<List<String>> productosTikect = new ArrayList<List<String>>();
         productosTikect.add(new ArrayList<String>());
@@ -51,11 +52,11 @@ public class Controlador_PantallaProductos {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (productosTikect.get(0).size() > 0 && productosTikect.get(1).size() > 0) {
-                     tikectInventario = new TikectInventario();
-                     tikectInventario.tikectInventario(turno, productosTikect);
-                     
-                }else{
-                    JOptionPane.showMessageDialog(null, "No hay productos agregados" , "ERROR" , JOptionPane.ERROR_MESSAGE);
+                    tikectInventario = new TikectInventario();
+                    tikectInventario.tikectInventario(turno, productosTikect);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "No hay productos agregados", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -64,14 +65,18 @@ public class Controlador_PantallaProductos {
             @Override
             public void actionPerformed(ActionEvent e) {
                 pantalla_Productos.setVisible(false);
-                new Controlador_PantallaProductoAdd(rol , turno);
+                new Controlador_PantallaProductoAdd(rol, turno);
             }
         });
 
         pantalla_Productos.agregarInventario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int row = pantalla_Productos.tablaProductos.getSelectedRow();
+                if (row < 0) {
+                    JOptionPane.showMessageDialog(null, "Selecciona una fila", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 if (pantalla_Productos.campoAgregarExistencia.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "No deje el  campo en blanco");
                 } else {
@@ -122,11 +127,14 @@ public class Controlador_PantallaProductos {
                         if (boton.getName().equals("btnModificar")) {
                             int reply = JOptionPane.showConfirmDialog(null, "¿Modificar Medicamento?", "Modificar", JOptionPane.YES_NO_OPTION);
                             if (reply == JOptionPane.YES_OPTION) {
-
                                 filaseleccionada = pantalla_Productos.tablaProductos.getSelectedRow();
                                 long codi = (long) pantalla_Productos.tablaProductos.getValueAt(filaseleccionada, 0);
                                 String nombreM = (String) pantalla_Productos.tablaProductos.getValueAt(filaseleccionada, 1);
                                 String precio = (String) pantalla_Productos.tablaProductos.getValueAt(filaseleccionada, 3);
+                                if (!precio.matches("^\\d+\\.?\\d?\\d?")) {
+                                    JOptionPane.showMessageDialog(null, "Ingrese una cantidad correcta." , "ERROR" , JOptionPane.ERROR_MESSAGE);
+                                    return;
+                                }
                                 double precio2 = Double.valueOf(precio);
                                 if (rol.equals("Cajero")) {
                                     System.out.println(rol);

@@ -369,7 +369,7 @@ public class Corte {
             if (num == 0) {
                 sql = "SELECT  concat_ws(' DESCUENTO %  ', cliente.nombre, des_p, des_g) as clientes From ventas INNER JOIN cliente on ventas.id_cliente=cliente.id_cliente WHERE ventas.id_cliente != 1 AND fecha = CURDATE()  AND turno = '" + getTurno() + "' ";
             } else {
-                sql = "SELECT  concat_ws(' DESCUENTO %  ', cliente.nombre, des_p, des_g) as clientes From ventas INNER JOIN cliente on ventas.id_cliente=cliente.id_cliente WHERE ventas.id_cliente != 1 AND fecha = '"+getFecha()+"'  AND turno = '" + getTurno() + "' ";
+                sql = "SELECT  concat_ws(' DESCUENTO %  ', cliente.nombre, des_p, des_g) as clientes From ventas INNER JOIN cliente on ventas.id_cliente=cliente.id_cliente WHERE ventas.id_cliente != 1 AND fecha = '" + getFecha() + "'  AND turno = '" + getTurno() + "' ";
             }
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
@@ -510,10 +510,9 @@ public class Corte {
         try {
             con = conn.getConnection();
             Statement stm = (Statement) con.createStatement();
-            
-           
-                sql = "SELECT COUNT(codigo) AS num FROM productos WHERE tipo_medicamento = 'CONSULTA'";
-          
+
+            sql = "SELECT COUNT(codigo) AS num FROM productos WHERE tipo_medicamento = 'CONSULTA'";
+
             ResultSet resultado = stm.executeQuery(sql);
             if (resultado.next()) {
                 num = resultado.getInt("num");
@@ -530,10 +529,10 @@ public class Corte {
             }
 
             for (int i = 0; i < nom.length; i++) {
-                if(num2 == 0){
+                if (num2 == 0) {
                     sql = "SELECT IFNULL(descripcion , '" + nom[i] + "') AS des , IFNULL(SUM(total),0) AS sum , IFNULL(SUM(piezas) , 0 ) AS con FROM detalle_venta WHERE descripcion ='" + nom[i] + "' AND fecha = CURDATE() AND turno = '" + turno + "'";
-                }else{
-                     sql = "SELECT IFNULL(descripcion , '" + nom[i] + "') AS des , IFNULL(SUM(total),0) AS sum , IFNULL(SUM(piezas) , 0 ) AS con FROM detalle_venta WHERE descripcion ='" + nom[i] + "' AND fecha = '"+getFecha()+"' AND turno = '" + turno + "'";
+                } else {
+                    sql = "SELECT IFNULL(descripcion , '" + nom[i] + "') AS des , IFNULL(SUM(total),0) AS sum , IFNULL(SUM(piezas) , 0 ) AS con FROM detalle_venta WHERE descripcion ='" + nom[i] + "' AND fecha = '" + getFecha() + "' AND turno = '" + turno + "'";
                 }
                 resultado = stm.executeQuery(sql);
                 if (resultado.next()) {
@@ -564,11 +563,11 @@ public class Corte {
         try {
             con = new Conexion().getConnection();
             Statement stm = (Statement) con.createStatement();
-            
-            if(num == 0){
+
+            if (num == 0) {
                 sql = "SELECT IFNULL(SUM(precio),0) as total FROM retiros WHERE fecha = CURDATE() AND turno='" + getTurno() + "'";
-            }else{
-                sql = "SELECT IFNULL(SUM(precio),0) as total FROM retiros WHERE fecha = '"+getFecha()+"' AND turno='" + getTurno() + "'";
+            } else {
+                sql = "SELECT IFNULL(SUM(precio),0) as total FROM retiros WHERE fecha = '" + getFecha() + "' AND turno='" + getTurno() + "'";
             }
             ResultSet rs = stm.executeQuery(sql);
             if (rs.next()) {
