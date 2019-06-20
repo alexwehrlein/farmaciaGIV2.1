@@ -130,7 +130,7 @@
                 <Column editable="true" title="Correo" type="java.lang.Object"/>
                 <Column editable="true" title="Direccion" type="java.lang.Object"/>
                 <Column editable="false" title="Puesto" type="java.lang.Object"/>
-                <Column editable="false" title="Turno" type="java.lang.Object"/>
+                <Column editable="true" title="Turno" type="java.lang.Object"/>
                 <Column editable="false" title="Modificar" type="java.lang.Object"/>
                 <Column editable="false" title="Eliminar" type="java.lang.Object"/>
               </Table>

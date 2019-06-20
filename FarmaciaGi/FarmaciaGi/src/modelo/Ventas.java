@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import tikect.TikectInventario;
+import vista.Pantalla_Ventas;
 
 /**
  *
@@ -33,6 +34,7 @@ public class Ventas {
     private int piezas;
     private String turno;
     private float monto;
+    Pantalla_Ventas pv;
     Conexion conn = new Conexion();
 
     public Ventas(long codigo, int piezas) {
@@ -365,6 +367,7 @@ public class Ventas {
 
     public boolean registrarVenta(String idEmp, String idClient, String cantidad, String total, DefaultTableModel modelo, String turno, String tipoVenta, int des_p, int des_g) {
         String idv = null, sql = null;
+        pv  = new  Pantalla_Ventas();
         double totalV = Double.valueOf(total);
 
         try {
@@ -387,6 +390,7 @@ public class Ventas {
             if (resultado.next()) {
                 idv = resultado.getString("last_id");
             }
+            pv.folioTikect.setText(idv);
             for (int i = 0; i < modelo.getRowCount(); i++) {
                 int piezas = Integer.parseInt(modelo.getValueAt(i, 4).toString());
                 double totalProducto = Double.parseDouble(modelo.getValueAt(i, 6).toString());
@@ -398,8 +402,6 @@ public class Ventas {
                     long codigoProducto = Long.parseLong(modelo.getValueAt(i, 0).toString());
                     piezasDescontar(codigoProducto, piezas);
                     faltantes(modelo.getValueAt(i, 0).toString());
-                } else {
-
                 }
 
             }

@@ -55,7 +55,7 @@ public class TikectInventario {
         }
          
          auxs += "\n==========================================\n";
-         
+         auxs+= "Ingreso de medicamento  \n Farmacia gi\n\n\n\n\n";// Varios saltos para no cortar antes
          try {
             impServicio.printCadena(impra, auxs);
             // Cortar el papel ....

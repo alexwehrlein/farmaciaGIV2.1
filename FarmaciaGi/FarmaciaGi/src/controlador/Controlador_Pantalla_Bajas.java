@@ -49,6 +49,11 @@ public class Controlador_Pantalla_Bajas {
                 String codigo = pantalla_bajas.tctCodigo.getText();
                 int existencias = Integer.parseInt(pantalla_bajas.txtExistencias.getText());
                 int piezas = Integer.parseInt(pantalla_bajas.txtPiezas.getText());
+                if (!String.valueOf(piezas).matches("[0-9]*")) {
+                    JOptionPane.showMessageDialog(null, "Ingrese una cantidad correcta.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    pantalla_bajas.txtPiezas.requestFocus();
+                    return;
+                }
                 if (piezas > existencias) {
                     JOptionPane.showMessageDialog(null, "No puede dar de baja mas de lo que existe" , "ERROR" , JOptionPane.ERROR_MESSAGE);
                     return;

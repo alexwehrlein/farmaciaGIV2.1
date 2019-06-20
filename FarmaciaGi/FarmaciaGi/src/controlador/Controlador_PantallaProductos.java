@@ -140,7 +140,7 @@ public class Controlador_PantallaProductos {
                                     System.out.println(rol);
                                     productos = new Productos(codi);
                                     double precioActual = productos.PrrcioProducto();
-                                    if (precio2 > precioActual) {
+                                    if (precio2 >= precioActual) {
                                         productos = new Productos(codi, precio2, nombreM);
                                         if (productos.ModificarRegristros()) {
                                             JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente");

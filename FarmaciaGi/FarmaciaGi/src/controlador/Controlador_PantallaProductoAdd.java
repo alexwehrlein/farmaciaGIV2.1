@@ -54,7 +54,11 @@ public class Controlador_PantallaProductoAdd {
                         String laboratorio = productoAgregar.altaMedicamentoLavoratorio.getSelectedItem().toString();
                         Proveedor proveedor = (Proveedor) productoAgregar.altaMedicamentoProveedor.getSelectedItem();
                         int cantidad = Integer.parseInt(productoAgregar.altaMedicamentoCantidad.getText());
-                        
+                        if (!productoAgregar.altaMedicamentoCodigo.getText().matches("[0-9]*")) {
+                            JOptionPane.showMessageDialog(null, "Ingrese un codigo correcto.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                            productoAgregar.altaMedicamentoCodigo.requestFocus();
+                            return;
+                        }
 
                         productos = new Productos(codigo, marcaComercia.toUpperCase(), sustancia.toUpperCase(), precio, tipoMedicamento, laboratorio, proveedor.getIdproveedor(), cantidad);
 

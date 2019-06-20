@@ -91,6 +91,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jMenuItemProductosAdmin = new javax.swing.JMenuItem();
         jMenuItemInformacionSucursal = new javax.swing.JMenuItem();
         jMenuItemBajas = new javax.swing.JMenuItem();
+        jMenuItemPromociones = new javax.swing.JMenuItem();
         jMenuCajero = new javax.swing.JMenu();
         jMenuItemRealizarVenta = new javax.swing.JMenuItem();
         jMenuItemGrstionGastos = new javax.swing.JMenuItem();
@@ -268,6 +269,10 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jMenuItemBajas.setText("Baja de medicamento");
         jMenuAdmon.add(jMenuItemBajas);
 
+        jMenuItemPromociones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/promociones.png"))); // NOI18N
+        jMenuItemPromociones.setText("Promociones");
+        jMenuAdmon.add(jMenuItemPromociones);
+
         jMenuBar1.add(jMenuAdmon);
 
         jMenuCajero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cajero1.png"))); // NOI18N
@@ -423,6 +428,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
     public javax.swing.JMenuItem jMenuItemInformacionSucursal;
     public javax.swing.JMenuItem jMenuItemIniciarSesion;
     public javax.swing.JMenuItem jMenuItemProductosAdmin;
+    public javax.swing.JMenuItem jMenuItemPromociones;
     public javax.swing.JMenuItem jMenuItemRealizarCorteCaja;
     public javax.swing.JMenuItem jMenuItemRealizarVenta;
     public javax.swing.JMenuItem jMenuItemRetiro;

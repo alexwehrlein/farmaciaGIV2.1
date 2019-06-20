@@ -121,8 +121,8 @@ public class Controlador_PantallaDevoluciones {
                             if (devoluciones1.registrarDevolucion(idEmpleado, idCliente, turno)) {
                                 JOptionPane.showMessageDialog(null, "Devolucion Registrada Correctamente");
                                 devoluciones1 = new Devoluciones(codigo, piezas);
-                                //tikectDevoluciones = new TikectDevoluciones();
-                                //tikectDevoluciones.TikectDevoluciones(folio, nombreP, piezas, precio, total);
+                                tikectDevoluciones = new TikectDevoluciones();
+                                tikectDevoluciones.TikectDevoluciones(folio, nombreP, piezas, precio, total);
                                 if (devoluciones1.RegresarProducto()) {
                                     JOptionPane.showMessageDialog(null, "Medicamento Regresado al almacen");
                                     devoluciones1 = new Devoluciones(IntFolio, codigo, piezas);
