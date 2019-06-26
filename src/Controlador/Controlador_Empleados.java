@@ -23,13 +23,14 @@ public class Controlador_Empleados {
         pp = new Pantalla_Personal();
         pp.setVisible(true);
         pp.setResizable(true);
-        pp.setSize(981, 474);
+        //pp.setSize(981, 474);
         pp.setClosable(true);
         pp.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        Dimension desktopSize = pantalla_principal.jPanelIma.getSize();
-        pp.setLocation((desktopSize.width - 1245) / 2, (desktopSize.height - 600) / 2);
-        pantalla_principal.jPanelIma.removeAll();
-        pantalla_principal.add(pp);
+        Dimension FrameSize = pp.getSize();
+        Dimension desktopSize = pantalla_principal.jDesktopPane.getSize();
+        pp.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        pantalla_principal.jDesktopPane.removeAll();
+        pantalla_principal.jDesktopPane.add(pp);
 
     }
 

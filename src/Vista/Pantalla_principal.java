@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
@@ -70,6 +71,13 @@ public class Pantalla_principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelIma = new javax.swing.JPanel();
+        ImageIcon Img = new ImageIcon(getClass().getResource("/Images/farmacia.png"));
+        Image image = Img.getImage();
+        jDesktopPane = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(image , 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAdmon = new javax.swing.JMenu();
         jMenuItemPersonal = new javax.swing.JMenuItem();
@@ -80,15 +88,26 @@ public class Pantalla_principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
 
+        javax.swing.GroupLayout jDesktopPaneLayout = new javax.swing.GroupLayout(jDesktopPane);
+        jDesktopPane.setLayout(jDesktopPaneLayout);
+        jDesktopPaneLayout.setHorizontalGroup(
+            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 842, Short.MAX_VALUE)
+        );
+        jDesktopPaneLayout.setVerticalGroup(
+            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 461, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanelImaLayout = new javax.swing.GroupLayout(jPanelIma);
         jPanelIma.setLayout(jPanelImaLayout);
         jPanelImaLayout.setHorizontalGroup(
             jPanelImaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 842, Short.MAX_VALUE)
+            .addComponent(jDesktopPane)
         );
         jPanelImaLayout.setVerticalGroup(
             jPanelImaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
+            .addComponent(jDesktopPane)
         );
 
         jMenuBar1.setBackground(new java.awt.Color(0, 184, 233));
@@ -197,6 +216,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JDesktopPane jDesktopPane;
     public javax.swing.JMenu jMenuAdmon;
     private javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JMenu jMenuCajero;

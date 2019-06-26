@@ -60,8 +60,8 @@ public class Controlador_PantallaPrincipal {
         dim = pantalla_Principal.getToolkit().getScreenSize();
         pantalla_Principal.setSize(dim);
         // pantalla_Principal.setResizable(false);
-        Imagen imagen = new Imagen("/Images/farmacia.png", dim);
-        pantalla_Principal.jPanelIma.add(imagen);
+        //Imagen imagen = new Imagen("/Images/farmacia.png", dim);
+        //pantalla_Principal.jDesktopPane.add(imagen);
         pantalla_Principal.setVisible(true);
         pantalla_Principal.setExtendedState(MAXIMIZED_BOTH);
         inicioP();
