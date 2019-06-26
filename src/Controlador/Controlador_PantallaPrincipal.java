@@ -65,6 +65,13 @@ public class Controlador_PantallaPrincipal {
         pantalla_Principal.setVisible(true);
         pantalla_Principal.setExtendedState(MAXIMIZED_BOTH);
         inicioP();
+        
+        pantalla_Principal.jMenuItemPersonal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Controlador_Empleados(pantalla_Principal);
+            }
+        });
 
     }
 

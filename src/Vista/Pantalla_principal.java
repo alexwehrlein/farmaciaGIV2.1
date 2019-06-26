@@ -72,6 +72,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jPanelIma = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAdmon = new javax.swing.JMenu();
+        jMenuItemPersonal = new javax.swing.JMenuItem();
         jMenuCajero = new javax.swing.JMenu();
         jMenuInicioSesion = new javax.swing.JMenu();
         jMenuItemIniciarSesion = new javax.swing.JMenuItem();
@@ -95,6 +96,15 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jMenuAdmon.setBackground(new java.awt.Color(0, 0, 102));
         jMenuAdmon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/admin1.png"))); // NOI18N
         jMenuAdmon.setText("ADMINISTRADOR");
+
+        jMenuItemPersonal.setText("Personal");
+        jMenuItemPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPersonalActionPerformed(evt);
+            }
+        });
+        jMenuAdmon.add(jMenuItemPersonal);
+
         jMenuBar1.add(jMenuAdmon);
 
         jMenuCajero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cajero1.png"))); // NOI18N
@@ -146,6 +156,10 @@ public class Pantalla_principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuInicioSesionItemStateChanged
 
+    private void jMenuItemPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPersonalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemPersonalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -187,7 +201,8 @@ public class Pantalla_principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JMenu jMenuCajero;
     public javax.swing.JMenu jMenuInicioSesion;
-    private javax.swing.JMenuItem jMenuItemIniciarSesion;
+    public javax.swing.JMenuItem jMenuItemIniciarSesion;
+    public javax.swing.JMenuItem jMenuItemPersonal;
     public javax.swing.JPanel jPanelIma;
     // End of variables declaration//GEN-END:variables
 }
