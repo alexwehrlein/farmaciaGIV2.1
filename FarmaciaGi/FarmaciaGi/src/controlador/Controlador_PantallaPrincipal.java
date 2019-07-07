@@ -325,7 +325,8 @@ public class Controlador_PantallaPrincipal {
         pantalla_Principal.jMenuItemPromociones.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Controlador_Promociones();
+                //new Controlador_Promociones();
+                JOptionPane.showMessageDialog(null, "En reparacion." , "Pronto" , JOptionPane.WARNING_MESSAGE);
             }
         });
 

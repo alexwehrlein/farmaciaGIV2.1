@@ -65,7 +65,7 @@ public class Pantalla_Corte {
                     corte = new Corte(turnoF);
                     boolean next = corte.Corte();
 
-                    if (true) {
+                    if (next) {
 
                         String turno = pantalla_Corte.jComboBoxTurno.getSelectedItem().toString();
                         corte = new Corte(turno);
@@ -116,7 +116,7 @@ public class Pantalla_Corte {
 
                         corte = new Corte(turno, tt);
                         if (true) {
-                            //corte.registrarCortes()
+                            corte.registrarCortes();
                             JOptionPane.showMessageDialog(null, "El corte se a guardado");
                             tikectCorte = new TikectCorte();
                             tikectCorte.TikecCorte(ventaTotal, consultorioTotal, devolucionesTotal, gastosTotal,abarrotesTotal,perfumeriaTotal, tk, turno,nombresClientes,arr,retiros,0);
