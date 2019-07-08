@@ -81,6 +81,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAdmon = new javax.swing.JMenu();
         jMenuItemPersonal = new javax.swing.JMenuItem();
+        jMenuItemClientes = new javax.swing.JMenuItem();
         jMenuCajero = new javax.swing.JMenu();
         jMenuInicioSesion = new javax.swing.JMenu();
         jMenuItemIniciarSesion = new javax.swing.JMenuItem();
@@ -123,6 +124,9 @@ public class Pantalla_principal extends javax.swing.JFrame {
             }
         });
         jMenuAdmon.add(jMenuItemPersonal);
+
+        jMenuItemClientes.setText("Clientes");
+        jMenuAdmon.add(jMenuItemClientes);
 
         jMenuBar1.add(jMenuAdmon);
 
@@ -221,6 +225,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JMenu jMenuCajero;
     public javax.swing.JMenu jMenuInicioSesion;
+    public javax.swing.JMenuItem jMenuItemClientes;
     public javax.swing.JMenuItem jMenuItemIniciarSesion;
     public javax.swing.JMenuItem jMenuItemPersonal;
     public javax.swing.JPanel jPanelIma;

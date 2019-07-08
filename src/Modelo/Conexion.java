@@ -17,10 +17,10 @@ import javax.swing.JOptionPane;
  * @author saube
  */
 public class Conexion {
-    private static String bd = "farmaciagi";
-    private static String login = "root";
-    private static String password = "";
-    private static String url ="jdbc:mysql://127.0.0.1/"+bd;
+    private static String bd = "farmacia";
+    private static String login = "rooty";
+    private static String password = "adriana14";
+    private static String url ="jdbc:mysql://192.168.5.14/"+bd;
     Connection conn = null;
     public Connection getConnection() {
         

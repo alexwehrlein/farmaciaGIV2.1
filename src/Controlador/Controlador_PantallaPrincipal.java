@@ -72,6 +72,12 @@ public class Controlador_PantallaPrincipal {
                 new Controlador_Empleados(pantalla_Principal);
             }
         });
+        pantalla_Principal.jMenuItemClientes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            new Controlador_Clientes(pantalla_Principal);    
+            }
+        });
 
     }
 
