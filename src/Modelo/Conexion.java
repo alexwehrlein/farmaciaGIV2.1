@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author saube
  */
 public class Conexion {
-    private static String bd = "farmaciagi";
+    private static String bd = "farmacia";
     private static String login = "root";
     private static String password = "";
     private static String url ="jdbc:mysql://127.0.0.1/"+bd;
@@ -30,18 +30,18 @@ public class Conexion {
             //obtenemos la conexión
             conn = (Connection) DriverManager.getConnection(url, login, password);
             if (conn != null) {
-              //  System.out.println("Base de datos  " + bd + " conectado");
+                //System.out.println("Base de datos  " + bd + " conectado");
                 //
               // JOptionPane.showMessageDialog(null, "Base de datos  " + bd + " conectado");
             }
             //System.out.println("sii");
         } catch (SQLException e) {
             //System.out.println(e);
-            JOptionPane.showMessageDialog(null,e.getMessage());
+            //JOptionPane.showMessageDialog(null,e.getMessage());
             //System.out.println("nnn");
         } catch (ClassNotFoundException e) {
             //System.out.println(e);
-            JOptionPane.showMessageDialog(null,e.getMessage());
+            //JOptionPane.showMessageDialog(null,e.getMessage());
         }finally{
             return conn;
         }
