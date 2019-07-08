@@ -24,6 +24,7 @@ import javax.swing.table.TableColumn;
  * @author saube
  */
 public class Empleados {
+    
 
     private int id;
     private String nombre;

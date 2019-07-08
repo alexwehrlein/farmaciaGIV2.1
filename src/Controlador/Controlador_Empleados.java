@@ -60,7 +60,8 @@ public class Controlador_Empleados {
                 pp.jLabelStatus.setText("Nuevo Empleado");
                 pp.comboStatus.setVisible(false);
                 pp.jLabelSta.setVisible(false);
-                pp.jDialogEmpleado.show();
+                pp.jDialogEmpleado.show(); 
+                
             }
         });
 

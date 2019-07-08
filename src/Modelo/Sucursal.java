@@ -10,6 +10,7 @@ package Modelo;
  * @author saube
  */
 public class Sucursal {
+    
     private int idSucursal;
     private String nombre;
     private String direccion;

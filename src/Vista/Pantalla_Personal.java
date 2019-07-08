@@ -21,6 +21,7 @@ public class Pantalla_Personal extends javax.swing.JInternalFrame {
      * Creates new form Pantalla_Personal
      */
     public Pantalla_Personal() {
+        
         modeloCategorias = new DefaultComboBoxModel<Sucursal>();
         cargarModeloCat();
         initComponents();
