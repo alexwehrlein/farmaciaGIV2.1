@@ -81,6 +81,8 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAdmon = new javax.swing.JMenu();
         jMenuItemPersonal = new javax.swing.JMenuItem();
+        jMenuItemClientes = new javax.swing.JMenuItem();
+        jMenuItemProveedores = new javax.swing.JMenuItem();
         jMenuCajero = new javax.swing.JMenu();
         jMenuInicioSesion = new javax.swing.JMenu();
         jMenuItemIniciarSesion = new javax.swing.JMenuItem();
@@ -123,6 +125,17 @@ public class Pantalla_principal extends javax.swing.JFrame {
             }
         });
         jMenuAdmon.add(jMenuItemPersonal);
+
+        jMenuItemClientes.setText("Clientes");
+        jMenuItemClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemClientesActionPerformed(evt);
+            }
+        });
+        jMenuAdmon.add(jMenuItemClientes);
+
+        jMenuItemProveedores.setText("Proveedores");
+        jMenuAdmon.add(jMenuItemProveedores);
 
         jMenuBar1.add(jMenuAdmon);
 
@@ -179,6 +192,10 @@ public class Pantalla_principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemPersonalActionPerformed
 
+    private void jMenuItemClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemClientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -221,8 +238,10 @@ public class Pantalla_principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JMenu jMenuCajero;
     public javax.swing.JMenu jMenuInicioSesion;
+    public javax.swing.JMenuItem jMenuItemClientes;
     public javax.swing.JMenuItem jMenuItemIniciarSesion;
     public javax.swing.JMenuItem jMenuItemPersonal;
+    public javax.swing.JMenuItem jMenuItemProveedores;
     public javax.swing.JPanel jPanelIma;
     // End of variables declaration//GEN-END:variables
 }

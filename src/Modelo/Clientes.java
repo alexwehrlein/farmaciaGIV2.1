@@ -5,7 +5,6 @@
  */
 package Modelo;
 
-import Controlador.ModeloTablaClientes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -111,7 +110,7 @@ public class Clientes {
         return false;
    }
    public DefaultTableModel consultaClientes(JTable jt){
-       jt.setDefaultRenderer(Object.class, new ModeloTablaClientes());
+       jt.setDefaultRenderer(Object.class, new Render());
        JButton btnEliminar =new JButton ("Eliminar");
        btnEliminar.setName("btnEliminar");
        
@@ -176,7 +175,7 @@ public class Clientes {
             
     public DefaultTableModel busquedaClientes(JTable jt){
        // System.out.println(getNombre());
-       jt.setDefaultRenderer(Object.class, new ModeloTablaClientes());
+       jt.setDefaultRenderer(Object.class, new Render());
        JButton btnEliminar =new JButton ("Eliminar");
        btnEliminar.setName("btnEliminar");
        
