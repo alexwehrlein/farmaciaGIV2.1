@@ -21,7 +21,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-
 /**
  *
  * @author Jose Abada Nava
@@ -29,7 +28,7 @@ import javax.swing.KeyStroke;
 public class Controlador_PantallaPrincipal {
 
     Pantalla_principal pantalla_Principal;
-    
+
     public static boolean ventanaControl9 = false;
 
     public class Imagen extends javax.swing.JPanel {
@@ -65,39 +64,44 @@ public class Controlador_PantallaPrincipal {
         pantalla_Principal.setVisible(true);
         pantalla_Principal.setExtendedState(MAXIMIZED_BOTH);
         inicioP();
-        
+
         pantalla_Principal.jMenuItemPersonal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Controlador_Empleados(pantalla_Principal);
             }
         });
-        
+
         pantalla_Principal.jMenuItemClientes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            new Controlador_Clientes(pantalla_Principal);    
+                new Controlador_Clientes(pantalla_Principal);
             }
         });
-        
-         pantalla_Principal.jMenuItemProveedores.addActionListener(new ActionListener() {
+
+        pantalla_Principal.jMenuItemProveedores.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Controlador_Proveedores(pantalla_Principal);
             }
         });
 
-    }
+        pantalla_Principal.jMenuItemGastos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Controlador_Gastos(pantalla_Principal);
+            } // el parametrp lo traemos desde controlador de gastos
+        });
 
+    }
 
     public void cerrar() {
         inicioP();
     }
 
     private void inicioP() {
-        
-    }
 
+    }
 
     public static void main(String[] args) {
         Controlador_PantallaPrincipal controlador_PantallaPrincipal = new Controlador_PantallaPrincipal();
