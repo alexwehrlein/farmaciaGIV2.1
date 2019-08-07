@@ -112,6 +112,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
         });
 
         jButtonSalirLogin.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButtonSalirLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/if_Log Out_27856.png"))); // NOI18N
         jButtonSalirLogin.setText("Salir");
         jButtonSalirLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +121,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
         });
 
         jButtonIngresarLogin.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButtonIngresarLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Login_37128 (1).png"))); // NOI18N
         jButtonIngresarLogin.setText("Ingresar");
 
         jLabel3.setFont(new java.awt.Font("Bodoni MT", 1, 48)); // NOI18N
@@ -127,6 +129,10 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jLabel3.setText("¡ Bienvenido !");
 
         jTextFieldPasswordLogin.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/miranda.png"))); // NOI18N
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/candado.png"))); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel5.setText("Usuario");
@@ -191,7 +197,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonIngresarLogin)
                     .addComponent(jButtonSalirLogin))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jDialogLoginLayout = new javax.swing.GroupLayout(jDialogLogin.getContentPane());
@@ -383,7 +389,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
     public javax.swing.JMenuItem jMenuItemIniciarSesion;
     public javax.swing.JMenuItem jMenuItemPersonal;
     public javax.swing.JMenuItem jMenuItemProveedores;
-    public javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel1;
     public javax.swing.JPanel jPanelIma;
     public javax.swing.JPasswordField jTextFieldPasswordLogin;
     public javax.swing.JTextField jTextFieldUsuarioLogin;

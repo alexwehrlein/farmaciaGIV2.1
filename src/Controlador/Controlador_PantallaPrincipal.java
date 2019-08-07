@@ -91,6 +91,53 @@ public class Controlador_PantallaPrincipal {
         
         
         
+        
+        
+//ingresa al login Aceptar ---- SI ESTAN INCORECTAS TE MARCA DE DONDE ESTA EL ERROR SI EN EL USAURIO O CONTRASEÑA CAMBIA DE COLORRES
+        pantalla_Principal.jTextFieldPasswordLogin.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+                    if (!camposVacios()) {
+                        pantalla_Principal.jTextFieldUsuarioLogin.setBackground(Color.white);
+                        pantalla_Principal.jTextFieldPasswordLogin.setBackground(Color.white);
+                        String[] arr = new Empleado().obtenerContraUsuario(pantalla_Principal.jTextFieldUsuarioLogin.getText());
+                        if (!arr[0].equals("")) {
+                            if (arr[0].equals(pantalla_Principal.jTextFieldPasswordLogin.getText())) {
+                                pantalla_Principal.jTextFieldUsuarioLogin.setText("");
+                                pantalla_Principal.jTextFieldPasswordLogin.setText("");
+                                empleado_idempleado = arr[1];
+                                nombreEmpleado = arr[3];
+                                rol = arr[2];
+                                turno = arr[4];
+                                if (arr[2].equals("Administrador")) {
+                                    activarAdministrador();
+                                    pantalla_Principal.jDialogLogin.setVisible(false);
+                                    JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+                                } else {
+                                    activarCajero();
+                                    pantalla_Principal.jDialogLogin.setVisible(false);
+                                    JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+                                }
+                            } else {
+                                pantalla_Principal.jTextFieldPasswordLogin.setBackground(Color.red);
+                                JOptionPane.showMessageDialog(null, "Contraseña Incorrecta");
+                            }
+                        } else {
+                            pantalla_Principal.jTextFieldUsuarioLogin.setBackground(Color.red);
+                            JOptionPane.showMessageDialog(null, "Usuario Incorrecto");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Campos Vacios");
+                    }
+                }
+
+            }
+        });
+        
+        
+        
            // BOTIN INGRESAR LA PANTALLA PRINCPAL
         pantalla_Principal.jButtonIngresarLogin.addActionListener(new ActionListener() {
 

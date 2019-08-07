@@ -77,61 +77,9 @@ public class GastosCon {
     }                                                                       
                
      
-     /*================    LISTAR BUSQUEDA DE  GASTOS POR UNA SOLA FECHA DETERMINADA   ==================*/
-     public ArrayList<Gastos> listBuscaXFecha() {
-          ArrayList  listaGastos = new ArrayList();
-          Gastos gastos; // obj de tipo persona 
-          try {              
-              Connection con  =new Conexion().getConnection();
-              
-             String sql = "SELECT *FROM egreso\n" + "WHERE fecha = '2019-07-20'";            
-            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
-            ResultSet resultado = pst.executeQuery();     // valo devuelto se almaena en resultado                                      
-           
-            while (resultado.next()) {
-                
-                gastos = new Gastos();
-                gastos.setIdegreso(resultado.getInt(1));
-                gastos.setTipo(resultado.getString(2));                
-                gastos.setTotal(resultado.getString(3));
-                gastos.setFecha(resultado.getString(4));
-                gastos.setEmpleado_idempleado(resultado.getString(5));
-                listaGastos.add(gastos);
-            }                                                   
-          } catch (Exception e) {
-          }
-          return listaGastos;
-      }   
+    
                          
      
-          /*================    LISTAR BUSQUEDA DE  GASTOS POR --- (( DOS )) ---, RANGO DE FECHAS    ==================*/
-     public ArrayList<Gastos> listBuscaXRangoFechas(String jDateFecha1, String jDateFecha2) {
-          ArrayList  listaGastos = new ArrayList();
-          Gastos gastos; // obj de tipo persona 
-          try {
-             
-              Connection con  =new Conexion().getConnection();
-              
-             String sql = "SELECT *FROM egreso\n" + "WHERE fecha BETWEEN ? AND ?";    
-          
-            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
-            ResultSet resultado = pst.executeQuery();     // valo devuelto se almaena en resultado                                      
-               pst.setDate(1, java.sql.Date.valueOf(jDateFecha1));
-              pst.setDate(2, java.sql.Date.valueOf(jDateFecha2));
-                    
-            while (resultado.next()) {
-                
-                gastos = new Gastos();
-               gastos.setIdegreso(resultado.getInt(1));
-                gastos.setTipo(resultado.getString(2));                
-                gastos.setTotal(resultado.getString(3));
-                gastos.setFecha(resultado.getString(4));
-                gastos.setEmpleado_idempleado(resultado.getString(5));
-                listaGastos.add(gastos);
-            }                                                   
-          } catch (Exception e) {
-          }
-          return listaGastos;
-      }                                                                                      
+                                                                                          
     
 }

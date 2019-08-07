@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.Connection;
@@ -56,8 +58,9 @@ public class Controlador_Gastos {
 
                 } else {
                     boolean pass = validarFormulario(vistaGastos.txtmonto.getText());
+                    boolean pass2 = validarFormulariotexto(vistaGastos.txtdescripcion.getText());
 
-                    if (pass) {
+                    if (pass && pass2) {
                          String tipo = vistaGastos.txtdescripcion.getText();
                         String total = vistaGastos.txtmonto.getText();
                         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyy-MM-dd");  // formato de la fecha e instanciando y darle formato de la fecha 
@@ -81,6 +84,23 @@ public class Controlador_Gastos {
             }
         });  
 //   TERMINA BOTON DE REGIRTOS
+
+
+
+vistaGastos.txtdescripcion.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e
+            ) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    vistaGastos.txtdescripcion.requestFocus();
+                }
+            }
+        });
+
+
+
+
+
+
                                                                                                        
                 
             //  ME HACE LA BUSKEDA AL PONER UNA FECJA EN EL CHOOSERDATE
@@ -199,6 +219,23 @@ public class Controlador_Gastos {
     }
 
           
+           
+           
+             public boolean validarFormulariotexto(String gastos) {
+        boolean next = false;
+        Pattern patGastos = Pattern.compile("[a-z].*");// ^[0-9]+([.])?([0-9]+)?$
+        Matcher matGastos = patGastos.matcher(gastos);
+
+        if (matGastos.matches()) {
+            next = true;
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Solo letras");
+            vistaGastos.txtdescripcion.setBackground(Color.red);
+        }
+
+        return next;
+    }
           
           
           
