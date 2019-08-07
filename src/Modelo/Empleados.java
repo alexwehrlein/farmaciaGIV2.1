@@ -44,7 +44,7 @@ public class Empleados {
     public void setNombreSucursal(String nombreSucursal) {
         this.nombreSucursal = nombreSucursal;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -123,7 +123,7 @@ public class Empleados {
         this.status = status;
         this.nombreSucursal = nombreSucursal;
     }
-
+    
     public Empleados(String nombre, String telefono, String email, String turno, String status, int sucursalId) {
         this.nombre = nombre;
         this.telefono = telefono;
@@ -248,5 +248,30 @@ public class Empleados {
         }
         return listaSucursal;
     }
+    
+    
+    public String[] obtenerContraUsuario(String usuario){
+        String []arr = {"","","","",""};
+        try { //          select contrasena,login.empleado_idempleado,empleado.nombre,empleado.turno from login join empleado on login.empleado_idempleado=empleado.idempleado '" + usuario + "'";      
+  // String sql = "select contrasena,login.id_empleado,empleado.puesto,empleado.nombre,empleado.turno from login join empleado on login.id_empleado=empleado.id_empleado  '" + usuario + "'";
+     String sql = "select contrasena,login.empleado_idempleado,empleado.puesto,empleado.nombre,empleado.turno from login "
+             + "inner join empleado on login.empleado_idempleado=empleado.idempleado where  usuario=  '" + usuario + "'";                      
+            java.sql.Statement sta = con.createStatement();
+            ResultSet resultado = sta.executeQuery(sql);
+            if(resultado.next()){
+                arr[0]=resultado.getString("contrasena");
+                arr[1]=String.valueOf(resultado.getInt("empleado_idempleado"));
+                arr[2]=resultado.getString("puesto");
+                arr[3]=resultado.getString("usuario");
+                arr[4]=resultado.getString("turno");
+         // "Select user, password From usuarios where user=? AND password=?";       
+            }
+            con.close();
+        } catch (SQLException ex) {
+        }
+        return arr;
+    }
+    
+    
 
 }

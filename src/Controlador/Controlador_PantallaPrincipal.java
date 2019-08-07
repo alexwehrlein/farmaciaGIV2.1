@@ -1,10 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
+import Modelo.Empleado;
+import Modelo.Empleados;
 import Vista.Pantalla_principal;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -21,14 +19,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-/**
- *
- * @author Jose Abada Nava
- */
+
 public class Controlador_PantallaPrincipal {
 
     Pantalla_principal pantalla_Principal;
-
+    String empleado_idempleado, nombreEmpleado, turno, rol;
     public static boolean ventanaControl9 = false;
 
     public class Imagen extends javax.swing.JPanel {
@@ -64,6 +59,89 @@ public class Controlador_PantallaPrincipal {
         pantalla_Principal.setVisible(true);
         pantalla_Principal.setExtendedState(MAXIMIZED_BOTH);
         inicioP();
+        
+        
+        //abre ventana de login  
+        pantalla_Principal.jMenuItemIniciarSesion.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (pantalla_Principal.jMenuItemIniciarSesion.getText().equals("Iniciar Sesion")) {
+                    pantalla_Principal.jDialogLogin.setTitle("Farmacia GI");
+                    pantalla_Principal.jDialogLogin.setBounds(249, 154, 598, 344);
+                    pantalla_Principal.jDialogLogin.setResizable(false);
+                    pantalla_Principal.jDialogLogin.setVisible(true);
+                    pantalla_Principal.jTextFieldUsuarioLogin.requestFocus();
+
+                } else {
+                    int m = JOptionPane.showConfirmDialog(pantalla_Principal, "Desea cerrar sesion ", "Confirmar salida", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    if (m == 0) {
+                        inicioP();
+                        pantalla_Principal.jMenuItemIniciarSesion.setText("Iniciar Sesion");
+                        //  pantalla_Principal.panel.removeAll();
+                        //  pantalla_Principal.panel.repaint();
+                    } else {
+
+                    }
+                    //     JOptionPane.showMessageDialog(null, "Administrador a cerrado sesion");
+                    // new Controlador_Mensaje(pantalla_Principal, "Administrador a cerrado sesion");
+                }
+            }
+        });
+        
+        
+        
+           // BOTIN INGRESAR LA PANTALLA PRINCPAL
+        pantalla_Principal.jButtonIngresarLogin.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!camposVacios()) {
+                    pantalla_Principal.jTextFieldUsuarioLogin.setBackground(Color.white);
+                    pantalla_Principal.jTextFieldPasswordLogin.setBackground(Color.white);
+                 String[] arr = new Empleado().obtenerContraUsuario(pantalla_Principal.jTextFieldUsuarioLogin.getText());
+                    if (!arr[0].equals("")) {
+                        if (arr[0].equals(pantalla_Principal.jTextFieldPasswordLogin.getText())) {
+                            pantalla_Principal.jTextFieldUsuarioLogin.setText("");
+                            pantalla_Principal.jTextFieldPasswordLogin.setText("");
+                            empleado_idempleado = arr[1];
+                            nombreEmpleado = arr[3];
+                            turno = arr[1];
+                            if (arr[2].equals("Administrador")) {
+                                activarAdministrador();
+                                pantalla_Principal.jDialogLogin.setVisible(false);
+                                JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+
+                            } else {
+                                activarCajero();
+                                pantalla_Principal.jDialogLogin.setVisible(false);
+                                JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+                            }
+                        } else {
+                            pantalla_Principal.jTextFieldPasswordLogin.setBackground(Color.red);
+                            JOptionPane.showMessageDialog(null, "Contraseña Incorrecta");
+                        }
+                    } else {
+                        pantalla_Principal.jTextFieldUsuarioLogin.setBackground(Color.red);
+                        JOptionPane.showMessageDialog(null, "Usuario Incorrecto");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Campos Vacios");
+                }
+
+            }
+        }); 
+        
+        
+        pantalla_Principal.jButtonSalirLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pantalla_Principal.jDialogLogin.setVisible(false);
+            }
+        });
+        
+        
+        
 
         pantalla_Principal.jMenuItemPersonal.addActionListener(new ActionListener() {
             @Override
@@ -89,18 +167,41 @@ public class Controlador_PantallaPrincipal {
         pantalla_Principal.jMenuItemGastos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Controlador_Gastos(pantalla_Principal);
-            } // el parametrp lo traemos desde controlador de gastos
+               
+                    new Controlador_Gastos(pantalla_Principal,turno); // le mando turno al contro gastos
+                
+                
+            }
         });
+        
 
+    }
+    
+    
+    public boolean camposVacios() {
+        return pantalla_Principal.jTextFieldUsuarioLogin.getText().isEmpty() || pantalla_Principal.jTextFieldPasswordLogin.getText().isEmpty();
     }
 
     public void cerrar() {
         inicioP();
     }
+    
+    private void activarAdministrador() {       
+        pantalla_Principal.jMenuItemGastos.setEnabled(true);      
+        pantalla_Principal.jMenuItemIniciarSesion.setText("Cerrar Sesion");
+    }
+    
+    
+    private void activarCajero() {       
+        pantalla_Principal.jMenuItemGastos.setEnabled(true);        
+        pantalla_Principal.jMenuItemIniciarSesion.setText("Cerrar Sesion");
+
+    }
+    
+    
 
     private void inicioP() {
-
+    pantalla_Principal.jMenuItemGastos.setEnabled(false);
     }
 
     public static void main(String[] args) {

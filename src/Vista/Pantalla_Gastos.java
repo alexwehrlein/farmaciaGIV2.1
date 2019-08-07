@@ -39,7 +39,6 @@ public class Pantalla_Gastos extends javax.swing.JInternalFrame {
         jTableGastos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btnImprimirTikect = new javax.swing.JButton();
         btnRegistrarGasto = new javax.swing.JButton();
         btnListar = new javax.swing.JButton();
         txtmonto = new javax.swing.JTextField();
@@ -47,20 +46,11 @@ public class Pantalla_Gastos extends javax.swing.JInternalFrame {
         jDateChooserFecha = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        btnBuscaXFechas = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTableGastosxFechas = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        btnBuscaFecha = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableGastosFechaActual = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        txtempleado = new javax.swing.JTextField();
-        jDateFecha2 = new com.toedter.calendar.JDateChooser();
-        jDateFecha1 = new com.toedter.calendar.JDateChooser();
+        btnImprimirticket = new javax.swing.JButton();
         jDateXUnaFecha = new com.toedter.calendar.JDateChooser();
-        jLabel7 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "GASTOS DE FARMACIA GI", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Serif", 1, 36))); // NOI18N
@@ -89,7 +79,7 @@ public class Pantalla_Gastos extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTableGastos);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 260, 650, 210);
+        jScrollPane1.setBounds(10, 240, 650, 230);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setText("Fecha:");
@@ -101,25 +91,15 @@ public class Pantalla_Gastos extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel2);
         jLabel2.setBounds(10, 10, 167, 29);
 
-        btnImprimirTikect.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnImprimirTikect.setText("Imprimir Tikect");
-        btnImprimirTikect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImprimirTikectActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnImprimirTikect);
-        btnImprimirTikect.setBounds(470, 210, 190, 40);
-
         btnRegistrarGasto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnRegistrarGasto.setText("Registrar Gastos");
         jPanel2.add(btnRegistrarGasto);
-        btnRegistrarGasto.setBounds(470, 150, 190, 40);
+        btnRegistrarGasto.setBounds(430, 170, 210, 50);
 
         btnListar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnListar.setText("Listar Gastos");
         jPanel2.add(btnListar);
-        btnListar.setBounds(470, 90, 190, 40);
+        btnListar.setBounds(430, 110, 210, 50);
 
         txtmonto.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtmonto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -137,51 +117,15 @@ public class Pantalla_Gastos extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel3);
         jLabel3.setBounds(10, 80, 105, 29);
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel4.setText("Rango de Fechas:");
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel4.setText("Busqueda de Gastos");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(890, 0, 120, 30);
-
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel5.setText("A");
-        jPanel2.add(jLabel5);
-        jLabel5.setBounds(880, 40, 30, 40);
-
-        btnBuscaXFechas.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnBuscaXFechas.setText("Buscar Gastos");
-        jPanel2.add(btnBuscaXFechas);
-        btnBuscaXFechas.setBounds(1070, 40, 190, 40);
-
-        jTableGastosxFechas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Idegreso", "Descripcion", "Total", "Fecha", "Turno"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(jTableGastosxFechas);
-
-        jPanel2.add(jScrollPane3);
-        jScrollPane3.setBounds(700, 90, 580, 110);
+        jLabel4.setBounds(870, 10, 250, 40);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setText("Fecha:");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(720, 240, 90, 40);
-
-        btnBuscaFecha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnBuscaFecha.setText("Buscar de Gastos");
-        jPanel2.add(btnBuscaFecha);
-        btnBuscaFecha.setBounds(1070, 240, 190, 40);
+        jLabel6.setBounds(770, 90, 90, 40);
 
         jTableGastosFechaActual.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -202,30 +146,16 @@ public class Pantalla_Gastos extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(jTableGastosFechaActual);
 
         jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(700, 290, 580, 110);
+        jScrollPane2.setBounds(680, 150, 600, 170);
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton1.setText("Imprimir Tikect");
-        jPanel2.add(jButton1);
-        jButton1.setBounds(930, 410, 200, 50);
-        jPanel2.add(txtempleado);
-        txtempleado.setBounds(260, 160, 140, 20);
-
-        jDateFecha2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jPanel2.add(jDateFecha2);
-        jDateFecha2.setBounds(910, 40, 140, 40);
-
-        jDateFecha1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jPanel2.add(jDateFecha1);
-        jDateFecha1.setBounds(720, 40, 140, 40);
+        btnImprimirticket.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnImprimirticket.setText("Imprimir Tikect");
+        jPanel2.add(btnImprimirticket);
+        btnImprimirticket.setBounds(910, 360, 200, 50);
 
         jDateXUnaFecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPanel2.add(jDateXUnaFecha);
-        jDateXUnaFecha.setBounds(780, 240, 220, 40);
-
-        jLabel7.setText("ID:");
-        jPanel2.add(jLabel7);
-        jLabel7.setBounds(230, 160, 15, 14);
+        jDateXUnaFecha.setBounds(890, 90, 230, 40);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(10, 50, 1290, 480);
@@ -246,39 +176,25 @@ public class Pantalla_Gastos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnImprimirTikectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirTikectActionPerformed
-        //JOptionPane.showMessageDialog(null, "OPRIMIDO");
-    }//GEN-LAST:event_btnImprimirTikectActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnBuscaFecha;
-    public javax.swing.JButton btnBuscaXFechas;
-    public javax.swing.JButton btnImprimirTikect;
+    public javax.swing.JButton btnImprimirticket;
     public javax.swing.JButton btnListar;
     public javax.swing.JButton btnRegistrarGasto;
-    private javax.swing.JButton jButton1;
     public com.toedter.calendar.JDateChooser jDateChooserFecha;
-    public com.toedter.calendar.JDateChooser jDateFecha1;
-    public com.toedter.calendar.JDateChooser jDateFecha2;
     public com.toedter.calendar.JDateChooser jDateXUnaFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JTable jTableGastos;
     public javax.swing.JTable jTableGastosFechaActual;
-    public javax.swing.JTable jTableGastosxFechas;
     public javax.swing.JTextField txtdescripcion;
-    public javax.swing.JTextField txtempleado;
     public javax.swing.JTextField txtmonto;
     // End of variables declaration//GEN-END:variables
    
