@@ -18,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -33,7 +34,7 @@ public class Controlador_Gastos {
       Gastos gastos;
       String turno;  // declara del turno
       TikectGasto tikectGastos;
-    
+    Calendar fecha_actual = new GregorianCalendar();
      public Controlador_Gastos(Pantalla_principal pantalla_principal, String turnoE) {
          this.turno = turnoE;  // se almacena turno en varaiable TurnoE
         vistaGastos = new Pantalla_Gastos();                                
@@ -64,8 +65,9 @@ public class Controlador_Gastos {
                          String tipo = vistaGastos.txtdescripcion.getText();
                         String total = vistaGastos.txtmonto.getText();
                         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyy-MM-dd");  // formato de la fecha e instanciando y darle formato de la fecha 
-                      String fecha = formatoFecha.format(vistaGastos.jDateChooserFecha.getDate()); 
-
+                      String fecha = formatoFecha.format(vistaGastos.jDateChooserFecha.getDate());  
+                  //   Calendar fechahoy = vistaGastos.jDateChooserFecha.setCalendar(fecha_actual);
+   
                         gastos = new Gastos(tipo, total, turno, fecha);
 
                         if (gastos.Gastosinsert()) {
@@ -165,7 +167,7 @@ vistaGastos.txtdescripcion.addKeyListener(new KeyAdapter() {
     public void limpiar(){     /*====  VACIAR CAMPOS */
             vistaGastos.txtdescripcion.setText(null);
             vistaGastos.txtmonto.setText(null);
-            vistaGastos.jDateChooserFecha.setDate(null);
+           // vistaGastos.jDateChooserFecha.setDate(null);
          }                 
     
     
@@ -223,7 +225,7 @@ vistaGastos.txtdescripcion.addKeyListener(new KeyAdapter() {
            
              public boolean validarFormulariotexto(String gastos) {
         boolean next = false;
-        Pattern patGastos = Pattern.compile("[a-z].*");// ^[0-9]+([.])?([0-9]+)?$
+        Pattern patGastos = Pattern.compile("^([a-zA-ZÁÉÍÓÚ]{1}[a-zñáéíóú]{1,24}[\\s]*)+$");// ^([a-zA-ZÁÉÍÓÚ]{1}[a-zñáéíóú]{1,24}[\\s]*)+$
         Matcher matGastos = patGastos.matcher(gastos);
 
         if (matGastos.matches()) {

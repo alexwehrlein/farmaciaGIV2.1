@@ -9,16 +9,27 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Vista.Pantalla_Gastos;
+import java.util.GregorianCalendar;
 
 public class Gastos {
     int idegreso;
      String tipo;
      String total;
      String fecha;
+     Calendar fechahoy;
      String empleado_idempleado;
      Pantalla_Gastos vistaGastos;
      private Connection con;
-    Conexion conn = new Conexion();       
+    Conexion conn = new Conexion(); 
+    Calendar fecha_actual = new GregorianCalendar();
+    
+    public Calendar getFechahoy() {
+        return fechahoy;
+    }
+
+    public void setFechahoy(Calendar fechahoy) {
+        this.fechahoy = fechahoy;
+    }
     
      public Gastos(){
    //  idegreso = 0;
@@ -28,11 +39,21 @@ public class Gastos {
      empleado_idempleado = "";
     }
 
-    public Gastos(String descripcion, String total, String turno, String fecha) {
+   public Gastos(String descripcion, String total, String turno, String fecha) {
         this.tipo = descripcion; // tipo lo almaceno en descirpcion
         this.total = total;      
         this.empleado_idempleado = turno;  // empleado_idempleado lo almaceno en turno asi se usa en controlador
         this.fecha = fecha;
+    }
+
+   
+   public Calendar Gastos(String descripcion, String total, String turno, Calendar fechahoy) {
+        this.tipo = descripcion; // tipo lo almaceno en descirpcion
+        this.total = total;      
+        this.empleado_idempleado = turno; 
+        
+        this.fecha_actual = fechahoy;
+        return null;
     }
 
     
@@ -99,6 +120,12 @@ public class Gastos {
             return false;
         } 
        return true;
+    }
+
+    private static class llenarfechadehoy {
+
+        public llenarfechadehoy() {
+        }
     }
                
           

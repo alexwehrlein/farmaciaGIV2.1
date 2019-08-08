@@ -2,6 +2,8 @@ package Vista;
 import Controlador.Controlador_Gastos;
 import Controlador.Controlador_PantallaPrincipal;
 import java.lang.Object;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,10 +20,11 @@ public class Pantalla_Gastos extends javax.swing.JInternalFrame {
     /**
      * Creates new form Pantalla_Gastos
      */
+    Calendar fecha_actual = new GregorianCalendar();
     public Pantalla_Gastos() {
         initComponents();
       //  setLocationRelativeTo(null);setVisible(true);
-        
+        jDateChooserFecha.setCalendar(fecha_actual);
     }
 
     /**
@@ -108,7 +111,9 @@ public class Pantalla_Gastos extends javax.swing.JInternalFrame {
         jPanel2.add(txtdescripcion);
         txtdescripcion.setBounds(10, 40, 480, 40);
 
-        jDateChooserFecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jDateChooserFecha.setDateFormatString("yyy/MM/dd");
+        jDateChooserFecha.setEnabled(false);
+        jDateChooserFecha.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jPanel2.add(jDateChooserFecha);
         jDateChooserFecha.setBounds(10, 180, 210, 40);
 
