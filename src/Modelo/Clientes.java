@@ -184,7 +184,9 @@ public class Clientes {
        DefaultTableModel modelo= (DefaultTableModel) jt.getModel();
        ArrayList<Clientes> arrayConsulta = new ArrayList<>();
        try {
-           String sql = "SELECT * FROM cliente WHERE  nombre ='"+ getNombre()+"'";
+           String nombre= getNombre();
+           String filtro= ""+nombre+"%";//para hacer busqueda aun que este en blanco y todo lo que coincia
+           String sql = "SELECT * FROM cliente WHERE  nombre  LIKE "+'"'+ filtro+'"';
             Connection con  =new Conexion().getConnection();
             PreparedStatement pst = (PreparedStatement)con.prepareStatement(sql);
             ResultSet resultado = pst.executeQuery();

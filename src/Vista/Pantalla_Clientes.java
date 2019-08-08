@@ -16,6 +16,7 @@ public class Pantalla_Clientes extends javax.swing.JInternalFrame {
      */
     public Pantalla_Clientes() {
         initComponents();
+        this.setResizable(false);
     }
 
     /**
