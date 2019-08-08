@@ -9,6 +9,7 @@ import Modelo.Conexion;
 import Modelo.Proveedores;
 import Vista.Pantalla_Proveedores;
 import Vista.Pantalla_principal;
+import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
@@ -52,10 +53,12 @@ public class Controlador_Proveedores {
             public void actionPerformed(ActionEvent e) {
 
                 //pantalla_proveedores.dispose();
-                pantalla_proveedores.AgregarProveedor.setVisible(true);
+                //pantalla_proveedores.AgregarProveedor.setVisible(true);
+               // pantalla_proveedores.AgregarProveedor.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
                 pantalla_proveedores.AgregarProveedor.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
                 pantalla_proveedores.AgregarProveedor.setResizable(false);
                 pantalla_proveedores.AgregarProveedor.setBounds(390, 100, 350, 600);
+                pantalla_proveedores.AgregarProveedor.show(); 
 
             }
         });
@@ -73,11 +76,15 @@ public class Controlador_Proveedores {
             @Override
             public void mouseClicked(MouseEvent dobleclik) {
                 int fila;
+                
                 if (dobleclik.getClickCount() == 2) {
-                    //pantalla_proveedores.dispose();
-                    pantalla_proveedores.EditarProveedores.setVisible(true);
+                    
+                    //
                     pantalla_proveedores.EditarProveedores.setResizable(false);
                     pantalla_proveedores.EditarProveedores.setBounds(400, 70, 350, 650);
+                    
+                    
+                     
                     fila = pantalla_proveedores.TableProveedores.getSelectedRow();
                     int id = (int) pantalla_proveedores.TableProveedores.getValueAt(fila, 0);
                     String nombre = pantalla_proveedores.TableProveedores.getValueAt(fila, 1).toString();
@@ -92,6 +99,8 @@ public class Controlador_Proveedores {
                     pantalla_proveedores.ciudadProveedor.setText(ciudad);
                     pantalla_proveedores.estadoProveedor.setText(estado);
                     pantalla_proveedores.emailProveedor.setText(email);
+                    pantalla_proveedores.EditarProveedores.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                    pantalla_proveedores.EditarProveedores.show();
                 }
                 ///para eliminar
                 if (dobleclik.getClickCount() == 1) {
@@ -138,49 +147,95 @@ public class Controlador_Proveedores {
         pantalla_proveedores.btnAcetarAgregarPro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                String nombre = pantalla_proveedores.nombreProveedorAg.getText();
-                String telefono = pantalla_proveedores.telefono.getText();
-                String correo = pantalla_proveedores.ciudad.getText();
-                String direccion = pantalla_proveedores.estado.getText();
-                String puesto = pantalla_proveedores.email.getText();
-                String estatus = "1";
-                System.out.println(nombre + " " + telefono);
-                proveedores = new Proveedores(0, nombre, telefono, correo, direccion, puesto, estatus);
-                if (proveedores.agregarProveedor()) {
-                    JOptionPane.showMessageDialog(null, "Datos ingresados Correctamente");
-                    limpiarCamposAgregar();
-                    pantalla_proveedores.AgregarProveedor.setVisible(false);
-                     pantalla_proveedores.setVisible(true);
-                     actualizarTabla();
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error");
-
-                }
+                colorB();
+              if(pantalla_proveedores.nombreProveedorAg.getText().equals("") ||pantalla_proveedores.telefono.getText().equals("")||pantalla_proveedores.ciudad.getText().equals("")
+                      ||pantalla_proveedores.estado.getText().equals("") ||pantalla_proveedores.email.getText().equals("")){
+                 JOptionPane.showMessageDialog(null, "No dejar campos vacios");
+                 
+               if(pantalla_proveedores.nombreProveedorAg.getText().equals("")){
+                
+                 pantalla_proveedores.nombreProveedorAg.setBackground(Color.red);;
+               }
+                 if(pantalla_proveedores.telefono.getText().equals("")){
+                
+                 pantalla_proveedores.telefono.setBackground(Color.red);
+               }
+              if(pantalla_proveedores.ciudad.getText().equals("")){
+                 pantalla_proveedores.ciudad.setBackground(Color.red);
+               }
+              if(pantalla_proveedores.estado.getText().equals("")){
+                pantalla_proveedores.estado.setBackground(Color.red);
+               }
+              if(pantalla_proveedores.email.getText().equals("")){
+                 pantalla_proveedores.email.setBackground(Color.red);
+               }
+               }else{
+                  
+                   if(pantalla_proveedores.nombreProveedorAg.getText().matches("[a-z A-Z.ñÑáéíóúÁÉÍÓÚ ]*")){
+                     if(pantalla_proveedores.telefono.getText().matches("[0-9]{10}")){
+                        if(pantalla_proveedores.email.getText().matches("[a-z0-9-_.]+@[a-z0-9-_.]+$")){
+                            agregarProveedor();
+                    }else{
+                    JOptionPane.showMessageDialog(null, "Escribe bien el correo");
+                    pantalla_proveedores.email.setBackground(Color.red);
+                    }
+                     }else{
+                         JOptionPane.showMessageDialog(null, "Revisa el numero telefonico, Sin dejar espacios en blanco");
+                        pantalla_proveedores.telefono.setBackground(Color.red);
+                     } 
+                    }else{
+                    JOptionPane.showMessageDialog(null, "Escribe el Nombre, sin numeros ");
+                    pantalla_proveedores.nombreProveedorAg.setBackground(Color.red);
+                    }
+              }
+              
             }
 
         });
         pantalla_proveedores.btnAceptarEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                String id = pantalla_proveedores.idProveedor.getText();
-                String nombre = pantalla_proveedores.nombreProveedor.getText();
-                String telefono = pantalla_proveedores.telefonoProveedor.getText();
-                String ciudad = pantalla_proveedores.ciudadProveedor.getText();
-                String estado = pantalla_proveedores.estadoProveedor.getText();
-                String email = pantalla_proveedores.emailProveedor.getText();
-                int id2 = Integer.valueOf(id);
-
-                proveedores = new Proveedores(id2, nombre, telefono, ciudad, estado, email, "activo");
-                if (proveedores.EditarProveedor()) {
-                    JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente");
-                    pantalla_proveedores.EditarProveedores.setVisible(false);
-                     pantalla_proveedores.setVisible(true);
-                     actualizarTabla();
-
-                }
+              colorBE();
+              if(pantalla_proveedores.nombreProveedor.getText().equals("") ||pantalla_proveedores.telefonoProveedor.getText().equals("")||pantalla_proveedores.ciudadProveedor.getText().equals("")
+                      ||pantalla_proveedores.estadoProveedor.getText().equals("") ||pantalla_proveedores.emailProveedor.getText().equals("")){
+                 JOptionPane.showMessageDialog(null, "No dejar campos vacios");
+                 
+               if(pantalla_proveedores.nombreProveedor.getText().equals("")){
+                
+                 pantalla_proveedores.nombreProveedor.setBackground(Color.red);;
+               }
+                 if(pantalla_proveedores.telefonoProveedor.getText().equals("")){
+                
+                 pantalla_proveedores.telefonoProveedor.setBackground(Color.red);
+               }
+              if(pantalla_proveedores.ciudadProveedor.getText().equals("")){
+                 pantalla_proveedores.ciudadProveedor.setBackground(Color.red);
+               }
+              if(pantalla_proveedores.estadoProveedor.getText().equals("")){
+                pantalla_proveedores.estadoProveedor.setBackground(Color.red);
+               }
+              if(pantalla_proveedores.emailProveedor.getText().equals("")){
+                 pantalla_proveedores.emailProveedor.setBackground(Color.red);
+               }
+               }else{
+                  
+                   if(pantalla_proveedores.nombreProveedor.getText().matches("[a-z A-Z.ñÑáéíóúÁÉÍÓÚ ]*")){
+                     if(pantalla_proveedores.telefonoProveedor.getText().matches("[0-9]{10}")){
+                        if(pantalla_proveedores.emailProveedor.getText().matches("[a-z0-9-_.]+@[a-z0-9-_.]+$")){
+                            EditarProveedor();
+                    }else{
+                    JOptionPane.showMessageDialog(null, "Escribe bien el correo");
+                    pantalla_proveedores.emailProveedor.setBackground(Color.red);
+                    }
+                     }else{
+                         JOptionPane.showMessageDialog(null, "Revisa el numero telefonico, Sin dejar espacios en blanco");
+                        pantalla_proveedores.telefonoProveedor.setBackground(Color.red);
+                     } 
+                    }else{
+                    JOptionPane.showMessageDialog(null, "Escribe el Nombre, sin numeros ");
+                    pantalla_proveedores.nombreProveedor.setBackground(Color.red);
+                    }
+              }
 
             }
         });
@@ -203,5 +258,58 @@ public class Controlador_Proveedores {
         pantalla_proveedores.estado.setText("");
         pantalla_proveedores.email.setText("");
     }
+    public void colorB(){
+        pantalla_proveedores.nombreProveedorAg.setBackground(Color.white);
+        pantalla_proveedores.telefono.setBackground(Color.white);
+        pantalla_proveedores.ciudad.setBackground(Color.white);
+        pantalla_proveedores.estado.setBackground(Color.white);
+        pantalla_proveedores.email.setBackground(Color.white);
+    }
+    public void colorBE(){
+        pantalla_proveedores.nombreProveedor.setBackground(Color.white);
+        pantalla_proveedores.telefonoProveedor.setBackground(Color.white);
+        pantalla_proveedores.ciudadProveedor.setBackground(Color.white);
+        pantalla_proveedores.estadoProveedor.setBackground(Color.white);
+        pantalla_proveedores.emailProveedor.setBackground(Color.white);
+    }
+    public void agregarProveedor(){
+                String nombre = pantalla_proveedores.nombreProveedorAg.getText();
+                String telefono = pantalla_proveedores.telefono.getText();
+                String correo = pantalla_proveedores.ciudad.getText();
+                String direccion = pantalla_proveedores.estado.getText();
+                String puesto = pantalla_proveedores.email.getText();
+                String estatus = "1";
+                System.out.println(nombre + " " + telefono);
+                proveedores = new Proveedores(0, nombre, telefono, correo, direccion, puesto, estatus);
+                if (proveedores.agregarProveedor()) {
+                    JOptionPane.showMessageDialog(null, "Datos ingresados Correctamente");
+                    limpiarCamposAgregar();
+                    actualizarTabla();
+                     pantalla_proveedores.AgregarProveedor.setVisible(false);
+                    
 
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error");
+
+                }
+    }
+  public void EditarProveedor(){
+      
+                String id = pantalla_proveedores.idProveedor.getText();
+                String nombre = pantalla_proveedores.nombreProveedor.getText();
+                String telefono = pantalla_proveedores.telefonoProveedor.getText();
+                String ciudad = pantalla_proveedores.ciudadProveedor.getText();
+                String estado = pantalla_proveedores.estadoProveedor.getText();
+                String email = pantalla_proveedores.emailProveedor.getText();
+                int id2 = Integer.valueOf(id);
+
+                proveedores = new Proveedores(id2, nombre, telefono, ciudad, estado, email, "activo");
+                if (proveedores.EditarProveedor()) {
+                    JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente");
+                    pantalla_proveedores.EditarProveedores.setVisible(false);
+                     pantalla_proveedores.setVisible(true);
+                     actualizarTabla();
+
+                }
+  }
 }

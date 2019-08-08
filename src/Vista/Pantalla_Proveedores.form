@@ -277,19 +277,21 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="idProveedor" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="ciudadProveedor" alignment="0" max="32767" attributes="0"/>
-                          <Component id="estadoProveedor" alignment="0" max="32767" attributes="0"/>
-                          <Component id="emailProveedor" alignment="0" max="32767" attributes="0"/>
-                          <Component id="telefonoProveedor" alignment="0" max="32767" attributes="0"/>
-                          <Component id="nombreProveedor" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="nombreProveedor" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="idProveedor" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="ciudadProveedor" alignment="0" max="32767" attributes="0"/>
+                              <Component id="estadoProveedor" alignment="0" max="32767" attributes="0"/>
+                              <Component id="emailProveedor" alignment="0" max="32767" attributes="0"/>
+                              <Component id="telefonoProveedor" alignment="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -304,9 +306,9 @@
                       <Component id="idProveedor" min="-2" pref="32" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="nombreProveedor" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="nombreProveedor" min="-2" pref="35" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="telefonoProveedor" min="-2" pref="35" max="-2" attributes="0"/>
@@ -409,7 +411,7 @@
             <Component class="rojeru_san.RSMTextFull" name="telefonoProveedor">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Roboto Bold" size="12" style="1"/>
+                  <Font name="Roboto Bold" size="10" style="1"/>
                 </Property>
                 <Property name="placeholder" type="java.lang.String" value="Escribe el telefono..."/>
               </Properties>
@@ -439,6 +441,9 @@
             <Component class="rojeru_san.RSMTextFull" name="idProveedor">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Roboto Bold" size="12" style="1"/>
+                </Property>
                 <Property name="placeholder" type="java.lang.String" value=""/>
               </Properties>
               <AuxValues>
@@ -453,7 +458,13 @@
                 <Property name="text" type="java.lang.String" value="Id del Proveedor"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="nombreProveedor">
+            <Component class="rojeru_san.RSMTextFull" name="nombreProveedor">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Roboto Bold" size="10" style="1"/>
+                </Property>
+                <Property name="placeholder" type="java.lang.String" value="Escribe el nombre..."/>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -500,6 +511,8 @@
         </Container>
       </SubComponents>
     </Container>
+    <Component class="rojeru_san.RSMTextFullBeanInfo" name="rSMTextFullBeanInfo1">
+    </Component>
   </NonVisualComponents>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>

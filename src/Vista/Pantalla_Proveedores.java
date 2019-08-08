@@ -58,9 +58,10 @@ public class Pantalla_Proveedores extends javax.swing.JInternalFrame {
         btnCancelarEditar = new rojeru_san.RSButton();
         idProveedor = new rojeru_san.RSMTextFull();
         jLabel14 = new javax.swing.JLabel();
-        nombreProveedor = new javax.swing.JTextField();
+        nombreProveedor = new rojeru_san.RSMTextFull();
         jPanel5 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        rSMTextFullBeanInfo1 = new rojeru_san.RSMTextFullBeanInfo();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableProveedores = new rojerusan.RSTableMetro();
@@ -221,7 +222,7 @@ public class Pantalla_Proveedores extends javax.swing.JInternalFrame {
         emailProveedor.setFont(new java.awt.Font("Roboto Bold", 1, 10)); // NOI18N
         emailProveedor.setPlaceholder("Escribe el email...");
 
-        telefonoProveedor.setFont(new java.awt.Font("Roboto Bold", 1, 12)); // NOI18N
+        telefonoProveedor.setFont(new java.awt.Font("Roboto Bold", 1, 10)); // NOI18N
         telefonoProveedor.setPlaceholder("Escribe el telefono...");
         telefonoProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,10 +235,14 @@ public class Pantalla_Proveedores extends javax.swing.JInternalFrame {
         btnCancelarEditar.setText("CANCELAR");
 
         idProveedor.setEditable(false);
+        idProveedor.setFont(new java.awt.Font("Roboto Bold", 1, 12)); // NOI18N
         idProveedor.setPlaceholder("");
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel14.setText("Id del Proveedor");
+
+        nombreProveedor.setFont(new java.awt.Font("Roboto Bold", 1, 10)); // NOI18N
+        nombreProveedor.setPlaceholder("Escribe el nombre...");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -251,19 +256,20 @@ public class Pantalla_Proveedores extends javax.swing.JInternalFrame {
                 .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel14)
-                    .addComponent(idProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(ciudadProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(estadoProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(emailProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(telefonoProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nombreProveedor))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nombreProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel14)
+                        .addComponent(idProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabel10)
+                        .addComponent(jLabel11)
+                        .addComponent(jLabel12)
+                        .addComponent(ciudadProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(estadoProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(emailProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(telefonoProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -275,9 +281,9 @@ public class Pantalla_Proveedores extends javax.swing.JInternalFrame {
                 .addComponent(idProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
+                .addGap(19, 19, 19)
+                .addComponent(nombreProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(nombreProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(telefonoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -461,8 +467,9 @@ public class Pantalla_Proveedores extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTextField nombreProveedor;
+    public rojeru_san.RSMTextFull nombreProveedor;
     public rojeru_san.RSMTextFull nombreProveedorAg;
+    private rojeru_san.RSMTextFullBeanInfo rSMTextFullBeanInfo1;
     public rojeru_san.RSMTextFull telefono;
     public rojeru_san.RSMTextFull telefonoProveedor;
     // End of variables declaration//GEN-END:variables
