@@ -218,7 +218,7 @@ public class Controlador_PantallaPrincipal {
             @Override
             public void actionPerformed(ActionEvent e) {
                
-                    new Controlador_Gastos(pantalla_Principal,turno); // le mando turno al contro gastos
+                    new Controlador_Gastos(pantalla_Principal,empleado_idempleado); // le mando turno al contro gastos
                 
                 
             }

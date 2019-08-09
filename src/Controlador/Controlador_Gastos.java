@@ -32,11 +32,11 @@ public class Controlador_Gastos {
     GastosCon modeloGastos = new GastosCon();              // modelo 
       String fechadesde="",fechahasta="", fechahoy=""; 
       Gastos gastos;
-      String turno;  // declara del turno
+      String empleado_idempleado;  // declara del turno
       TikectGasto tikectGastos;
     Calendar fecha_actual = new GregorianCalendar();
      public Controlador_Gastos(Pantalla_principal pantalla_principal, String turnoE) {
-         this.turno = turnoE;  // se almacena turno en varaiable TurnoE
+         this.empleado_idempleado = turnoE;  // se almacena turno en varaiable TurnoE
         vistaGastos = new Pantalla_Gastos();                                
         vistaGastos.setVisible(true);
         
@@ -68,9 +68,10 @@ public class Controlador_Gastos {
                       String fecha = formatoFecha.format(vistaGastos.jDateChooserFecha.getDate());  
                   //   Calendar fechahoy = vistaGastos.jDateChooserFecha.setCalendar(fecha_actual);
    
-                        gastos = new Gastos(tipo, total, turno, fecha);
+                        gastos = new Gastos(tipo, total, empleado_idempleado, fecha);
 
                         if (gastos.Gastosinsert()) {
+                            JOptionPane.showMessageDialog(null,"idempleado" + empleado_idempleado);
                             JOptionPane.showMessageDialog(null, "Gastos Registrados con Exito");
                             limpiar();
                             JOptionPane.showMessageDialog(null, "Generando Ticket de Gastos");
