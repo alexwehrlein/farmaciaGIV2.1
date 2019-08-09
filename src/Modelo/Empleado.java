@@ -140,7 +140,7 @@ public class Empleado {
                 arr[0]=resultado.getString("contrasena");
                 arr[1]=String.valueOf(resultado.getInt("empleado_idempleado"));
                 arr[2]=resultado.getString("puesto");
-                arr[3]=resultado.getString("usuario");
+                arr[3]=resultado.getString("nombre");
                 arr[4]=resultado.getString("turno");
          // "Select user, password From usuarios where user=? AND password=?";       
             }

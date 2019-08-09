@@ -23,7 +23,7 @@ import javax.swing.KeyStroke;
 public class Controlador_PantallaPrincipal {
 
     Pantalla_principal pantalla_Principal;
-    String empleado_idempleado, nombreEmpleado, turno, rol;
+    String empleado_idempleado, nombre, turno, rol;
     public static boolean ventanaControl9 = false;
 
     public class Imagen extends javax.swing.JPanel {
@@ -108,17 +108,19 @@ public class Controlador_PantallaPrincipal {
                                 pantalla_Principal.jTextFieldUsuarioLogin.setText("");
                                 pantalla_Principal.jTextFieldPasswordLogin.setText("");
                                 empleado_idempleado = arr[1];
-                                nombreEmpleado = arr[3];
+                                nombre = arr[3];
                                 rol = arr[2];
                                 turno = arr[4];
                                 if (arr[2].equals("Administrador")) {
                                     activarAdministrador();
                                     pantalla_Principal.jDialogLogin.setVisible(false);
                                     JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+                                              
                                 } else {
                                     activarCajero();
                                     pantalla_Principal.jDialogLogin.setVisible(false);
                                     JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+                                              
                                 }
                             } else {
                                 pantalla_Principal.jTextFieldPasswordLogin.setBackground(Color.red);
@@ -152,17 +154,18 @@ public class Controlador_PantallaPrincipal {
                             pantalla_Principal.jTextFieldUsuarioLogin.setText("");
                             pantalla_Principal.jTextFieldPasswordLogin.setText("");
                             empleado_idempleado = arr[1];
-                            nombreEmpleado = arr[3];
+                            nombre = arr[3];
                             turno = arr[1];
                             if (arr[2].equals("Administrador")) {
                                 activarAdministrador();
                                 pantalla_Principal.jDialogLogin.setVisible(false);
                                 JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
-
+                                             JOptionPane.showMessageDialog(null, "ADMIN Idempleado: " + arr[1] + " \n ADMIN puesto: " + arr[2]);
                             } else {
                                 activarCajero();
                                 pantalla_Principal.jDialogLogin.setVisible(false);
                                 JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+                                         JOptionPane.showMessageDialog(null, "EMPLEADO Idempleado: " + arr[1] + " \nEMPLEADO puesto: " + arr[2]);
                             }
                         } else {
                             pantalla_Principal.jTextFieldPasswordLogin.setBackground(Color.red);
