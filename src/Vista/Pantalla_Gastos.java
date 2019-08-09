@@ -104,7 +104,6 @@ public class Pantalla_Gastos extends javax.swing.JInternalFrame {
         jPanel2.add(btnListar);
         btnListar.setBounds(430, 110, 210, 50);
 
-        txtmonto.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtmonto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel2.add(txtmonto);
         txtmonto.setBounds(10, 110, 210, 40);
