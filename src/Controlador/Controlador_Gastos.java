@@ -28,7 +28,7 @@ import ticket.TikectGasto;
 public class Controlador_Gastos {
    
     
-    Pantalla_Gastos vistaGastos ;    // vista   /*---------------- PANGASTOS -----------------*/
+    Pantalla_Gastos vistaGastos ;    // vista  
     GastosCon modeloGastos = new GastosCon();              // modelo 
       String fechadesde="",fechahasta="", fechahoy=""; 
       Gastos gastos;
@@ -63,10 +63,9 @@ public class Controlador_Gastos {
 
                     if (pass && pass2) {
                          String tipo = vistaGastos.txtdescripcion.getText();
-                        String total = vistaGastos.txtmonto.getText();
-                        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyy-MM-dd");  // formato de la fecha e instanciando y darle formato de la fecha 
-                      String fecha = formatoFecha.format(vistaGastos.jDateChooserFecha.getDate());  
-                  //   Calendar fechahoy = vistaGastos.jDateChooserFecha.setCalendar(fecha_actual);
+                         String total = vistaGastos.txtmonto.getText();
+                         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyy-MM-dd");  // formato de la fecha e instanciando y darle formato de la fecha 
+                         String fecha = formatoFecha.format(vistaGastos.jDateChooserFecha.getDate());  
    
                         gastos = new Gastos(tipo, total, empleado_idempleado, fecha);
 
@@ -75,7 +74,7 @@ public class Controlador_Gastos {
                             JOptionPane.showMessageDialog(null, "Gastos Registrados con Exito");
                             limpiar();
                             JOptionPane.showMessageDialog(null, "Generando Ticket de Gastos");
-                     vistaGastos.jTableGastos.setModel(new GastosCon().LlenarTabla(vistaGastos.jTableGastos));
+                            vistaGastos.jTableGastos.setModel(new GastosCon().LlenarTabla(vistaGastos.jTableGastos));
                             tikectGastos = new TikectGasto();
                             tikectGastos.TikectGasto(tipo, total);
 
@@ -88,8 +87,6 @@ public class Controlador_Gastos {
         });  
 //   TERMINA BOTON DE REGIRTOS
 
-
-
 vistaGastos.txtdescripcion.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e
             ) {
@@ -98,14 +95,7 @@ vistaGastos.txtdescripcion.addKeyListener(new KeyAdapter() {
                 }
             }
         });
-
-
-
-
-
-
-                                                                                                       
-                
+                                                                                                                      
             //  ME HACE LA BUSKEDA AL PONER UNA FECJA EN EL CHOOSERDATE
         vistaGastos.jDateXUnaFecha.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
@@ -115,8 +105,7 @@ vistaGastos.txtdescripcion.addKeyListener(new KeyAdapter() {
             LlenarTablaBusquedaFecha(vistaGastos.jTableGastosFechaActual, llenarfechadehoy()); 
             }
         });
-        
-        
+                
         // BOTON PARA GENERAR TICKTEC CON LA BUSKEDA DE FECHAS 
         vistaGastos.btnImprimirticket.addActionListener(new ActionListener() {
             @Override
@@ -135,8 +124,7 @@ vistaGastos.txtdescripcion.addKeyListener(new KeyAdapter() {
                         tikectGastos.TikectGasto(tipo, total);
                     }
                 } catch (Exception ex) {
-                }
-             
+                }             
             }
         });
         // BOTON PARA GENERAR TICKTEC CON LA BUSKEDA DE FECHAS                          
@@ -150,11 +138,9 @@ vistaGastos.txtdescripcion.addKeyListener(new KeyAdapter() {
 /* declaro VISTA.TABLA EN LA VISTA.OBTENGO EL MODELO(GASTOCON es el modelo lo llamo.llamo el metod del modelo LLENARTABLA
                 y vuelvo a llamar la vista y la tabla) */                            
                     }                                                   
-        });  
-  
+        });    
     } 
-    
-    
+        
     public String llenarfechadehoy(){ 
         
        int año= vistaGastos.jDateXUnaFecha.getCalendar().get(Calendar.YEAR);
@@ -163,8 +149,7 @@ vistaGastos.txtdescripcion.addKeyListener(new KeyAdapter() {
        fechahoy= año+"-"+mes+"-"+dia;
         return fechahoy;
     } 
-    
-    
+       
     public void limpiar(){     /*====  VACIAR CAMPOS */
             vistaGastos.txtdescripcion.setText(null);
             vistaGastos.txtmonto.setText(null);
@@ -199,12 +184,12 @@ vistaGastos.txtdescripcion.addKeyListener(new KeyAdapter() {
                 modeloT.addRow(columna);
             }
         }
+        ps.close();
     } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e, "Advertencia", JOptionPane.PLAIN_MESSAGE);    
     }
 }
-                           
-          
+                                     
            public boolean validarFormulario(String gastos) {
         boolean next = false;
         Pattern patGastos = Pattern.compile("^[0-9]+([.])?([0-9]+)?$");
@@ -217,13 +202,9 @@ vistaGastos.txtdescripcion.addKeyListener(new KeyAdapter() {
             JOptionPane.showMessageDialog(null, "Solo Numeros");
             vistaGastos.txtmonto.setBackground(Color.red);
         }
-
         return next;
     }
-
-          
-           
-           
+                               
              public boolean validarFormulariotexto(String gastos) {
         boolean next = false;
         Pattern patGastos = Pattern.compile("^([a-zA-ZÁÉÍÓÚ]{1}[a-zñáéíóú]{1,24}[\\s]*)+$");// ^([a-zA-ZÁÉÍÓÚ]{1}[a-zñáéíóú]{1,24}[\\s]*)+$
@@ -236,10 +217,6 @@ vistaGastos.txtdescripcion.addKeyListener(new KeyAdapter() {
             JOptionPane.showMessageDialog(null, "Solo letras");
             vistaGastos.txtdescripcion.setBackground(Color.red);
         }
-
         return next;
-    }
-          
-          
-          
+    }                              
 }  

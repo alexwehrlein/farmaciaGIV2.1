@@ -45,7 +45,6 @@ public class Gastos {
         this.empleado_idempleado = turno;  // empleado_idempleado lo almaceno en turno asi se usa en controlador
         this.fecha = fecha;
     }
-
    
    public Calendar Gastos(String descripcion, String total, String turno, Calendar fechahoy) {
         this.tipo = descripcion; // tipo lo almaceno en descirpcion
@@ -55,9 +54,7 @@ public class Gastos {
         this.fecha_actual = fechahoy;
         return null;
     }
-
     
-
     public int getIdegreso() {
         return idegreso;
     }
@@ -96,8 +93,7 @@ public class Gastos {
 
     public void setEmpleado_idempleado(String empleado_idempleado) {
         this.empleado_idempleado = empleado_idempleado;
-    }                                  
-      
+    }                                        
     
     public boolean Gastosinsert() {
         String sql = null;
@@ -109,8 +105,7 @@ public class Gastos {
              stmt.setString(2, getFecha());
             stmt.setString(3, getTotal());
             stmt.setString(4, getEmpleado_idempleado());
-           
-           
+                      
             stmt.executeUpdate();
 
             stmt.close();
@@ -120,14 +115,6 @@ public class Gastos {
             return false;
         } 
        return true;
-    }
-
-    private static class llenarfechadehoy {
-
-        public llenarfechadehoy() {
-        }
-    }
-               
-          
+    }                         
 }
 

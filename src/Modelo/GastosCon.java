@@ -7,8 +7,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import Modelo.Gastos;
-import java.sql.Statement;
 
 public class GastosCon {
     
@@ -16,9 +14,7 @@ public class GastosCon {
     
     public GastosCon(){ // constructor de this class
         conexion = new Conexion();//instanciar la variblle tipo conexion
-    }           
-    
-      
+    }                     
         /*========      LISTAR  GASTOS    ===========*/
      public ArrayList<Gastos> listGastos() {
           ArrayList  listaGastos = new ArrayList();
@@ -40,13 +36,13 @@ public class GastosCon {
                 gastos.setTotal(resultado.getString(3));
                 gastos.setFecha(resultado.getString(4));
                 gastos.setEmpleado_idempleado(resultado.getString(5));
-                listaGastos.add(gastos);
-            }                                                   
+                listaGastos.add(gastos);                
+            }     
+            pst.close();                                              
           } catch (Exception e) {
           }
           return listaGastos;
-      }                           
-     
+      }                                
      
       /* ********************** LLENDO DE LA TABLA DE GASTOS  ******************************** */
     
@@ -74,12 +70,6 @@ public class GastosCon {
         }        
         
         return modeloT;
-    }                                                                       
-               
-     
-    
-                         
-     
-                                                                                          
-    
+    }                                                                                                                             
+                                                                                              
 }

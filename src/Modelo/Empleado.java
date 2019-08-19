@@ -21,7 +21,6 @@ public class Empleado {
     
    private Connection con;
     Conexion conn = new Conexion();
-
     
 
     public int getIdempleado() {
@@ -86,9 +85,7 @@ public class Empleado {
 
     public void setCon(Connection con) {
         this.con = con;
-    }
-    
-    
+    }        
     
      public Empleado(int id, String nombre, String telefono, String correo, String turno, String estado, String sucursal_idsucursal) {
         this.id = id;
@@ -106,8 +103,7 @@ public class Empleado {
             Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-    }
-     
+    }     
      
      public Empleado(int id, String nombre) {
         this.id = id;
@@ -121,12 +117,8 @@ public class Empleado {
             con.setAutoCommit(false);
         } catch (SQLException ex) {
             Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-     
-    
-    
+        }        
+    }             
      
      public String[] obtenerContraUsuario(String usuario){
         String []arr = {"","","","",""};
@@ -148,18 +140,5 @@ public class Empleado {
         } catch (SQLException ex) {
         }
         return arr;
-    }
-    
-    
-     
-     
-      
-    
-    
-    
-    
-    
-    
-    
-    
+    }    
 }
