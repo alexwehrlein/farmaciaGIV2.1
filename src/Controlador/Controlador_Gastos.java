@@ -2,7 +2,6 @@ package Controlador;
 
 import Modelo.Conexion;
 import Modelo.Gastos;
-import Modelo.GastosCon;
 import Vista.Pantalla_Gastos;
 import Vista.Pantalla_principal;
 import java.awt.Color;
@@ -29,12 +28,13 @@ public class Controlador_Gastos {
    
     
     Pantalla_Gastos vistaGastos ;    // vista  
-    GastosCon modeloGastos = new GastosCon();              // modelo 
+  //  GastosCon modeloGastos = new GastosCon();              // modelo 
       String fechadesde="",fechahasta="", fechahoy=""; 
       Gastos gastos;
       String empleado_idempleado;  // declara del turno
       TikectGasto tikectGastos;
     Calendar fecha_actual = new GregorianCalendar();
+    
      public Controlador_Gastos(Pantalla_principal pantalla_principal, String turnoE) {
          this.empleado_idempleado = turnoE;  // se almacena turno en varaiable TurnoE
         vistaGastos = new Pantalla_Gastos();                                
@@ -74,7 +74,7 @@ public class Controlador_Gastos {
                             JOptionPane.showMessageDialog(null, "Gastos Registrados con Exito");
                             limpiar();
                             JOptionPane.showMessageDialog(null, "Generando Ticket de Gastos");
-                            vistaGastos.jTableGastos.setModel(new GastosCon().LlenarTabla(vistaGastos.jTableGastos));
+                            vistaGastos.jTableGastos.setModel(new Gastos().LlenarTabla(vistaGastos.jTableGastos));
                             tikectGastos = new TikectGasto();
                             tikectGastos.TikectGasto(tipo, total);
 
@@ -134,11 +134,12 @@ vistaGastos.txtdescripcion.addKeyListener(new KeyAdapter() {
      vistaGastos.btnListar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                vistaGastos.jTableGastos.setModel(new GastosCon().LlenarTabla(vistaGastos.jTableGastos));
+                vistaGastos.jTableGastos.setModel(new Gastos().LlenarTabla(vistaGastos.jTableGastos));
 /* declaro VISTA.TABLA EN LA VISTA.OBTENGO EL MODELO(GASTOCON es el modelo lo llamo.llamo el metod del modelo LLENARTABLA
                 y vuelvo a llamar la vista y la tabla) */                            
                     }                                                   
         });    
+     
     } 
         
     public String llenarfechadehoy(){ 
@@ -169,9 +170,12 @@ vistaGastos.txtdescripcion.addKeyListener(new KeyAdapter() {
         modeloT.addColumn("Total");
         modeloT.addColumn("Fecha");
        modeloT.addColumn("Turno");               
-       
+         /* SELECT `idegreso`, `tipo`, `total`, `fecha`, turno FROM `egreso` \n" + "  INNER JOIN empleado\n" + "WHERE egreso.`empleado_idempleado` = empleado.idempleado";     */    
         try {
-         String sSQL = "SELECT *FROM egreso\n" + "WHERE fecha = '"+llenarfechadehoy()+"'";
+         String sSQL = "SELECT `idegreso`, `tipo`, `total`, `fecha`, turno FROM `egreso` INNER JOIN empleado WHERE egreso.`empleado_idempleado` = empleado.idempleado AND fecha = '"+llenarfechadehoy()+"'";
+         
+  // String sSQL = "SELECT * FROM egreso\n" + "WHERE fecha = '"+llenarfechadehoy()+"'";
+         
          //   "SELECT *FROM egreso\n" + "WHERE fecha = '2019-07-20'";            
         PreparedStatement ps = con.prepareStatement(sSQL);       
         try (ResultSet rs = ps.executeQuery(sSQL)) {
@@ -180,7 +184,7 @@ vistaGastos.txtdescripcion.addKeyListener(new KeyAdapter() {
                 columna[1] = rs.getString("tipo");
                 columna[2] = rs.getString("total");
                 columna[3] = rs.getString("fecha");
-                columna[4] = rs.getString("empleado_idempleado");                
+                columna[4] = rs.getString("Turno");                
                 modeloT.addRow(columna);
             }
         }

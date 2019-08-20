@@ -1,7 +1,6 @@
 
 package Controlador;
 
-import Modelo.Empleado;
 import Modelo.Empleados;
 import Vista.Pantalla_principal;
 import java.awt.Color;
@@ -102,7 +101,7 @@ public class Controlador_PantallaPrincipal {
                     if (!camposVacios()) {
                         pantalla_Principal.jTextFieldUsuarioLogin.setBackground(Color.white);
                         pantalla_Principal.jTextFieldPasswordLogin.setBackground(Color.white);
-                        String[] arr = new Empleado().obtenerContraUsuario(pantalla_Principal.jTextFieldUsuarioLogin.getText());
+                        String[] arr = new Empleados().obtenerContraUsuario(pantalla_Principal.jTextFieldUsuarioLogin.getText());
                         if (!arr[0].equals("")) {
                             if (arr[0].equals(pantalla_Principal.jTextFieldPasswordLogin.getText())) {
                                 pantalla_Principal.jTextFieldUsuarioLogin.setText("");
@@ -148,24 +147,24 @@ public class Controlador_PantallaPrincipal {
                 if (!camposVacios()) {
                     pantalla_Principal.jTextFieldUsuarioLogin.setBackground(Color.white);
                     pantalla_Principal.jTextFieldPasswordLogin.setBackground(Color.white);
-                 String[] arr = new Empleado().obtenerContraUsuario(pantalla_Principal.jTextFieldUsuarioLogin.getText());
+                 String[] arr = new Empleados().obtenerContraUsuario(pantalla_Principal.jTextFieldUsuarioLogin.getText());
                     if (!arr[0].equals("")) {
                         if (arr[0].equals(pantalla_Principal.jTextFieldPasswordLogin.getText())) {
                             pantalla_Principal.jTextFieldUsuarioLogin.setText("");
                             pantalla_Principal.jTextFieldPasswordLogin.setText("");
                             empleado_idempleado = arr[1];
                             nombre = arr[3];
-                            turno = arr[1];
+                            turno = arr[4];
                             if (arr[2].equals("Administrador")) {
                                 activarAdministrador();
                                 pantalla_Principal.jDialogLogin.setVisible(false);
                                 JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
-                                             JOptionPane.showMessageDialog(null, "ADMIN Idempleado: " + arr[1] + " \n ADMIN puesto: " + arr[2]);
+     JOptionPane.showMessageDialog(null, "ADMIN Idempleado: " + arr[1] + " \n ADMIN puesto: " + arr[2] + " \n ADMIN turno: " + arr[4]);
                             } else {
                                 activarCajero();
                                 pantalla_Principal.jDialogLogin.setVisible(false);
                                 JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
-                                         JOptionPane.showMessageDialog(null, "EMPLEADO Idempleado: " + arr[1] + " \nEMPLEADO puesto: " + arr[2]);
+    JOptionPane.showMessageDialog(null, "EMPLEADO Idempleado: " + arr[1] + " \n EMPLEADO puesto: " + arr[2] + " \n EMPLEADO turno: " + arr[4]);
                             }
                         } else {
                             pantalla_Principal.jTextFieldPasswordLogin.setBackground(Color.red);

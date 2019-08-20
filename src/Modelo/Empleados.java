@@ -25,6 +25,8 @@ import javax.swing.table.TableColumn;
  */
 public class Empleados {
     
+    
+    
 
     private int id;
     private String nombre;
@@ -36,6 +38,17 @@ public class Empleados {
     private String nombreSucursal;
     private Connection con;
     Conexion conn = new Conexion();
+
+    public Empleados() {
+        
+         con = new Conexion().getConnection();
+        try {
+            con.setAutoCommit(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+    }
 
     public String getNombreSucursal() {
         return nombreSucursal;
@@ -101,8 +114,9 @@ public class Empleados {
         this.sucursalId = sucursalId;
     }
 
-    public Empleados() {
-    }
+    
+    
+    
 
     public Empleados(int id, String nombre, String telefono, String email, String turno, String status, int sucursalId) {
         this.id = id;
@@ -262,7 +276,7 @@ public class Empleados {
                 arr[0]=resultado.getString("contrasena");
                 arr[1]=String.valueOf(resultado.getInt("empleado_idempleado"));
                 arr[2]=resultado.getString("puesto");
-                arr[3]=resultado.getString("usuario");
+                arr[3]=resultado.getString("nombre");
                 arr[4]=resultado.getString("turno");
          // "Select user, password From usuarios where user=? AND password=?";       
             }
