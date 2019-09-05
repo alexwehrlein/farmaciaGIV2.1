@@ -16,10 +16,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import Modelo.Sucursal;
 
 /**
  *
@@ -30,6 +32,8 @@ public class Controlador_PantallaPrincipal {
     Pantalla_principal pantalla_Principal;
 
     public static boolean ventanaControl9 = false;
+    ArrayList<String> array;
+    private String idSucursal, nombreSucursal;
 
     public class Imagen extends javax.swing.JPanel {
 
@@ -53,6 +57,7 @@ public class Controlador_PantallaPrincipal {
     }
 
     public Controlador_PantallaPrincipal() {
+
         Dimension dim;
 
         pantalla_Principal = new Pantalla_principal();
@@ -63,34 +68,36 @@ public class Controlador_PantallaPrincipal {
         //pantalla_Principal.jDesktopPane.add(imagen);
         pantalla_Principal.setVisible(true);
         pantalla_Principal.setExtendedState(MAXIMIZED_BOTH);
+
+//---------------------------------------parte de sucursal---------------------------------------------------
+        array = new Sucursal().obtenerIdSucursal(System.getProperty("user.name"));
+//        array = new Sucursal().obtenerIdSucursal("usuario2");
+//        array = new Sucursal().obtenerIdSucursal("usuario3");
+//        array = new Sucursal().obtenerIdSucursal("usuario4");
+        if (array.isEmpty()) {
+            new Controlador_DialogSucursal(pantalla_Principal);
+        } else {
+            idSucursal = array.get(0);
+            nombreSucursal = array.get(1);
+//            JOptionPane.showMessageDialog(pantalla_Principal,"ID: "+idSucursal+ " Sucursal: " + nombreSucursal);
+        }
+//---------------------------------------------------------------------------------------------------------------
         inicioP();
 
-        pantalla_Principal.jMenuItemPersonal.addActionListener(new ActionListener() {
+        pantalla_Principal.jMenuItemProduucto.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Controlador_Empleados(pantalla_Principal);
+                new Controlador_Producto(pantalla_Principal, idSucursal);
             }
         });
 
-        pantalla_Principal.jMenuItemClientes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Controlador_Clientes(pantalla_Principal);
-            }
-        });
+        pantalla_Principal.jMenuItemProductoxSucursal.addActionListener(new ActionListener() {
 
-        pantalla_Principal.jMenuItemProveedores.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Controlador_Proveedores(pantalla_Principal);
+                new Controlador_productosPorSucursal(pantalla_Principal,nombreSucursal,idSucursal);
             }
-        });
-
-        pantalla_Principal.jMenuItemGastos.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Controlador_Gastos(pantalla_Principal);
-            } // el parametrp lo traemos desde controlador de gastos
         });
 
     }

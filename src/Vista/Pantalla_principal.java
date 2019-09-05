@@ -81,10 +81,9 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAdmon = new javax.swing.JMenu();
         jMenuItemPersonal = new javax.swing.JMenuItem();
-        jMenuItemClientes = new javax.swing.JMenuItem();
-        jMenuItemProveedores = new javax.swing.JMenuItem();
+        jMenuItemProduucto = new javax.swing.JMenuItem();
+        jMenuItemProductoxSucursal = new javax.swing.JMenuItem();
         jMenuCajero = new javax.swing.JMenu();
-        jMenuItemGastos = new javax.swing.JMenuItem();
         jMenuInicioSesion = new javax.swing.JMenu();
         jMenuItemIniciarSesion = new javax.swing.JMenuItem();
 
@@ -127,25 +126,21 @@ public class Pantalla_principal extends javax.swing.JFrame {
         });
         jMenuAdmon.add(jMenuItemPersonal);
 
-        jMenuItemClientes.setText("Clientes");
-        jMenuItemClientes.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemProduucto.setText("Producto");
+        jMenuAdmon.add(jMenuItemProduucto);
+
+        jMenuItemProductoxSucursal.setText("Sucursal");
+        jMenuItemProductoxSucursal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemClientesActionPerformed(evt);
+                jMenuItemProductoxSucursalActionPerformed(evt);
             }
         });
-        jMenuAdmon.add(jMenuItemClientes);
-
-        jMenuItemProveedores.setText("Proveedores");
-        jMenuAdmon.add(jMenuItemProveedores);
+        jMenuAdmon.add(jMenuItemProductoxSucursal);
 
         jMenuBar1.add(jMenuAdmon);
 
         jMenuCajero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cajero1.png"))); // NOI18N
         jMenuCajero.setText("CAJERO");
-
-        jMenuItemGastos.setText("gastos");
-        jMenuCajero.add(jMenuItemGastos);
-
         jMenuBar1.add(jMenuCajero);
 
         jMenuInicioSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/loo4.png"))); // NOI18N
@@ -197,9 +192,9 @@ public class Pantalla_principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemPersonalActionPerformed
 
-    private void jMenuItemClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClientesActionPerformed
+    private void jMenuItemProductoxSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProductoxSucursalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemClientesActionPerformed
+    }//GEN-LAST:event_jMenuItemProductoxSucursalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,6 +223,8 @@ public class Pantalla_principal extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -243,11 +240,10 @@ public class Pantalla_principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JMenu jMenuCajero;
     public javax.swing.JMenu jMenuInicioSesion;
-    public javax.swing.JMenuItem jMenuItemClientes;
-    public javax.swing.JMenuItem jMenuItemGastos;
     public javax.swing.JMenuItem jMenuItemIniciarSesion;
     public javax.swing.JMenuItem jMenuItemPersonal;
-    public javax.swing.JMenuItem jMenuItemProveedores;
+    public javax.swing.JMenuItem jMenuItemProductoxSucursal;
+    public javax.swing.JMenuItem jMenuItemProduucto;
     public javax.swing.JPanel jPanelIma;
     // End of variables declaration//GEN-END:variables
 }
