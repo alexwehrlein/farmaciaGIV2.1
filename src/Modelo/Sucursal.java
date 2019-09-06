@@ -37,7 +37,7 @@ public class Sucursal {
 
     public boolean registrarSucursal(String nombre, String direccion) {
         try {
-            String sql = "INSERT INTO SUCURSAL(nombre,direccion) VALUES(?,?)";
+            String sql = "INSERT INTO sucursal(nombre,direccion) VALUES(?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nombre);
             ps.setString(2, direccion);
@@ -45,11 +45,12 @@ public class Sucursal {
             con.commit();
             return true;
         } catch (SQLException e) {
+            Logger.getLogger(Sucursal.class.getName()).log(Level.SEVERE, "Error " + e);
             try {
                 con.rollback();
                 return false;
             } catch (SQLException ex) {
-                //JOptionPane.showMessageDialog(null, e.getMessage());
+                Logger.getLogger(Sucursal.class.getName()).log(Level.SEVERE, "Error " + ex);
             }
         }
         return false;
@@ -71,7 +72,7 @@ public class Sucursal {
                 con.rollback();
                 return false;
             } catch (SQLException ex) {
-                //JOptionPane.showMessageDialog(null, e.getMessage());
+                Logger.getLogger(Sucursal.class.getName()).log(Level.SEVERE, "Error " + ex);
             }
         }
         return false;
@@ -91,7 +92,7 @@ public class Sucursal {
             try {
                 con.rollback();
             } catch (SQLException ex) {
-                //JOptionPane.showMessageDialog(null, e.getMessage());
+                 Logger.getLogger(Sucursal.class.getName()).log(Level.SEVERE, "Error " + ex);
             }
         }
         return idProducto;
@@ -100,7 +101,7 @@ public class Sucursal {
 
     public boolean registrarMaquina(String idSucursal, String usuario) {
         try {
-            String sql = "INSERT INTO MAQUINA(sucursal_idsucursal,usuario) VALUES(?,?)";
+            String sql = "INSERT INTO maquina(sucursal_idsucursal,usuario) VALUES(?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, Integer.valueOf(idSucursal));
             ps.setString(2, usuario);
@@ -112,7 +113,7 @@ public class Sucursal {
                 con.rollback();
                 return false;
             } catch (SQLException ex) {
-                //JOptionPane.showMessageDialog(null, e.getMessage());
+                 Logger.getLogger(Sucursal.class.getName()).log(Level.SEVERE, "Error " + ex);
             }
         }
         return false;
@@ -130,7 +131,7 @@ public class Sucursal {
                 array.add(resultado.getString("nombre"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Sucursal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sucursal.class.getName()).log(Level.SEVERE, "Error " + ex);
         }
         return array;
     }
@@ -146,7 +147,7 @@ public class Sucursal {
                 arraySucursales.add(resultado.getString("nombre"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Sucursal.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(Sucursal.class.getName()).log(Level.SEVERE, "Error " + ex);
         }
 
         return arraySucursales;
@@ -172,7 +173,7 @@ public class Sucursal {
                 modelo.addRow(new Object[]{arraySucursal.get(i).get(0), arraySucursal.get(i).get(1), btnEliminar});
             }
         } catch (SQLException ex) {
-            //Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(Sucursal.class.getName()).log(Level.SEVERE, "Error " + ex);
         }
 
         return modelo;
@@ -199,7 +200,7 @@ public class Sucursal {
                 modelo.addRow(new Object[]{arrayProductos.get(i).get(0), arrayProductos.get(i).get(1), arrayProductos.get(i).get(2), btnEditar});
             }
         } catch (SQLException ex) {
-            //Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sucursal.class.getName()).log(Level.SEVERE, "Error " + ex);
         }
 
         return modelo;
@@ -217,7 +218,7 @@ public class Sucursal {
             try {
                 con.rollback();
             } catch (SQLException ex) {
-                //JOptionPane.showMessageDialog(null, e.getMessage());
+                Logger.getLogger(Sucursal.class.getName()).log(Level.SEVERE, "Error " + ex);
             }
         }
         return idProducto;
@@ -244,7 +245,7 @@ public class Sucursal {
                 modelo.addRow(new Object[]{arrayProductos.get(i).get(0), arrayProductos.get(i).get(1)});
             }
         } catch (SQLException ex) {
-            //Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sucursal.class.getName()).log(Level.SEVERE, "Error " + ex);
         }
 
         return modelo;
@@ -263,7 +264,7 @@ public class Sucursal {
             try {
                 con.rollback();
             } catch (SQLException ex) {
-                //JOptionPane.showMessageDialog(null, e.getMessage());
+                Logger.getLogger(Sucursal.class.getName()).log(Level.SEVERE, "Error " + ex);
             }
         }
         return id;
