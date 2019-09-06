@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
+import Modelo.Empleados;
 import Vista.Pantalla_principal;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -23,14 +19,10 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import Modelo.Sucursal;
 
-/**
- *
- * @author Jose Abada Nava
- */
 public class Controlador_PantallaPrincipal {
 
     Pantalla_principal pantalla_Principal;
-
+    String empleado_idempleado, nombre, turno, rol;
     public static boolean ventanaControl9 = false;
     ArrayList<String> array;
     private String idSucursal, nombreSucursal;
@@ -84,30 +76,178 @@ public class Controlador_PantallaPrincipal {
 //---------------------------------------------------------------------------------------------------------------
         inicioP();
 
-        pantalla_Principal.jMenuItemProduucto.addActionListener(new ActionListener() {
+        //abre ventana de login  
+        pantalla_Principal.jMenuItemIniciarSesion.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (pantalla_Principal.jMenuItemIniciarSesion.getText().equals("Iniciar Sesion")) {
+                    pantalla_Principal.jDialogLogin.setTitle("Farmacia GI");
+                    pantalla_Principal.jDialogLogin.setBounds(249, 154, 598, 344);
+                    pantalla_Principal.jDialogLogin.setResizable(false);
+                    pantalla_Principal.jDialogLogin.setVisible(true);
+                    pantalla_Principal.jTextFieldUsuarioLogin.requestFocus();
+
+                } else {
+                    int m = JOptionPane.showConfirmDialog(pantalla_Principal, "Desea cerrar sesion ", "Confirmar salida", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    if (m == 0) {
+                        inicioP();
+                        pantalla_Principal.jMenuItemIniciarSesion.setText("Iniciar Sesion");
+                        //  pantalla_Principal.panel.removeAll();
+                        //  pantalla_Principal.panel.repaint();
+                    } else {
+
+                    }
+                    //     JOptionPane.showMessageDialog(null, "Administrador a cerrado sesion");
+                    // new Controlador_Mensaje(pantalla_Principal, "Administrador a cerrado sesion");
+                }
+            }
+        });
+
+//ingresa al login Aceptar ---- SI ESTAN INCORECTAS TE MARCA DE DONDE ESTA EL ERROR SI EN EL USAURIO O CONTRASEÑA CAMBIA DE COLORRES
+        pantalla_Principal.jTextFieldPasswordLogin.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+                    if (!camposVacios()) {
+                        pantalla_Principal.jTextFieldUsuarioLogin.setBackground(Color.white);
+                        pantalla_Principal.jTextFieldPasswordLogin.setBackground(Color.white);
+                        String[] arr = new Empleados().obtenerContraUsuario(pantalla_Principal.jTextFieldUsuarioLogin.getText());
+                        if (!arr[0].equals("")) {
+                            if (arr[0].equals(pantalla_Principal.jTextFieldPasswordLogin.getText())) {
+                                pantalla_Principal.jTextFieldUsuarioLogin.setText("");
+                                pantalla_Principal.jTextFieldPasswordLogin.setText("");
+                                empleado_idempleado = arr[1];
+                                nombre = arr[3];
+                                rol = arr[2];
+                                turno = arr[4];
+                                if (arr[2].equals("Administrador")) {
+                                    activarAdministrador();
+                                    pantalla_Principal.jDialogLogin.setVisible(false);
+                                    JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+
+                                } else {
+                                    activarCajero();
+                                    pantalla_Principal.jDialogLogin.setVisible(false);
+                                    JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+
+                                }
+                            } else {
+                                pantalla_Principal.jTextFieldPasswordLogin.setBackground(Color.red);
+                                JOptionPane.showMessageDialog(null, "Contraseña Incorrecta");
+                            }
+                        } else {
+                            pantalla_Principal.jTextFieldUsuarioLogin.setBackground(Color.red);
+                            JOptionPane.showMessageDialog(null, "Usuario Incorrecto");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Campos Vacios");
+                    }
+                }
+
+            }
+        });
+
+        // BOTIN INGRESAR LA PANTALLA PRINCPAL
+        pantalla_Principal.jButtonIngresarLogin.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!camposVacios()) {
+                    pantalla_Principal.jTextFieldUsuarioLogin.setBackground(Color.white);
+                    pantalla_Principal.jTextFieldPasswordLogin.setBackground(Color.white);
+                    String[] arr = new Empleados().obtenerContraUsuario(pantalla_Principal.jTextFieldUsuarioLogin.getText());
+                    if (!arr[0].equals("")) {
+                        if (arr[0].equals(pantalla_Principal.jTextFieldPasswordLogin.getText())) {
+                            pantalla_Principal.jTextFieldUsuarioLogin.setText("");
+                            pantalla_Principal.jTextFieldPasswordLogin.setText("");
+                            empleado_idempleado = arr[1];
+                            nombre = arr[3];
+                            turno = arr[4];
+                            if (arr[2].equals("Administrador")) {
+                                activarAdministrador();
+                                pantalla_Principal.jDialogLogin.setVisible(false);
+                                JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+                                JOptionPane.showMessageDialog(null, "ADMIN Idempleado: " + arr[1] + " \n ADMIN puesto: " + arr[2] + " \n ADMIN turno: " + arr[4]);
+                            } else {
+                                activarCajero();
+                                pantalla_Principal.jDialogLogin.setVisible(false);
+                                JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+                                JOptionPane.showMessageDialog(null, "EMPLEADO Idempleado: " + arr[1] + " \n EMPLEADO puesto: " + arr[2] + " \n EMPLEADO turno: " + arr[4]);
+                            }
+                        } else {
+                            pantalla_Principal.jTextFieldPasswordLogin.setBackground(Color.red);
+                            JOptionPane.showMessageDialog(null, "Contraseña Incorrecta");
+                        }
+                    } else {
+                        pantalla_Principal.jTextFieldUsuarioLogin.setBackground(Color.red);
+                        JOptionPane.showMessageDialog(null, "Usuario Incorrecto");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Campos Vacios");
+                }
+
+            }
+        });
+
+        pantalla_Principal.jButtonSalirLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pantalla_Principal.jDialogLogin.setVisible(false);
+            }
+        });
+
+        pantalla_Principal.jMenuItemProducto.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Controlador_Producto(pantalla_Principal, idSucursal);
             }
         });
-
+        
         pantalla_Principal.jMenuItemProductoxSucursal.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Controlador_productosPorSucursal(pantalla_Principal,nombreSucursal,idSucursal);
+                new Controlador_productosPorSucursal(pantalla_Principal, nombreSucursal ,idSucursal);
+            }
+        });
+        
+        pantalla_Principal.jMenuItemGastos.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Controlador_Gastos(pantalla_Principal, empleado_idempleado);
             }
         });
 
+    }
+
+    public boolean camposVacios() {
+        return pantalla_Principal.jTextFieldUsuarioLogin.getText().isEmpty() || pantalla_Principal.jTextFieldPasswordLogin.getText().isEmpty();
     }
 
     public void cerrar() {
         inicioP();
     }
 
-    private void inicioP() {
+    private void activarAdministrador() {
+        pantalla_Principal.jMenuItemProducto.setEnabled(true);
+        pantalla_Principal.jMenuItemProductoxSucursal.setEnabled(true);
+        pantalla_Principal.jMenuItemIniciarSesion.setText("Cerrar Sesion");
+    }
 
+    private void activarCajero() {
+        pantalla_Principal.jMenuItemGastos.setEnabled(true);
+        pantalla_Principal.jMenuItemIniciarSesion.setText("Cerrar Sesion");
+
+    }
+
+    private void inicioP() {
+        pantalla_Principal.jMenuItemGastos.setEnabled(false);
+        pantalla_Principal.jMenuItemProducto.setEnabled(false);
+        pantalla_Principal.jMenuItemProductoxSucursal.setEnabled(false);
     }
 
     public static void main(String[] args) {
