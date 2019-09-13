@@ -229,6 +229,22 @@ public class Controlador_PantallaPrincipal {
                 new Controlador_Empleados(pantalla_Principal, Integer.parseInt(empleado_idempleado) , Integer.parseInt(idSucursal));
             }
         });
+        
+        pantalla_Principal.jMenuItemProveedores.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Controlador_Proveedores(pantalla_Principal, Integer.parseInt(empleado_idempleado) , Integer.parseInt(idSucursal));
+            }
+        });
+        
+        pantalla_Principal.jMenuItemClientes.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Controlador_Clientes(pantalla_Principal, Integer.parseInt(empleado_idempleado) , Integer.parseInt(idSucursal));
+            }
+        });
 
     }
 
@@ -241,6 +257,8 @@ public class Controlador_PantallaPrincipal {
     }
 
     private void activarAdministrador() {
+        pantalla_Principal.jMenuItemProveedores.setEnabled(true);
+        pantalla_Principal.jMenuItemClientes.setEnabled(true);
         pantalla_Principal.jMenuItemEmpleados.setEnabled(true);
         pantalla_Principal.jMenuItemProducto.setEnabled(true);
         pantalla_Principal.jMenuItemProductoxSucursal.setEnabled(true);
@@ -254,6 +272,8 @@ public class Controlador_PantallaPrincipal {
     }
 
     private void inicioP() {
+        pantalla_Principal.jMenuItemProveedores.setEnabled(false);
+        pantalla_Principal.jMenuItemClientes.setEnabled(false);
         pantalla_Principal.jMenuItemEmpleados.setEnabled(false);
         pantalla_Principal.jMenuItemGastos.setEnabled(false);
         pantalla_Principal.jMenuItemProducto.setEnabled(false);
