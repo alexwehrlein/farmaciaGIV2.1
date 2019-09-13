@@ -221,6 +221,14 @@ public class Controlador_PantallaPrincipal {
                 new Controlador_Gastos(pantalla_Principal, empleado_idempleado);
             }
         });
+        
+        pantalla_Principal.jMenuItemEmpleados.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Controlador_Empleados(pantalla_Principal, Integer.parseInt(empleado_idempleado) , Integer.parseInt(idSucursal));
+            }
+        });
 
     }
 
@@ -233,6 +241,7 @@ public class Controlador_PantallaPrincipal {
     }
 
     private void activarAdministrador() {
+        pantalla_Principal.jMenuItemEmpleados.setEnabled(true);
         pantalla_Principal.jMenuItemProducto.setEnabled(true);
         pantalla_Principal.jMenuItemProductoxSucursal.setEnabled(true);
         pantalla_Principal.jMenuItemIniciarSesion.setText("Cerrar Sesion");
@@ -245,6 +254,7 @@ public class Controlador_PantallaPrincipal {
     }
 
     private void inicioP() {
+        pantalla_Principal.jMenuItemEmpleados.setEnabled(false);
         pantalla_Principal.jMenuItemGastos.setEnabled(false);
         pantalla_Principal.jMenuItemProducto.setEnabled(false);
         pantalla_Principal.jMenuItemProductoxSucursal.setEnabled(false);

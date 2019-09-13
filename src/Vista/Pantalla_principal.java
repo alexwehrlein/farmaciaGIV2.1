@@ -93,6 +93,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jMenuAdmon = new javax.swing.JMenu();
         jMenuItemProducto = new javax.swing.JMenuItem();
         jMenuItemProductoxSucursal = new javax.swing.JMenuItem();
+        jMenuItemEmpleados = new javax.swing.JMenuItem();
         jMenuCajero = new javax.swing.JMenu();
         jMenuItemGastos = new javax.swing.JMenuItem();
         jMenuInicioSesion = new javax.swing.JMenu();
@@ -259,6 +260,14 @@ public class Pantalla_principal extends javax.swing.JFrame {
         });
         jMenuAdmon.add(jMenuItemProductoxSucursal);
 
+        jMenuItemEmpleados.setText("Empleados");
+        jMenuItemEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEmpleadosActionPerformed(evt);
+            }
+        });
+        jMenuAdmon.add(jMenuItemEmpleados);
+
         jMenuBar1.add(jMenuAdmon);
 
         jMenuCajero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cajero1.png"))); // NOI18N
@@ -330,6 +339,10 @@ public class Pantalla_principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemProductoxSucursalActionPerformed
 
+    private void jMenuItemEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEmpleadosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemEmpleadosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -382,6 +395,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JMenu jMenuCajero;
     public javax.swing.JMenu jMenuInicioSesion;
+    public javax.swing.JMenuItem jMenuItemEmpleados;
     public javax.swing.JMenuItem jMenuItemGastos;
     public javax.swing.JMenuItem jMenuItemIniciarSesion;
     public javax.swing.JMenuItem jMenuItemProducto;

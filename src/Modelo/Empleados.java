@@ -25,14 +25,12 @@ import javax.swing.table.TableColumn;
  */
 public class Empleados {
     
-    
-    
-
     private int id;
     private String nombre;
     private String telefono;
     private String email;
     private String turno;
+    private String puesto;
     private String status;
     private int sucursalId;
     private String nombreSucursal;
@@ -50,6 +48,14 @@ public class Empleados {
         
     }
 
+    public String getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
+    }
+   
     public String getNombreSucursal() {
         return nombreSucursal;
     }
@@ -118,47 +124,51 @@ public class Empleados {
     
     
 
-    public Empleados(int id, String nombre, String telefono, String email, String turno, String status, int sucursalId) {
+    public Empleados(int id, String nombre, String telefono, String email, String turno, String status, String puesto , int sucursalId) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
         this.turno = turno;
         this.status = status;
+        this.puesto = puesto;
         this.sucursalId = sucursalId;
     }
 
-    public Empleados(int id, String nombre, String telefono, String email, String turno, String status, String nombreSucursal) {
+    public Empleados(int id, String nombre, String telefono, String email, String turno, String status, String puesto  ,String nombreSucursal) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
         this.turno = turno;
         this.status = status;
+        this.puesto = puesto;
         this.nombreSucursal = nombreSucursal;
     }
     
-    public Empleados(String nombre, String telefono, String email, String turno, String status, int sucursalId) {
+    public Empleados(String nombre, String telefono, String email, String turno, String status, String puesto , int sucursalId) {
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
         this.turno = turno;
         this.status = status;
+        this.puesto = puesto;
         this.sucursalId = sucursalId;
     }
 
-    public boolean ingresarEmpleado() throws SQLException {
+    public boolean ingresarEmpleado() {
         String sql = null;
         try {
             con = conn.getConnection();
-            sql = " Insert into empleado (nombre,telefono,email,turno,estatus,sucursal_idsucursal) VALUES (?,?,?,?,?,?)";
+            sql = " Insert into empleado (nombre,telefono,email,turno,estatus,puesto,sucursal_idsucursal) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement stmt = (PreparedStatement) con.prepareStatement(sql);
             stmt.setString(1, getNombre());
             stmt.setString(2, getTelefono());
             stmt.setString(3, getEmail());
             stmt.setString(4, getTurno());
             stmt.setString(5, getStatus());
-            stmt.setInt(6, getSucursalId());
+            stmt.setString(6, getPuesto());
+            stmt.setInt(7, getSucursalId());
             stmt.executeUpdate();
 
             stmt.close();
@@ -166,24 +176,29 @@ public class Empleados {
             Logger.getLogger(Empleados.class.getName()).log(Level.SEVERE, "Error " + ex);
             return false;
         } finally {
-            con.close();
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Empleados.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return true;
     }
 
-    public boolean ModificarEmpleado() throws SQLException {
+    public boolean ModificarEmpleado(){
         String sql = null;
         try {
             con = conn.getConnection();
-            sql = " UPDATE empleado SET nombre=?,telefono=?,email=?,turno=?,estatus=?,sucursal_idsucursal=? WHERE idempleado = ? ";
+            sql = " UPDATE empleado SET nombre=?,telefono=?,email=?,turno=?,estatus=?, puesto=? ,sucursal_idsucursal=? WHERE idempleado = ? ";
             PreparedStatement stmt = (PreparedStatement) con.prepareStatement(sql);
             stmt.setString(1, getNombre());
             stmt.setString(2, getTelefono());
             stmt.setString(3, getEmail());
             stmt.setString(4, getTurno());
             stmt.setString(5, getStatus());
-            stmt.setInt(6, getSucursalId());
-            stmt.setInt(7, getId());
+            stmt.setString(6, getPuesto());
+            stmt.setInt(7, getSucursalId());
+            stmt.setInt(8, getId());
             stmt.executeUpdate();
 
             stmt.close();
@@ -191,12 +206,16 @@ public class Empleados {
             Logger.getLogger(Empleados.class.getName()).log(Level.SEVERE, "Error " + ex);
             return false;
         } finally {
-            con.close();
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Empleados.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return true;
     }
 
-    public DefaultTableModel cargarRegistros(JTable jt, String palabra) throws SQLException {
+    public DefaultTableModel cargarRegistros(JTable jt, String palabra)  {
         String sql = null;
         jt.setDefaultRenderer(Object.class, new Render());
         JButton btnModificar = new JButton("Modificar");
@@ -222,47 +241,27 @@ public class Empleados {
             Statement pst = (Statement) con.createStatement();
             ResultSet resultado = pst.executeQuery(sql);
             while (resultado.next()) {
-                arrayEmpleados.add(new Empleados(resultado.getInt("idempleado"), resultado.getString("nombre"), resultado.getString("telefono"), resultado.getString("email"), resultado.getString("turno"), resultado.getString("estatus"), resultado.getString("nombreSucursal")));
+                arrayEmpleados.add(new Empleados(resultado.getInt("idempleado"), resultado.getString("nombre"), resultado.getString("telefono"), resultado.getString("email"), resultado.getString("turno"), resultado.getString("estatus"),resultado.getString("puesto"), resultado.getString("nombreSucursal")));
             }
             for (int i = 0; i < arrayEmpleados.size(); i++) {
                 modelo.addRow(new Object[]{arrayEmpleados.get(i).getId(), arrayEmpleados.get(i).getNombre(), arrayEmpleados.get(i).getTelefono(),
-                    arrayEmpleados.get(i).getEmail(), arrayEmpleados.get(i).getTurno(), arrayEmpleados.get(i).getStatus(), arrayEmpleados.get(i).getNombreSucursal(), btnModificar});
+                    arrayEmpleados.get(i).getEmail(), arrayEmpleados.get(i).getTurno(), arrayEmpleados.get(i).getStatus(),arrayEmpleados.get(i).getPuesto(), arrayEmpleados.get(i).getNombreSucursal(), btnModificar});
             }
             pst = null;
 
         } catch (SQLException ex) {
             Logger.getLogger(Empleados.class.getName()).log(Level.SEVERE, "Error " + ex);
         } finally {
-            con.close();
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Empleados.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return modelo;
     }
 
-//    public ArrayList<Sucursal> octenerSucursales() {
-//        ArrayList<Sucursal> listaSucursal = new ArrayList<Sucursal>();
-//        try {
-//            String sql = "SELECT * FROM sucursal";
-//            con = conn.getConnection();
-//            Statement pst = (Statement) con.createStatement();
-//            ResultSet rs = pst.executeQuery(sql);
-//            while (rs.next()) {
-//                int id = rs.getInt("idSucursal");
-//                String nombre = rs.getString("nombre");
-//                String direccion = rs.getString("direccion");
-//
-//                Sucursal sucursal = new Sucursal(id, nombre, direccion);
-//                listaSucursal.add(sucursal);
-//            }
-//            pst = null;
-//        } catch (Exception e) {
-//            Logger.getLogger(Empleados.class.getName()).log(Level.SEVERE, "Error " + e);
-//        } finally {
-//            conn.getClose();
-//        }
-//        return listaSucursal;
-//    }
-//    
     
     public String[] obtenerContraUsuario(String usuario){
         String []arr = {"","","","",""};
