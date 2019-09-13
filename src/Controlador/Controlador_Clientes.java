@@ -291,9 +291,10 @@ public class Controlador_Clientes {
                   String nombre = pantalla_clientes.nombreCliente.getText();
                   String telefono= pantalla_clientes.telefonoCliente.getText();
                   String email =pantalla_clientes.emailCliente.getText();
+                  String statu =pantalla_clientes.estatusCombo.getSelectedItem().toString();
                   int id2=Integer.valueOf(id);
                   
-            cliente= new Clientes(id2,nombre,telefono,email,"activo");
+            cliente= new Clientes(id2,nombre,telefono,email,statu);
                 if (cliente.EditarClientes()) {
                     JOptionPane.showMessageDialog(null,"Datos modificados  corectamente", "Modificación",JOptionPane.DEFAULT_OPTION);
                    limpiarCamposInsertar();

@@ -150,7 +150,7 @@ public class Proveedores {
             Connection connection =new Conexion().getConnection();
             com.mysql.jdbc.Statement stm= (com.mysql.jdbc.Statement) connection.createStatement();
             stm.execute("UPDATE proveedor SET nombre='"+getNombre()+"', telefono='"+getTelefono()+"',ciudad='"+getCiudad()+
-                    "',estado='"+getEstado()+"',email='"+getEmail()+"' WHERE iproveedor="+getIdproveedor());
+                    "',estado='"+getEstado()+"',email='"+getEmail()+"',estatus='"+getEstatus()+"' WHERE iproveedor="+getIdproveedor());
             connection.close();
             return true;
         } catch (Exception e) {
@@ -162,12 +162,10 @@ public class Proveedores {
       public boolean eliminarProvedor(){
           String sql = null;
         try {
-            con = conn.getConnection();
-            Statement stm = (Statement) con.createStatement();
-            sql = "DELETE FROM proveedor WHERE iproveedor= "+getIdproveedor();
-            stm.execute(sql);
-            con.setAutoCommit(true);
-            con.close();
+           Connection connection =new Conexion().getConnection();
+            com.mysql.jdbc.Statement stm= (com.mysql.jdbc.Statement) connection.createStatement();
+            stm.execute("UPDATE proveedor SET estatus='Inactivo' WHERE iproveedor="+getIdproveedor());
+            connection.close();
             return  true;
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -198,7 +196,7 @@ public class Proveedores {
             }
             for (int i = 0; i < arrayConsulta.size(); i++) {
                 modelo.addRow(new Object[]{arrayConsulta.get(i).getIdproveedor(), arrayConsulta.get(i).getNombre(), arrayConsulta.get(i).getTelefono(),
-                    arrayConsulta.get(i).getCiudad(), arrayConsulta.get(i).getEstado(), arrayConsulta.get(i).getEmail(), btnEliminar});
+                    arrayConsulta.get(i).getCiudad(), arrayConsulta.get(i).getEstado(), arrayConsulta.get(i).getEmail(),arrayConsulta.get(i).getEstatus(), btnEliminar});
             }
 
             con.close();

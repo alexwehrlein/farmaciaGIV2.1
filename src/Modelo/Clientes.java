@@ -128,7 +128,7 @@ public class Clientes {
             }
             for (int i = 0; i < arrayConsulta.size(); i++) {
                 modelo.addRow(new Object[]{ arrayConsulta.get(i).getIproveedor(), arrayConsulta.get(i).getNombre(), arrayConsulta.get(i).getTelefono(),
-                 arrayConsulta.get(i).getEmail(),btnEliminar});//se agrega el boton de eilimar a la tabla
+                 arrayConsulta.get(i).getEmail(),arrayConsulta.get(i).getEstatus(),btnEliminar});//se agrega el boton de eilimar a la tabla
             }
             
             con.close();
@@ -146,7 +146,7 @@ public class Clientes {
        try {
            con=conn.getConnection();
            Statement stm=(Statement) con.createStatement();
-           sql = "UPDATE cliente SET nombre ='" + getNombre() + "', telefono='"+getTelefono()+"', email='"+getEmail()+"' WHERE  iproveedor = '" + getIproveedor() + "';";
+           sql = "UPDATE cliente SET nombre ='" + getNombre() + "', telefono='"+getTelefono()+"', email='"+getEmail()+"', estatus='"+getEstatus()+"' WHERE  iproveedor = '" + getIproveedor() + "';";
             stm.execute(sql);
            con.setAutoCommit(true);
             con.close();
@@ -158,9 +158,9 @@ public class Clientes {
    public boolean EliminarClientes(){
        String sql=null;
        try {
-           con=conn.getConnection();
+          con=conn.getConnection();
            Statement stm=(Statement) con.createStatement();
-           sql = "DELETE  FROM cliente WHERE iproveedor =" + getIproveedor();
+           sql = "UPDATE cliente SET estatus='Inactivo' WHERE  iproveedor = '" + getIproveedor() + "';";
             stm.execute(sql);
            con.setAutoCommit(true);
             con.close();

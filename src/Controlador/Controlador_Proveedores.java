@@ -81,7 +81,7 @@ public class Controlador_Proveedores {
                     
                     //
                     pantalla_proveedores.EditarProveedores.setResizable(false);
-                    pantalla_proveedores.EditarProveedores.setBounds(400, 70, 350, 650);
+                    pantalla_proveedores.EditarProveedores.setBounds(400, 70, 630, 650);
                     
                     
                      
@@ -278,7 +278,7 @@ public class Controlador_Proveedores {
                 String correo = pantalla_proveedores.ciudad.getText();
                 String direccion = pantalla_proveedores.estado.getText();
                 String puesto = pantalla_proveedores.email.getText();
-                String estatus = "1";
+                String estatus = "Activo";
                 System.out.println(nombre + " " + telefono);
                 proveedores = new Proveedores(0, nombre, telefono, correo, direccion, puesto, estatus);
                 if (proveedores.agregarProveedor()) {
@@ -301,9 +301,10 @@ public class Controlador_Proveedores {
                 String ciudad = pantalla_proveedores.ciudadProveedor.getText();
                 String estado = pantalla_proveedores.estadoProveedor.getText();
                 String email = pantalla_proveedores.emailProveedor.getText();
+                String etts = pantalla_proveedores.jComboBoxEtts.getSelectedItem().toString();
                 int id2 = Integer.valueOf(id);
 
-                proveedores = new Proveedores(id2, nombre, telefono, ciudad, estado, email, "activo");
+                proveedores = new Proveedores(id2, nombre, telefono, ciudad, estado, email, etts);
                 if (proveedores.EditarProveedor()) {
                     JOptionPane.showMessageDialog(null, "Datos Modificados Correctamente");
                     pantalla_proveedores.EditarProveedores.setVisible(false);
