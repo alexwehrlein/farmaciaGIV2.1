@@ -28,12 +28,8 @@ public class Dialog_Sucursal extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonAceptar1 = new rojeru_san.RSButton();
         jPanel1 = new javax.swing.JPanel();
-        jComboBoxSucursales = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
-        jButtonAddSucursal = new javax.swing.JButton();
-        jButtonAceptar = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -42,28 +38,29 @@ public class Dialog_Sucursal extends javax.swing.JDialog {
         jTextFieldNombre = new javax.swing.JTextField();
         jButtonRegistrarS = new javax.swing.JButton();
         jButtonCancelarS = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jButtonAddSucursal = new rojerusan.RSMaterialButtonCircle();
+        jComboBoxSucursales = new rojerusan.RSComboMetro();
+        jButtonAceptar = new rojeru_san.RSButton();
+
+        jButtonAceptar1.setBackground(new java.awt.Color(155, 217, 217));
+        jButtonAceptar1.setForeground(new java.awt.Color(20, 36, 64));
+        jButtonAceptar1.setText("Aceptar");
+        jButtonAceptar1.setColorText(new java.awt.Color(20, 36, 64));
+        jButtonAceptar1.setPreferredSize(new java.awt.Dimension(200, 35));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jComboBoxSucursales.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        jLabel1.setText("Sucursal");
-
-        jButtonAddSucursal.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jButtonAddSucursal.setText("+");
-
-        jButtonAceptar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jButtonAceptar.setText("Aceptar");
-
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nueva Sucursal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         jLabel2.setText("Nombre: ");
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         jLabel3.setText("Dirección:");
 
         jTextAreaDireccion.setColumns(20);
@@ -72,10 +69,13 @@ public class Dialog_Sucursal extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTextAreaDireccion);
 
         jTextFieldNombre.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jTextFieldNombre.setPreferredSize(new java.awt.Dimension(7, 30));
 
+        jButtonRegistrarS.setBackground(new java.awt.Color(155, 217, 217));
         jButtonRegistrarS.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jButtonRegistrarS.setText("Registrar");
 
+        jButtonCancelarS.setBackground(new java.awt.Color(155, 217, 217));
         jButtonCancelarS.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jButtonCancelarS.setText("Cancelar");
 
@@ -84,7 +84,7 @@ public class Dialog_Sucursal extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButtonRegistrarS)
@@ -94,7 +94,7 @@ public class Dialog_Sucursal extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNombre))
+                        .addComponent(jTextFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -115,48 +115,74 @@ public class Dialog_Sucursal extends javax.swing.JDialog {
                     .addComponent(jButtonCancelarS)))
         );
 
+        jPanel3.setBackground(new java.awt.Color(0, 160, 223));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Sucursal");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jButtonAddSucursal.setBackground(new java.awt.Color(155, 217, 217));
+        jButtonAddSucursal.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonAddSucursal.setText("+");
+        jButtonAddSucursal.setToolTipText("Agregar Sucursal");
+
+        jComboBoxSucursales.setColorFondo(new java.awt.Color(155, 217, 217));
+        jComboBoxSucursales.setPreferredSize(new java.awt.Dimension(200, 35));
+
+        jButtonAceptar.setBackground(new java.awt.Color(155, 217, 217));
+        jButtonAceptar.setForeground(new java.awt.Color(20, 36, 64));
+        jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.setColorText(new java.awt.Color(20, 36, 64));
+        jButtonAceptar.setPreferredSize(new java.awt.Dimension(200, 35));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(jButtonAddSucursal)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxSucursales, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonAceptar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(159, 159, 159)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jButtonAddSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBoxSucursales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jButtonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAddSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxSucursales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonAddSucursal)
-                    .addComponent(jButtonAceptar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                    .addComponent(jButtonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -219,18 +245,19 @@ public class Dialog_Sucursal extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton jButtonAceptar;
-    public javax.swing.JButton jButtonAddSucursal;
+    public rojeru_san.RSButton jButtonAceptar;
+    private rojeru_san.RSButton jButtonAceptar1;
+    public rojerusan.RSMaterialButtonCircle jButtonAddSucursal;
     public javax.swing.JButton jButtonCancelarS;
     public javax.swing.JButton jButtonRegistrarS;
-    public javax.swing.JComboBox jComboBoxSucursales;
+    public rojerusan.RSComboMetro jComboBoxSucursales;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     public javax.swing.JTextArea jTextAreaDireccion;
     public javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables

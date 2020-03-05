@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import alert.AlertInformation;
+import java.awt.Dialog;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -20,6 +22,8 @@ import javax.swing.JOptionPane;
  */
 public class Pantalla_principal extends javax.swing.JFrame {
 
+    AlertInformation alertInformation;
+
     /**
      * Creates new form Pantalla_principal
      */
@@ -27,11 +31,11 @@ public class Pantalla_principal extends javax.swing.JFrame {
         initComponents();
         cerrar();
     }
-    
+
     public void cerrar() {
         try {
             addWindowListener(new WindowAdapter() {
-                public void windowClosing(WindowEvent e){
+                public void windowClosing(WindowEvent e) {
                     confirmarSalida();
                 }
             });
@@ -40,23 +44,24 @@ public class Pantalla_principal extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
-    
-    public void confirmarSalida(){
+
+    public void confirmarSalida() {
         Icon icono = new ImageIcon(getClass().getResource("/Images/logo22.png"));
-        int valor = JOptionPane.showConfirmDialog(this, "¿Esta seguro de cerrar la aplicacion?","Advertencia",JOptionPane.YES_NO_OPTION);
+        int valor = JOptionPane.showConfirmDialog(this, "¿Esta seguro de cerrar la aplicacion?", "Advertencia", JOptionPane.YES_NO_OPTION);
         if (valor == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(null,"Famacia Gi" , "Gracias", JOptionPane.INFORMATION_MESSAGE);
+            alertInformation = new AlertInformation("Famacia Gi");
+            alertInformation.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+            alertInformation.show();
+            //JOptionPane.showMessageDialog(null, "Famacia Gi", "Gracias", JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
-            
+
         }
     }
-    
+
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
                 getImage(ClassLoader.getSystemResource("Images/logo22.png"));
-
 
         return retValue;
     }
@@ -96,17 +101,19 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jMenuItemEmpleados = new javax.swing.JMenuItem();
         jMenuItemClientes = new javax.swing.JMenuItem();
         jMenuItemProveedores = new javax.swing.JMenuItem();
+        jMenuItemBajas = new javax.swing.JMenuItem();
         jMenuCajero = new javax.swing.JMenu();
         jMenuItemGastos = new javax.swing.JMenuItem();
         jMenuInicioSesion = new javax.swing.JMenu();
         jMenuItemIniciarSesion = new javax.swing.JMenuItem();
 
-        jPanel1.setBackground(new java.awt.Color(0, 184, 233));
+        jPanel1.setBackground(new java.awt.Color(0, 160, 223));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Contraseña:");
 
-        jTextFieldUsuarioLogin.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jTextFieldUsuarioLogin.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jTextFieldUsuarioLogin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldUsuarioLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldUsuarioLoginActionPerformed(evt);
@@ -130,7 +137,8 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("¡ Bienvenido !");
 
-        jTextFieldPasswordLogin.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jTextFieldPasswordLogin.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jTextFieldPasswordLogin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/miranda.png"))); // NOI18N
 
@@ -226,7 +234,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
         );
         jDesktopPaneLayout.setVerticalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
+            .addGap(0, 463, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanelImaLayout = new javax.swing.GroupLayout(jPanelIma);
@@ -245,7 +253,11 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jMenuAdmon.setBackground(new java.awt.Color(0, 0, 102));
         jMenuAdmon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/admin1.png"))); // NOI18N
         jMenuAdmon.setText("ADMINISTRADOR");
+        jMenuAdmon.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
 
+        jMenuItemProducto.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItemProducto.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jMenuItemProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/menu/productos.png"))); // NOI18N
         jMenuItemProducto.setText("Producto");
         jMenuItemProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,6 +266,9 @@ public class Pantalla_principal extends javax.swing.JFrame {
         });
         jMenuAdmon.add(jMenuItemProducto);
 
+        jMenuItemProductoxSucursal.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItemProductoxSucursal.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jMenuItemProductoxSucursal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/menu/sucursal.png"))); // NOI18N
         jMenuItemProductoxSucursal.setText("Sucursal");
         jMenuItemProductoxSucursal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,6 +277,9 @@ public class Pantalla_principal extends javax.swing.JFrame {
         });
         jMenuAdmon.add(jMenuItemProductoxSucursal);
 
+        jMenuItemEmpleados.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItemEmpleados.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jMenuItemEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/menu/empleados.png"))); // NOI18N
         jMenuItemEmpleados.setText("Empleados");
         jMenuItemEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -270,17 +288,33 @@ public class Pantalla_principal extends javax.swing.JFrame {
         });
         jMenuAdmon.add(jMenuItemEmpleados);
 
+        jMenuItemClientes.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItemClientes.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jMenuItemClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/menu/clientes.png"))); // NOI18N
         jMenuItemClientes.setText("Clientes");
         jMenuAdmon.add(jMenuItemClientes);
 
+        jMenuItemProveedores.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItemProveedores.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jMenuItemProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/menu/proveedor.png"))); // NOI18N
         jMenuItemProveedores.setText("Proveedores");
         jMenuAdmon.add(jMenuItemProveedores);
+
+        jMenuItemBajas.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItemBajas.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jMenuItemBajas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/menu/bajas.png"))); // NOI18N
+        jMenuItemBajas.setText("Bajas");
+        jMenuAdmon.add(jMenuItemBajas);
 
         jMenuBar1.add(jMenuAdmon);
 
         jMenuCajero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cajero1.png"))); // NOI18N
         jMenuCajero.setText("CAJERO");
+        jMenuCajero.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
 
+        jMenuItemGastos.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItemGastos.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jMenuItemGastos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/menu/gatos.png"))); // NOI18N
         jMenuItemGastos.setText("Gastos");
         jMenuCajero.add(jMenuItemGastos);
 
@@ -288,6 +322,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
 
         jMenuInicioSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/loo4.png"))); // NOI18N
         jMenuInicioSesion.setText("LOGIN");
+        jMenuInicioSesion.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         jMenuInicioSesion.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jMenuInicioSesionItemStateChanged(evt);
@@ -299,6 +334,8 @@ public class Pantalla_principal extends javax.swing.JFrame {
             }
         });
 
+        jMenuItemIniciarSesion.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuItemIniciarSesion.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         jMenuItemIniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/login1.png"))); // NOI18N
         jMenuItemIniciarSesion.setText("Iniciar Sesion");
         jMenuInicioSesion.add(jMenuItemIniciarSesion);
@@ -403,6 +440,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JMenu jMenuCajero;
     public javax.swing.JMenu jMenuInicioSesion;
+    public javax.swing.JMenuItem jMenuItemBajas;
     public javax.swing.JMenuItem jMenuItemClientes;
     public javax.swing.JMenuItem jMenuItemEmpleados;
     public javax.swing.JMenuItem jMenuItemGastos;

@@ -35,7 +35,7 @@ public class Pantalla_ProductosPorSucursal extends javax.swing.JInternalFrame {
         jTableProductosSolicitados = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         jLabelActualizar = new javax.swing.JLabel();
-        jButtonSolicitar = new javax.swing.JButton();
+        jButtonSolicitar = new rojeru_san.RSButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableProductos = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -46,7 +46,8 @@ public class Pantalla_ProductosPorSucursal extends javax.swing.JInternalFrame {
         jRadioButtonTipo = new javax.swing.JRadioButton();
         jComboBoxNuevoProducto = new javax.swing.JComboBox();
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 20))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -81,8 +82,10 @@ public class Pantalla_ProductosPorSucursal extends javax.swing.JInternalFrame {
         jLabelActualizar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabelActualizar.setText("A");
 
-        jButtonSolicitar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jButtonSolicitar.setBackground(new java.awt.Color(155, 217, 217));
         jButtonSolicitar.setText("Solicitar");
+        jButtonSolicitar.setColorText(new java.awt.Color(20, 36, 64));
+        jButtonSolicitar.setFont(new java.awt.Font("Roboto Bold", 1, 17)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -93,8 +96,9 @@ public class Pantalla_ProductosPorSucursal extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButtonSolicitar)
-                        .addGap(26, 26, 26)
+                        .addGap(3, 3, 3)
+                        .addComponent(jButtonSolicitar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabelActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -103,12 +107,11 @@ public class Pantalla_ProductosPorSucursal extends javax.swing.JInternalFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonSolicitar)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabelActualizar)))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabelActualizar)
+                    .addComponent(jButtonSolicitar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(35, Short.MAX_VALUE))
@@ -164,16 +167,16 @@ public class Pantalla_ProductosPorSucursal extends javax.swing.JInternalFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Sucursal");
 
-        jTextFieldBuscarProducto.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jTextFieldBuscarProducto.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        jRadioButtonCodigo.setBackground(new java.awt.Color(51, 51, 255));
+        jRadioButtonCodigo.setBackground(new java.awt.Color(0, 160, 223));
         buttonGroup1.add(jRadioButtonCodigo);
         jRadioButtonCodigo.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jRadioButtonCodigo.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButtonCodigo.setSelected(true);
         jRadioButtonCodigo.setText("Codigo");
 
-        jRadioButtonTipo.setBackground(new java.awt.Color(51, 51, 255));
+        jRadioButtonTipo.setBackground(new java.awt.Color(0, 160, 223));
         buttonGroup1.add(jRadioButtonTipo);
         jRadioButtonTipo.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jRadioButtonTipo.setForeground(new java.awt.Color(255, 255, 255));
@@ -190,13 +193,6 @@ public class Pantalla_ProductosPorSucursal extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addContainerGap(14, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jComboBoxNuevoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addComponent(jRadioButtonCodigo)
@@ -206,11 +202,18 @@ public class Pantalla_ProductosPorSucursal extends javax.swing.JInternalFrame {
                         .addComponent(jTextFieldBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 371, Short.MAX_VALUE)
                         .addComponent(jLabel6)
-                        .addGap(187, 187, 187))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(300, 300, 300)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(187, 187, 187))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(280, 280, 280)
+                                .addComponent(jLabel1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +234,7 @@ public class Pantalla_ProductosPorSucursal extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -251,7 +254,7 @@ public class Pantalla_ProductosPorSucursal extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    public javax.swing.JButton jButtonSolicitar;
+    public rojeru_san.RSButton jButtonSolicitar;
     public javax.swing.JComboBox jComboBoxNuevoProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;

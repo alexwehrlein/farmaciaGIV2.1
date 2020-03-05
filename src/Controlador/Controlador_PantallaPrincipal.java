@@ -6,22 +6,23 @@ import java.awt.Color;
 import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
 import Modelo.Sucursal;
+import alert.AlertError;
+import alert.AlertInformation;
+import java.awt.Dialog;
 
 public class Controlador_PantallaPrincipal {
 
     Pantalla_principal pantalla_Principal;
+    AlertInformation alertInformation;
+    AlertError alertError;
     String empleado_idempleado, nombre, turno, rol;
     public static boolean ventanaControl9 = false;
     ArrayList<String> array;
@@ -125,24 +126,39 @@ public class Controlador_PantallaPrincipal {
                                 if (arr[2].equals("Administrador")) {
                                     activarAdministrador();
                                     pantalla_Principal.jDialogLogin.setVisible(false);
-                                    JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+                                    //JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+                                    alertInformation = new AlertInformation("Bienvenido: " + arr[3]);
+                                    alertInformation.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                                    alertInformation.show();
 
                                 } else {
                                     activarCajero();
                                     pantalla_Principal.jDialogLogin.setVisible(false);
-                                    JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+                                    //JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+                                    alertInformation = new AlertInformation("Bienvenido: " + arr[3]);
+                                    alertInformation.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                                    alertInformation.show();
 
                                 }
                             } else {
                                 pantalla_Principal.jTextFieldPasswordLogin.setBackground(Color.red);
-                                JOptionPane.showMessageDialog(null, "Contraseña Incorrecta");
+                                //JOptionPane.showMessageDialog(null, "Contraseña Incorrecta");
+                                alertError = new AlertError("Contraseña Incorrecta");
+                                alertError.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                                alertError.show();
                             }
                         } else {
                             pantalla_Principal.jTextFieldUsuarioLogin.setBackground(Color.red);
-                            JOptionPane.showMessageDialog(null, "Usuario Incorrecto");
+                            //JOptionPane.showMessageDialog(null, "Usuario Incorrecto");
+                            alertError = new AlertError("Usuario Incorrecto");
+                            alertError.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                            alertError.show();
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Campos Vacios");
+                        //JOptionPane.showMessageDialog(null, "Campos Vacios");
+                        alertError = new AlertError("Campos Vacios");
+                        alertError.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                        alertError.show();
                     }
                 }
 
@@ -168,24 +184,40 @@ public class Controlador_PantallaPrincipal {
                             if (arr[2].equals("Administrador")) {
                                 activarAdministrador();
                                 pantalla_Principal.jDialogLogin.setVisible(false);
-                                JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
-                                JOptionPane.showMessageDialog(null, "ADMIN Idempleado: " + arr[1] + " \n ADMIN puesto: " + arr[2] + " \n ADMIN turno: " + arr[4]);
+                                //JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+                                //JOptionPane.showMessageDialog(null, "ADMIN Idempleado: " + arr[1] + " \n ADMIN puesto: " + arr[2] + " \n ADMIN turno: " + arr[4]);
+                                alertInformation = new AlertInformation("Bienvenido: " + arr[3]);
+                                alertInformation.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                                alertInformation.show();
                             } else {
                                 activarCajero();
                                 pantalla_Principal.jDialogLogin.setVisible(false);
-                                JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
-                                JOptionPane.showMessageDialog(null, "EMPLEADO Idempleado: " + arr[1] + " \n EMPLEADO puesto: " + arr[2] + " \n EMPLEADO turno: " + arr[4]);
+                                //JOptionPane.showMessageDialog(null, "Bienvenido: " + arr[3]);
+                                //JOptionPane.showMessageDialog(null, "EMPLEADO Idempleado: " + arr[1] + " \n EMPLEADO puesto: " + arr[2] + " \n EMPLEADO turno: " + arr[4]);
+                                alertInformation = new AlertInformation("Bienvenido: " + arr[3]);
+                                alertInformation.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                                alertInformation.show();
                             }
                         } else {
                             pantalla_Principal.jTextFieldPasswordLogin.setBackground(Color.red);
                             JOptionPane.showMessageDialog(null, "Contraseña Incorrecta");
+                            alertError = new AlertError("Contraseña Incorrecta");
+                            alertError.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                            alertError.show();
+
                         }
                     } else {
                         pantalla_Principal.jTextFieldUsuarioLogin.setBackground(Color.red);
                         JOptionPane.showMessageDialog(null, "Usuario Incorrecto");
+                        alertError = new AlertError("Usuario Incorrecto");
+                        alertError.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                        alertError.show();
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Campos Vacios");
+                    alertError = new AlertError("Campos Vacios");
+                    alertError.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                    alertError.show();
                 }
 
             }
@@ -205,15 +237,15 @@ public class Controlador_PantallaPrincipal {
                 new Controlador_Producto(pantalla_Principal, idSucursal);
             }
         });
-        
+
         pantalla_Principal.jMenuItemProductoxSucursal.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Controlador_productosPorSucursal(pantalla_Principal, nombreSucursal ,idSucursal);
+                new Controlador_productosPorSucursal(pantalla_Principal, nombreSucursal, idSucursal);
             }
         });
-        
+
         pantalla_Principal.jMenuItemGastos.addActionListener(new ActionListener() {
 
             @Override
@@ -221,28 +253,35 @@ public class Controlador_PantallaPrincipal {
                 new Controlador_Gastos(pantalla_Principal, empleado_idempleado);
             }
         });
-        
+
         pantalla_Principal.jMenuItemEmpleados.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Controlador_Empleados(pantalla_Principal, Integer.parseInt(empleado_idempleado) , Integer.parseInt(idSucursal));
+                new Controlador_Empleados(pantalla_Principal, Integer.parseInt(empleado_idempleado), Integer.parseInt(idSucursal));
             }
         });
-        
+
         pantalla_Principal.jMenuItemProveedores.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Controlador_Proveedores(pantalla_Principal, Integer.parseInt(empleado_idempleado) , Integer.parseInt(idSucursal));
+                new Controlador_Proveedores(pantalla_Principal, Integer.parseInt(empleado_idempleado), Integer.parseInt(idSucursal));
             }
         });
-        
+
         pantalla_Principal.jMenuItemClientes.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Controlador_Clientes(pantalla_Principal, Integer.parseInt(empleado_idempleado) , Integer.parseInt(idSucursal));
+                new Controlador_Clientes(pantalla_Principal, Integer.parseInt(empleado_idempleado), Integer.parseInt(idSucursal));
+            }
+        });
+        
+        pantalla_Principal.jMenuItemBajas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               new Controlador_bajas(pantalla_Principal, Integer.parseInt(empleado_idempleado), Integer.parseInt(idSucursal));
             }
         });
 
@@ -257,6 +296,7 @@ public class Controlador_PantallaPrincipal {
     }
 
     private void activarAdministrador() {
+         pantalla_Principal.jMenuItemBajas.setEnabled(true);
         pantalla_Principal.jMenuItemProveedores.setEnabled(true);
         pantalla_Principal.jMenuItemClientes.setEnabled(true);
         pantalla_Principal.jMenuItemEmpleados.setEnabled(true);
@@ -278,6 +318,7 @@ public class Controlador_PantallaPrincipal {
         pantalla_Principal.jMenuItemGastos.setEnabled(false);
         pantalla_Principal.jMenuItemProducto.setEnabled(false);
         pantalla_Principal.jMenuItemProductoxSucursal.setEnabled(false);
+        pantalla_Principal.jMenuItemBajas.setEnabled(false);
     }
 
     public static void main(String[] args) {

@@ -57,49 +57,58 @@ public class Pantalla_Personal extends javax.swing.JInternalFrame {
 
         jDialogEmpleado.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos de la Persona", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Noto Sans", 1, 18))); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos de la Persona", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 20))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setText("Email");
 
-        jLabelStatus.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        jLabelStatus.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabelStatus.setText("jLabel2");
 
         txtNombre.setPlaceholder("Nombre ...");
 
-        jLabel2.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel2.setText("Nombre");
 
         txtTelefono.setPlaceholder("Telefono");
 
+        comboTurno.setForeground(new java.awt.Color(20, 36, 64));
         comboTurno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MATUTINO", "VESPERTINO", "NOCTURNO" }));
         comboTurno.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel3.setText("Turno");
 
-        jLabel4.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel4.setText("Telefono");
 
         txtEmail.setPlaceholder("Email");
 
+        comboStatus.setForeground(new java.awt.Color(20, 36, 64));
         comboStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SI", "NO" }));
+        comboStatus.setColorFondo(new java.awt.Color(155, 217, 217));
         comboStatus.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        jLabelSta.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        jLabelSta.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabelSta.setText("Status");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 204));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnAction.setBackground(new java.awt.Color(155, 217, 217));
+        btnAction.setForeground(new java.awt.Color(20, 36, 64));
         jPanel3.add(btnAction, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 140, 47));
 
+        rSMaterialButtonRectangle2.setBackground(new java.awt.Color(155, 217, 217));
+        rSMaterialButtonRectangle2.setForeground(new java.awt.Color(20, 36, 64));
         rSMaterialButtonRectangle2.setText("Regresar");
         jPanel3.add(rSMaterialButtonRectangle2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, 47));
 
-        jLabel5.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel5.setText("Puesto");
 
+        comboPuesto.setForeground(new java.awt.Color(20, 36, 64));
         comboPuesto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Cajero" }));
         comboPuesto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
@@ -189,10 +198,10 @@ public class Pantalla_Personal extends javax.swing.JInternalFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel1.setBackground(new java.awt.Color(0, 112, 192));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Empleados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Noto Sans", 1, 14))); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Empleados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 20))); // NOI18N
 
-        btnNuevo.setBackground(new java.awt.Color(153, 153, 255));
+        btnNuevo.setBackground(new java.awt.Color(155, 217, 217));
         btnNuevo.setText("+");
         btnNuevo.setToolTipText("Nuevo");
         btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -214,6 +223,10 @@ public class Pantalla_Personal extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaEmpleados.setColorBackgoundHead(new java.awt.Color(0, 160, 223));
+        tablaEmpleados.setColorFilasForeground1(new java.awt.Color(0, 160, 223));
+        tablaEmpleados.setColorFilasForeground2(new java.awt.Color(0, 160, 223));
+        tablaEmpleados.setColorSelBackgound(new java.awt.Color(0, 160, 223));
         tablaEmpleados.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         tablaEmpleados.setFuenteFilas(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jScrollPane1.setViewportView(tablaEmpleados);
@@ -224,6 +237,8 @@ public class Pantalla_Personal extends javax.swing.JInternalFrame {
             tablaEmpleados.getColumnModel().getColumn(5).setPreferredWidth(70);
         }
 
+        search.setForeground(new java.awt.Color(155, 217, 217));
+        search.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         search.setPlaceholder("Buscar...");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -249,7 +264,7 @@ public class Pantalla_Personal extends javax.swing.JInternalFrame {
                     .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
