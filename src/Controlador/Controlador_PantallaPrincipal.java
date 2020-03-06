@@ -284,6 +284,13 @@ public class Controlador_PantallaPrincipal {
                new Controlador_bajas(pantalla_Principal, Integer.parseInt(empleado_idempleado), Integer.parseInt(idSucursal));
             }
         });
+        
+        pantalla_Principal.jMenuItemPromociones.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               new Controlador_Promociones(pantalla_Principal, Integer.parseInt(empleado_idempleado), Integer.parseInt(idSucursal));
+            }
+        });
 
     }
 
@@ -296,6 +303,7 @@ public class Controlador_PantallaPrincipal {
     }
 
     private void activarAdministrador() {
+        pantalla_Principal.jMenuItemPromociones.setEnabled(true);
          pantalla_Principal.jMenuItemBajas.setEnabled(true);
         pantalla_Principal.jMenuItemProveedores.setEnabled(true);
         pantalla_Principal.jMenuItemClientes.setEnabled(true);
@@ -319,6 +327,7 @@ public class Controlador_PantallaPrincipal {
         pantalla_Principal.jMenuItemProducto.setEnabled(false);
         pantalla_Principal.jMenuItemProductoxSucursal.setEnabled(false);
         pantalla_Principal.jMenuItemBajas.setEnabled(false);
+        pantalla_Principal.jMenuItemPromociones.setEnabled(false);
     }
 
     public static void main(String[] args) {
