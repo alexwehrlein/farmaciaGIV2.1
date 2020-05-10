@@ -291,6 +291,13 @@ public class Controlador_PantallaPrincipal {
                new Controlador_Promociones(pantalla_Principal, Integer.parseInt(empleado_idempleado), Integer.parseInt(idSucursal));
             }
         });
+        
+        pantalla_Principal.jMenuItemVentas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               new Controlador_ventas(pantalla_Principal, Integer.parseInt(empleado_idempleado), Integer.parseInt(idSucursal) , turno);
+            }
+        });
 
     }
 
@@ -315,11 +322,13 @@ public class Controlador_PantallaPrincipal {
 
     private void activarCajero() {
         pantalla_Principal.jMenuItemGastos.setEnabled(true);
+        pantalla_Principal.jMenuItemVentas.setEnabled(true);
         pantalla_Principal.jMenuItemIniciarSesion.setText("Cerrar Sesion");
 
     }
 
     private void inicioP() {
+        pantalla_Principal.jMenuItemVentas.setEnabled(false);
         pantalla_Principal.jMenuItemProveedores.setEnabled(false);
         pantalla_Principal.jMenuItemClientes.setEnabled(false);
         pantalla_Principal.jMenuItemEmpleados.setEnabled(false);

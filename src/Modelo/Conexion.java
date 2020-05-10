@@ -12,7 +12,7 @@ public class Conexion {
     private static String password = "admin";
  //private static String password = "1234";
  //   private static String url = "jdbc:mysql://192.168.1.11:3306/" + bd;
-    private static String url ="jdbc:mysql://localhost/"+bd;
+    private static String url ="jdbc:mysql://localhost/"+bd+"?useSSL=false";
 
     public static Connection getConnection() {
         Connection conn = null;

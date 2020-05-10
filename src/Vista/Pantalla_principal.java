@@ -105,6 +105,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jMenuItemPromociones = new javax.swing.JMenuItem();
         jMenuCajero = new javax.swing.JMenu();
         jMenuItemGastos = new javax.swing.JMenuItem();
+        jMenuItemVentas = new javax.swing.JMenuItem();
         jMenuInicioSesion = new javax.swing.JMenu();
         jMenuItemIniciarSesion = new javax.swing.JMenuItem();
 
@@ -325,6 +326,15 @@ public class Pantalla_principal extends javax.swing.JFrame {
         jMenuItemGastos.setText("Gastos");
         jMenuCajero.add(jMenuItemGastos);
 
+        jMenuItemVentas.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jMenuItemVentas.setText("Ventas");
+        jMenuItemVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemVentasActionPerformed(evt);
+            }
+        });
+        jMenuCajero.add(jMenuItemVentas);
+
         jMenuBar1.add(jMenuCajero);
 
         jMenuInicioSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/loo4.png"))); // NOI18N
@@ -395,6 +405,10 @@ public class Pantalla_principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemEmpleadosActionPerformed
 
+    private void jMenuItemVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVentasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemVentasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -456,6 +470,7 @@ public class Pantalla_principal extends javax.swing.JFrame {
     public javax.swing.JMenuItem jMenuItemProductoxSucursal;
     public javax.swing.JMenuItem jMenuItemPromociones;
     public javax.swing.JMenuItem jMenuItemProveedores;
+    public javax.swing.JMenuItem jMenuItemVentas;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JPanel jPanelIma;
     public javax.swing.JPasswordField jTextFieldPasswordLogin;
